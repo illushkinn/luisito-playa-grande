@@ -7,11 +7,14 @@ import { t } from "../utils/i18n";
     <img src="/images/logo-cabeza.svg" alt="" class="split-hero__caricature" aria-hidden="true" />
   </div>
   <div class="split-hero__content">
-    <h1 class="split-hero__title">Luisito</h1>
+    <h1 class="split-hero__title">
+      Bienvenido a
+      <img src="/images/luisito-logo-rotiseria-mdq(1).jpg" alt="Luisito Playa Grande" class="split-hero__logo-inline" />
+    </h1>
     <p class="split-hero__subtitle">{t("hero.subtitle")}</p>
     <div class="split-hero__actions">
       <a href="/menu" class="split-hero__cta">{t("hero.cta")}</a>
-      <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="split-hero__cta split-hero__cta--wpp">{t("hero.wpp")}</a>
+      <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="split-hero__cta--wpp">{t("hero.wpp")}</a>
     </div>
   </div>
 </section>
@@ -23,76 +26,95 @@ import { t } from "../utils/i18n";
   }
 
   .split-hero__visual {
-    flex: 1;
+    flex: 3;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--color-accent);
-    padding: var(--space-xl);
     overflow: hidden;
   }
 
   .split-hero__caricature {
-    max-width: 80%;
-    max-height: 80%;
+    width: min(90%, 800px);
+    height: auto;
     object-fit: contain;
-    filter: drop-shadow(8px 8px 0 rgba(0,0,0,0.15));
   }
 
   .split-hero__content {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: var(--space-xl);
-    background: var(--color-bg);
+    background: #fff5e0;
   }
 
   .split-hero__title {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 6rem);
-    letter-spacing: 6px;
-    color: var(--color-primary);
-    line-height: 1;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 2px;
+    color: #000;
+    line-height: 1.1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .split-hero__welcome {
+    color: #000;
+  }
+
+  .split-hero__logo-inline {
+    height: 1.2em;
+    width: auto;
+    object-fit: contain;
+    vertical-align: middle;
   }
 
   .split-hero__subtitle {
-    margin-top: var(--space-lg);
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-    color: var(--color-text-muted);
+    margin-top: var(--space-md);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: var(--color-primary);
+    font-family: var(--font-serif, Georgia, serif);
     max-width: 420px;
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
   .split-hero__actions {
     display: flex;
-    gap: var(--space-md);
-    margin-top: var(--space-xl);
-    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xl);
+    margin-top: var(--space-lg);
   }
 
   .split-hero__cta {
     display: inline-block;
     padding: var(--space-md) var(--space-xl);
-    background: var(--color-primary);
+    background: #000;
     color: #fff;
     font-family: var(--font-display);
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-    letter-spacing: 2px;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    letter-spacing: 1px;
     text-decoration: none;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.15s;
   }
 
   .split-hero__cta:hover {
-    background: var(--color-primary-hover);
+    background: var(--color-primary);
   }
 
   .split-hero__cta--wpp {
-    background: #25d366;
+    font-family: var(--font-sans);
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
   }
 
   .split-hero__cta--wpp:hover {
-    background: #1da851;
+    color: #25d366;
   }
 
   @media (max-width: 768px) {
@@ -102,19 +124,23 @@ import { t } from "../utils/i18n";
     }
 
     .split-hero__visual {
-      min-height: 40vh;
-      padding: var(--space-lg);
+      flex: none;
+      min-height: 45vh;
     }
 
     .split-hero__caricature {
-      max-width: 60%;
-      max-height: 60%;
+      width: min(85%, 500px);
     }
 
     .split-hero__content {
+      flex: none;
       align-items: center;
       text-align: center;
       padding: var(--space-lg);
+    }
+
+    .split-hero__title {
+      justify-content: center;
     }
 
     .split-hero__subtitle {
@@ -123,6 +149,8 @@ import { t } from "../utils/i18n";
 
     .split-hero__actions {
       justify-content: center;
+      flex-direction: column;
+      gap: var(--space-md);
     }
   }
 </style>

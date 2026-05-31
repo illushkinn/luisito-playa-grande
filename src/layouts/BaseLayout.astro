@@ -17,14 +17,14 @@ const { title, description, jsonLd } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet" />
     <Seo {title} {description} {jsonLd} />
     <style>
       :root {
-        --color-bg: #fff5e0;
-        --color-bg-alt: #ffe8b0;
+        --color-bg: #e8f4f8;
+        --color-bg-alt: #d0e8f0;
         --color-text: #1a1a1a;
-        --color-text-muted: #666;
+        --color-text-muted: #555;
         --color-primary: #0d7986;
         --color-primary-hover: #0a5f6a;
         --color-accent: #f5c800;
@@ -33,6 +33,7 @@ const { title, description, jsonLd } = Astro.props;
         --color-cream: #fff5e0;
         --font-sans: "Inter", system-ui, sans-serif;
         --font-display: "Bangers", "Inter", system-ui, cursive;
+        --font-serif: "Playfair Display", "Georgia", serif;
         --border-width: 3px;
         --space-xs: 0.25rem;
         --space-sm: 0.5rem;
@@ -118,8 +119,8 @@ const { title, description, jsonLd } = Astro.props;
       }
 
       .header__logo-img {
-        width: 48px;
-        height: 48px;
+        width: 72px;
+        height: 72px;
         object-fit: contain;
       }
 
@@ -215,9 +216,9 @@ const { title, description, jsonLd } = Astro.props;
       }
 
       .footer__tagline {
-        font-family: var(--font-display);
+        font-family: var(--font-serif);
         font-size: 1.25rem;
-        letter-spacing: 2px;
+        font-weight: 700;
         color: var(--color-primary);
         margin-bottom: var(--space-sm);
       }
@@ -228,13 +229,12 @@ const { title, description, jsonLd } = Astro.props;
       }
 
       .section-title {
-        font-family: var(--font-display);
+        font-family: var(--font-serif);
         font-size: 2.5rem;
         text-align: center;
         margin-bottom: var(--space-lg);
-        letter-spacing: 4px;
+        font-weight: 700;
         color: var(--color-primary);
-        text-shadow: 2px 2px 0 var(--color-text);
       }
 
       @media (max-width: 768px) {
