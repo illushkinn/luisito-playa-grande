@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SplitHero from "../components/SplitHero.astro";
 import { t } from "../utils/i18n";
 import { MENU_ITEMS } from "../utils/cart";
 
@@ -23,15 +24,7 @@ const jsonLd = {
 ---
 
 <BaseLayout title={t("site.title")} description={t("site.description")} jsonLd={jsonLd}>
-  <section class="hero">
-    <img src="/images/logo-cabeza.svg" alt="" class="hero__logo" aria-hidden="true" />
-    <h1 class="hero__title">{t("hero.title")}</h1>
-    <p class="hero__subtitle">{t("hero.subtitle")}</p>
-    <div class="hero__actions">
-      <a href="/menu" class="hero__cta hero__cta--primary">{t("hero.cta")}</a>
-      <a href="/pedido" class="hero__cta hero__cta--wpp">{t("hero.wpp")}</a>
-    </div>
-  </section>
+  <SplitHero />
 
   <section class="destacados">
     <h2 class="section-title">🌟 Destacados</h2>
@@ -77,79 +70,6 @@ const jsonLd = {
 </script>
 
 <style>
-  .hero {
-    text-align: center;
-    padding: var(--space-xl) 0 var(--space-lg);
-    position: relative;
-  }
-
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 12px;
-    background: repeating-linear-gradient(90deg, var(--color-primary) 0px, var(--color-primary) 20px, transparent 20px, transparent 40px);
-  }
-
-  .hero__logo {
-    width: 160px;
-    height: 160px;
-    margin-bottom: var(--space-md);
-    filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.2));
-  }
-
-  .hero__title {
-    font-family: var(--font-display);
-    font-size: 4rem;
-    color: var(--color-primary);
-    text-shadow: 3px 3px 0 var(--color-text);
-    letter-spacing: 3px;
-    line-height: 1;
-    margin-bottom: var(--space-md);
-  }
-
-  .hero__subtitle {
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
-    max-width: 500px;
-    margin: 0 auto var(--space-lg);
-    line-height: 1.5;
-  }
-
-  .hero__actions {
-    display: flex;
-    gap: var(--space-md);
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .hero__cta {
-    display: inline-block;
-    padding: var(--space-sm) var(--space-xl);
-    border: var(--border-width) solid var(--color-text);
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    letter-spacing: 2px;
-    text-decoration: none;
-    transition: transform 0.15s;
-  }
-
-  .hero__cta:hover { transform: scale(1.05); }
-
-  .hero__cta--primary {
-    background: var(--color-primary);
-    color: #fff;
-  }
-
-  .hero__cta--wpp {
-    background: #25d366;
-    color: #fff;
-    border-color: #1da851;
-  }
-
   .destacados {
     padding: var(--space-xl) 0;
   }
@@ -192,7 +112,6 @@ const jsonLd = {
 
   .destacado-card__btn {
     border: var(--border-width) solid var(--color-text);
-    border-radius: 999px;
     padding: var(--space-sm) var(--space-lg);
     background: var(--color-accent);
     color: var(--color-text);
