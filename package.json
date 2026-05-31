@@ -1,0 +1,21 @@
+{
+  "name": "luisito-playa-grande",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Luisito Playa Grande — Almacén & Rotisería",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.0.0",
+    "@astrojs/vercel": "^8.0.0",
+    "typescript": "^5.5.0"
+  }
+}

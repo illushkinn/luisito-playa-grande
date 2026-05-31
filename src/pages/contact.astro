@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { t } from "../utils/i18n";
+---
+
+<BaseLayout title={`${t("contact.title")} | ${t("site.title")}`} description={t("site.description")}>
+  <section class="contact">
+    <h1 class="section-title">{t("contact.title")}</h1>
+
+    <div class="contact__card">
+      <div class="contact__row">
+        <span class="contact__icon">📍</span>
+        <div>
+          <p class="contact__label">Dirección</p>
+          <p class="contact__value">{t("contact.address")}</p>
+        </div>
+      </div>
+      <div class="contact__row">
+        <span class="contact__icon">📞</span>
+        <div>
+          <p class="contact__label">Teléfono</p>
+          <p class="contact__value">{t("contact.phone")}</p>
+        </div>
+      </div>
+      <div class="contact__row">
+        <span class="contact__icon">🕐</span>
+        <div>
+          <p class="contact__label">Horarios</p>
+          <p class="contact__value">{t("contact.hours")}</p>
+        </div>
+      </div>
+      <div class="contact__row">
+        <span class="contact__icon">📸</span>
+        <div>
+          <p class="contact__label">Instagram</p>
+          <p class="contact__value">
+            <a href="https://www.instagram.com/luisito.playagrande/" target="_blank" rel="noopener">
+              @luisito.playagrande
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact__actions">
+      <a href="https://wa.me/5492235555555" target="_blank" rel="noopener" class="hero__cta hero__cta--wpp">
+        📱 {t("contact.cta")}
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact { max-width: 500px; margin: 0 auto; }
+
+  .contact__card {
+    border: var(--border-width) solid var(--color-text);
+    border-radius: 16px;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    background: var(--color-bg);
+  }
+
+  .contact__row {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+    padding: var(--space-md) 0;
+    border-bottom: 1px dashed var(--color-border);
+  }
+
+  .contact__row:last-child { border-bottom: none; }
+
+  .contact__icon { font-size: 1.5rem; line-height: 1.4; }
+
+  .contact__label {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2px;
+  }
+
+  .contact__value { font-weight: 600; }
+
+  .contact__actions { text-align: center; }
+
+  .hero__cta {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-xl);
+    border: var(--border-width) solid var(--color-text);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: transform 0.15s;
+  }
+  .hero__cta:hover { transform: scale(1.05); }
+  .hero__cta--wpp { background: #25d366; color: #fff; border-color: #1da851; }
+</style>

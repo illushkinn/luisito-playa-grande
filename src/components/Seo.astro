@@ -1,0 +1,33 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  image?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description, image, jsonLd } = Astro.props;
+const siteUrl = Astro.url.origin;
+const ogImage = image || `${siteUrl}/og-image.jpg`;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={Astro.url.href} />
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:url" content={Astro.url.href} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_AR" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+{
+  jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+}

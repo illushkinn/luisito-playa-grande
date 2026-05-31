@@ -1,0 +1,307 @@
+---
+import Seo from "../components/Seo.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+import { t, getLocale } from "../utils/i18n";
+import type { SeoProps } from "../components/Seo.astro";
+
+export interface Props extends SeoProps {}
+
+const locale = getLocale();
+const { title, description, jsonLd } = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale} data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <Seo {title} {description} {jsonLd} />
+    <style>
+      :root {
+        --color-bg: #fff5e0;
+        --color-bg-alt: #ffe8b0;
+        --color-text: #1a1a1a;
+        --color-text-muted: #666;
+        --color-primary: #d42027;
+        --color-primary-hover: #b01a20;
+        --color-accent: #f5c800;
+        --color-border: #1a1a1a;
+        --color-focus: #1a3c6d;
+        --color-cream: #fff5e0;
+        --font-sans: "Inter", system-ui, sans-serif;
+        --font-display: "Bangers", "Inter", system-ui, cursive;
+        --border-width: 3px;
+        --space-xs: 0.25rem;
+        --space-sm: 0.5rem;
+        --space-md: 1rem;
+        --space-lg: 2rem;
+        --space-xl: 4rem;
+        --max-width: 1100px;
+      }
+
+      [data-theme="dark"] {
+        --color-bg: #2a2a2a;
+        --color-bg-alt: #3a3a3a;
+        --color-text: #f0f0f0;
+        --color-text-muted: #aaa;
+        --color-primary: #ff4d4d;
+        --color-primary-hover: #ff6666;
+        --color-accent: #ffd700;
+        --color-border: #f0f0f0;
+        --color-cream: #3a3a3a;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: var(--font-sans);
+        color: var(--color-text);
+        background: var(--color-bg);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      a {
+        color: var(--color-primary);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      a:hover { color: var(--color-primary-hover); }
+
+      a:focus-visible, button:focus-visible {
+        outline: 3px solid var(--color-focus);
+        outline-offset: 2px;
+      }
+
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: var(--space-md);
+        padding: var(--space-sm) var(--space-md);
+        background: var(--color-primary);
+        color: #fff;
+        z-index: 1000;
+        font-weight: 700;
+        border: var(--border-width) solid var(--color-text);
+        border-radius: 0 0 8px 8px;
+        text-decoration: none;
+      }
+      .skip-link:focus { top: 0; }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-md) var(--space-lg);
+        max-width: var(--max-width);
+        margin: 0 auto;
+        border-bottom: var(--border-width) solid var(--color-text);
+        position: relative;
+      }
+
+      .header::after {
+        content: "";
+        position: absolute;
+        bottom: calc(-1 * var(--border-width) - 4px);
+        left: var(--space-lg);
+        right: var(--space-lg);
+        height: 6px;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--color-primary) 0px,
+          var(--color-primary) 10px,
+          var(--color-accent) 10px,
+          var(--color-accent) 20px,
+          var(--color-focus) 20px,
+          var(--color-focus) 30px
+        );
+        border-radius: 3px;
+      }
+
+      .header__brand {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        text-decoration: none;
+        color: var(--color-text);
+      }
+
+      .header__logo-img {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+      }
+
+      .header__title {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+        color: var(--color-primary);
+        text-shadow: 2px 2px 0 var(--color-text);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: var(--space-lg);
+      }
+
+      .nav__list {
+        display: flex;
+        gap: var(--space-md);
+        list-style: none;
+      }
+
+      .nav__link {
+        font-family: var(--font-display);
+        font-size: 1.125rem;
+        color: var(--color-text);
+        text-decoration: none;
+        padding: var(--space-xs) var(--space-sm);
+        letter-spacing: 0.5px;
+        transition: color 0.15s;
+      }
+
+      .nav__link:hover { color: var(--color-primary); }
+
+      .nav__controls {
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+      }
+
+      .btn--icon {
+        background: var(--color-accent);
+        border: var(--border-width) solid var(--color-text);
+        border-radius: 999px;
+        padding: var(--space-sm) var(--space-md);
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 0.875rem;
+        transition: transform 0.15s;
+      }
+
+      .btn--icon:hover { transform: scale(1.1); }
+
+      .lang-btn {
+        font-family: var(--font-display);
+        letter-spacing: 1px;
+      }
+
+      .cart-toggle {
+        position: relative;
+        font-size: 1.25rem;
+      }
+
+      #cart-badge {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: var(--color-primary);
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        width: 20px;
+        height: 20px;
+        border-radius: 999px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--color-text);
+      }
+
+      .main {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: var(--space-lg);
+        min-height: 70vh;
+      }
+
+      .footer {
+        text-align: center;
+        padding: var(--space-lg);
+        border-top: var(--border-width) solid var(--color-text);
+        margin-top: var(--space-xl);
+      }
+
+      .footer__tagline {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        color: var(--color-primary);
+        margin-bottom: var(--space-sm);
+      }
+
+      .footer p {
+        color: var(--color-text-muted);
+        font-size: 0.875rem;
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: var(--space-lg);
+        letter-spacing: 2px;
+        color: var(--color-primary);
+        text-shadow: 2px 2px 0 var(--color-text);
+      }
+
+      @media (max-width: 768px) {
+        .header { flex-wrap: wrap; gap: var(--space-sm); }
+        .nav { order: 3; width: 100%; justify-content: space-between; }
+        .nav__list { gap: var(--space-xs); }
+        .nav__link { font-size: 1rem; }
+        .section-title { font-size: 1.75rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">{t("accessibility.skipToContent")}</a>
+
+    <header class="header" role="banner">
+      <a href="/" class="header__brand">
+        <img src="/src/assets/logo-luisito.svg" alt="" class="header__logo-img" aria-hidden="true" />
+        <span class="header__title">Luisito</span>
+      </a>
+      <nav class="nav" aria-label={t("accessibility.navLabel")}>
+        <ul class="nav__list">
+          <li><a href="/" class="nav__link">{t("nav.home")}</a></li>
+          <li><a href="/menu" class="nav__link">{t("nav.menu")}</a></li>
+          <li><a href="/contact" class="nav__link">{t("nav.contact")}</a></li>
+        </ul>
+        <div class="nav__controls">
+          <a href="/pedido" class="btn--icon cart-toggle" aria-label={t("nav.order")}>
+            🛒<span id="cart-badge"></span>
+          </a>
+          <ThemeToggle />
+          <LanguageSwitcher />
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content" class="main" role="main">
+      <slot />
+    </main>
+
+    <footer class="footer" role="contentinfo" aria-label={t("accessibility.footerLabel")}>
+      <p class="footer__tagline">{t("footer.tagline")}</p>
+      <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
+    </footer>
+
+    <script>
+      const badge = document.getElementById("cart-badge");
+      if (badge) {
+        try {
+          const items = JSON.parse(localStorage.getItem("luisito-cart") || "[]");
+          const count = items.reduce((s, i) => s + i.qty, 0);
+          if (count > 0) { badge.textContent = String(count); badge.style.display = "flex"; }
+        } catch {}
+      }
+    </script>
+  </body>
+</html>

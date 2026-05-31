@@ -1,0 +1,16 @@
+<button id="lang-toggle" class="btn--icon lang-btn" aria-label="Cambiar idioma">
+  ES/EN
+</button>
+
+<script>
+  import { setLocale } from "../utils/i18n";
+  const btn = document.getElementById("lang-toggle")!;
+
+  btn.addEventListener("click", () => {
+    const current = document.documentElement.lang;
+    const next = current === "es" ? "en" : "es";
+    setLocale(next);
+    document.documentElement.lang = next;
+    window.location.reload();
+  });
+</script>

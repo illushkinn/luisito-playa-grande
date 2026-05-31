@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MenuCard from "../components/MenuCard.astro";
+import { t } from "../utils/i18n";
+import { MENU_ITEMS } from "../utils/cart";
+
+const categories = ["platos", "pizzas", "empanadas", "bebidas", "postres"] as const;
+---
+
+<BaseLayout title={`${t("menu.title")} | ${t("site.title")}`} description={t("site.description")}>
+  <section>
+    <h1 class="section-title">{t("menu.title")}</h1>
+    <p class="menu__subtitle">{t("menu.subtitle")}</p>
+
+    {categories.map((cat) => {
+      const items = MENU_ITEMS.filter((i) => i.category === cat);
+      if (items.length === 0) return null;
+      return (
+        <div class="menu-section">
+          <h2 class="menu-section__title">{t(`menu.categories.${cat}`)}</h2>
+          <div class="menu-section__grid">
+            {items.map((item) => (
+              <MenuCard
+                id={item.id}
+                name={item.name}
+                price={item.price}
+                category={item.category}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    })}
+
+    <div class="menu__footer">
+      <a href="/pedido" class="hero__cta hero__cta--primary">
+        🛒 {t("nav.order")}
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .menu__subtitle {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+    font-size: 1rem;
+    margin-top: calc(-1 * var(--space-md));
+  }
+
+  .menu-section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .menu-section__title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: var(--border-width) dashed var(--color-border);
+    color: var(--color-text);
+  }
+
+  .menu-section__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .menu__footer {
+    text-align: center;
+    padding: var(--space-lg) 0;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-xl);
+    border: var(--border-width) solid var(--color-text);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: transform 0.15s;
+  }
+
+  .hero__cta:hover { transform: scale(1.05); }
+  .hero__cta--primary { background: var(--color-primary); color: #fff; }
+</style>

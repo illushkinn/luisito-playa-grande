@@ -1,0 +1,81 @@
+{
+  "site": {
+    "title": "Luisito Playa Grande",
+    "description": "Almacén & Rotisería en Playa Grande, Mar del Plata. Milanesas, pizzas, empanadas y más. Delivery y take away."
+  },
+  "nav": {
+    "home": "Inicio",
+    "menu": "Carta",
+    "contact": "Contacto",
+    "order": "Mi Pedido"
+  },
+  "theme": {
+    "toggle": "Cambiar a modo {mode}",
+    "light": "claro",
+    "dark": "oscuro"
+  },
+  "language": {
+    "toggle": "Cambiar idioma",
+    "current": "Idioma actual: {lang}"
+  },
+  "accessibility": {
+    "skipToContent": "Saltar al contenido principal",
+    "navLabel": "Navegación principal",
+    "footerLabel": "Pie de página"
+  },
+  "hero": {
+    "title": "¡Bienvenido a Luisito!",
+    "subtitle": "Almacén & Rotisería en Playa Grande — Desde 1990 llevando el mejor sabor a tu mesa",
+    "cta": "Ver Carta",
+    "wpp": "Pedí por WhatsApp"
+  },
+  "menu": {
+    "title": "Nuestra Carta",
+    "subtitle": "Todo hecho con amor, como en casa",
+    "categories": {
+      "platos": "Platos",
+      "pizzas": "Pizzas",
+      "empanadas": "Empanadas",
+      "bebidas": "Bebidas",
+      "postres": "Postres"
+    },
+    "add": "Agregar",
+    "remove": "Quitar",
+    "qty": "Cantidad",
+    "empty": "No hay platos en esta categoría"
+  },
+  "order": {
+    "title": "Mi Pedido",
+    "empty": "Todavía no agregaste nada al pedido",
+    "emptyCta": "Ver la carta",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "send": "Enviar pedido por WhatsApp",
+    "delivery": "Delivery a domicilio",
+    "takeaway": "Passar a buscar",
+    "address": "Dirección de entrega",
+    "addressPlaceholder": "Calle y altura",
+    "notes": "Notas (opcional)",
+    "notesPlaceholder": "Ej: sin cebolla, bien cocido...",
+    "item": "item",
+    "items": "items",
+    "serviceType": "Tipo de servicio"
+  },
+  "contact": {
+    "title": "Contacto",
+    "address": "Bernardo De Irigoyen 3537, Playa Grande, Mar del Plata",
+    "phone": "223 555-5555",
+    "hours": "Lun a Sáb 10:00 - 22:00 — Dom 11:00 - 21:00",
+    "cta": "Pedí por WhatsApp",
+    "ctaAlt": "Llamanos"
+  },
+  "footer": {
+    "copyright": "© {year} Luisito Playa Grande. Todos los derechos reservados.",
+    "tagline": "El sabor de Playa Grande desde 1990"
+  },
+  "cart": {
+    "added": "Agregado al pedido",
+    "updated": "Pedido actualizado",
+    "emptyCart": "El carrito está vacío"
+  }
+}

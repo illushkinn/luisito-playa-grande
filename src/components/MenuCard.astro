@@ -1,0 +1,150 @@
+---
+import { t } from "../utils/i18n";
+import { getCart, addToCart, getCartCount } from "../utils/cart";
+
+export interface Props {
+  id: string;
+  name: string;
+  price: number;
+  category: string;
+  image?: string;
+}
+
+const { id, name, price, category, image } = Astro.props;
+---
+
+<div class="menu-card" data-id={id}>
+  <div class="menu-card__image" role="img" aria-label={name}>
+    {image ? (
+      <img src={image} alt={name} loading="lazy" />
+    ) : (
+      <div class="menu-card__placeholder">
+        <span class="menu-card__emoji">
+          {category === "pizzas" ? "🍕" : category === "empanadas" ? "🥟" : category === "bebidas" ? "🥤" : category === "postres" ? "🍰" : "🍽️"}
+        </span>
+      </div>
+    )}
+  </div>
+  <div class="menu-card__body">
+    <h3 class="menu-card__name">{name}</h3>
+    <p class="menu-card__price">${price.toLocaleString("es-AR")}</p>
+    <div class="menu-card__actions">
+      <button class="menu-card__btn" data-add={id}>
+        <span class="menu-card__btn-icon">🛒</span> {t("menu.add")}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { addToCart, getCartCount } from "../utils/cart";
+
+  document.querySelectorAll("[data-add]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-add")!;
+      const card = btn.closest(".menu-card")!;
+      const name = card.querySelector(".menu-card__name")!.textContent!;
+      const priceText = card.querySelector(".menu-card__price")!.textContent!;
+      const price = parseInt(priceText.replace(/[^0-9]/g, ""));
+
+      addToCart({ id, name, price, qty: 1, category: "" } as any);
+
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "✅ Agregado";
+      setTimeout(() => { btn.innerHTML = originalText; }, 1500);
+
+      const badge = document.getElementById("cart-badge");
+      if (badge) {
+        const items = JSON.parse(localStorage.getItem("luisito-cart") || "[]");
+        const count = items.reduce((s: number, i: any) => s + i.qty, 0);
+        badge.textContent = count > 0 ? String(count) : "";
+        badge.style.display = count > 0 ? "flex" : "none";
+      }
+    });
+  });
+</script>
+
+<style>
+  .menu-card {
+    border: 3px solid var(--color-text);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-bg);
+    transition: transform 0.2s ease;
+  }
+
+  .menu-card:hover {
+    transform: scale(1.02);
+  }
+
+  .menu-card__image {
+    width: 100%;
+    height: 180px;
+    background: var(--color-bg-alt);
+    overflow: hidden;
+  }
+
+  .menu-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .menu-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5c800;
+  }
+
+  .menu-card__emoji {
+    font-size: 4rem;
+    filter: grayscale(1) contrast(1.5);
+  }
+
+  .menu-card__body {
+    padding: var(--space-md);
+  }
+
+  .menu-card__name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-display);
+  }
+
+  .menu-card__price {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .menu-card__actions {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .menu-card__btn {
+    flex: 1;
+    border: 3px solid var(--color-text);
+    border-radius: 999px;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .menu-card__btn:hover {
+    background: var(--color-primary-hover);
+  }
+
+  .menu-card__btn-icon {
+    font-size: 1rem;
+  }
+</style>
