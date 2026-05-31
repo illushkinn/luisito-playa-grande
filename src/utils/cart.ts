@@ -14,7 +14,7 @@ export interface OrderDetails {
   phone: string;
 }
 
-const PHONE_NUMBER = "5492235555555";
+const PHONE_NUMBER = "5492235440230";
 const STORAGE_KEY = "luisito-cart";
 
 export function getCart(): CartItem[] {

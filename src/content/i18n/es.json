@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Luisito Playa Grande",
-    "description": "Almacén & Rotisería en Playa Grande, Mar del Plata. Milanesas, pizzas, empanadas y más. Delivery y take away."
+    "description": "Luisito, un clásico de Playa Grande desde 1955. Comidas caseras, pizzas, empanadas y más. Delivery y Take Away."
   },
   "nav": {
     "home": "Inicio",
@@ -25,7 +25,7 @@
   },
   "hero": {
     "title": "¡Bienvenido a Luisito!",
-    "subtitle": "Almacén & Rotisería en Playa Grande — Desde 1990 llevando el mejor sabor a tu mesa",
+    "subtitle": "Luisito, un clásico de Playa Grande. Comidas caseras. Delivery y Take Away.",
     "cta": "Ver Carta",
     "wpp": "Pedí por WhatsApp"
   },
@@ -52,7 +52,7 @@
     "total": "Total",
     "send": "Enviar pedido por WhatsApp",
     "delivery": "Delivery a domicilio",
-    "takeaway": "Passar a buscar",
+    "takeaway": "Pasar a buscar",
     "address": "Dirección de entrega",
     "addressPlaceholder": "Calle y altura",
     "notes": "Notas (opcional)",
@@ -63,15 +63,15 @@
   },
   "contact": {
     "title": "Contacto",
-    "address": "Bernardo De Irigoyen 3537, Playa Grande, Mar del Plata",
-    "phone": "223 555-5555",
-    "hours": "Lun a Sáb 10:00 - 22:00 — Dom 11:00 - 21:00",
+    "address": "Bernardo de Irigoyen 3537, Mar del Plata, Argentina 7600",
+    "phone": "223 544-0230",
+    "hours": "Lun a Sáb 10:00 - 14:00 | 17:00 - 21:30",
     "cta": "Pedí por WhatsApp",
     "ctaAlt": "Llamanos"
   },
   "footer": {
     "copyright": "© {year} Luisito Playa Grande. Todos los derechos reservados.",
-    "tagline": "El sabor de Playa Grande desde 1990"
+    "tagline": "Luisito, un clásico de Playa Grande desde 1955"
   },
   "cart": {
     "added": "Agregado al pedido",

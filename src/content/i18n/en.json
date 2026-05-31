@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Luisito Playa Grande",
-    "description": "Store & Rotisserie in Playa Grande, Mar del Plata. Milanesas, pizzas, empanadas and more. Delivery and take away."
+    "description": "Luisito, a Playa Grande classic since 1955. Home-style cooking, pizzas, empanadas and more. Delivery & Take Away."
   },
   "nav": {
     "home": "Home",
@@ -25,7 +25,7 @@
   },
   "hero": {
     "title": "Welcome to Luisito!",
-    "subtitle": "Store & Rotisserie in Playa Grande — Since 1990 bringing the best flavor to your table",
+    "subtitle": "Luisito, a Playa Grande classic. Home-style cooking. Delivery & Take Away.",
     "cta": "View Menu",
     "wpp": "Order via WhatsApp"
   },
@@ -63,15 +63,15 @@
   },
   "contact": {
     "title": "Contact",
-    "address": "Bernardo De Irigoyen 3537, Playa Grande, Mar del Plata",
-    "phone": "223 555-5555",
-    "hours": "Mon to Sat 10:00 - 22:00 — Sun 11:00 - 21:00",
+    "address": "Bernardo de Irigoyen 3537, Mar del Plata, Argentina 7600",
+    "phone": "223 544-0230",
+    "hours": "Mon to Sat 10:00 - 14:00 | 17:00 - 21:30",
     "cta": "Order via WhatsApp",
     "ctaAlt": "Call us"
   },
   "footer": {
-    "copyright": "© {year} Luisito Playa Grande. All rights reserved.",
-    "tagline": "The flavor of Playa Grande since 1990"
+    "copyright": "\u00a9 {year} Luisito Playa Grande. All rights reserved.",
+    "tagline": "Luisito, a Playa Grande classic since 1955"
   },
   "cart": {
     "added": "Added to order",
