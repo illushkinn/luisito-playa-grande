@@ -9,15 +9,15 @@ const categories = ["platos", "pizzas", "empanadas", "bebidas", "postres"] as co
 
 <BaseLayout title={`${t("menu.title")} | ${t("site.title")}`} description={t("site.description")}>
   <section>
-    <h1 class="section-title">{t("menu.title")}</h1>
-    <p class="menu__subtitle">{t("menu.subtitle")}</p>
+    <h1 class="section-title" data-i18n="menu.title">{t("menu.title")}</h1>
+    <p class="menu__subtitle" data-i18n="menu.subtitle">{t("menu.subtitle")}</p>
 
     {categories.map((cat) => {
       const items = MENU_ITEMS.filter((i) => i.category === cat);
       if (items.length === 0) return null;
       return (
         <div class="menu-section">
-          <h2 class="menu-section__title">{t(`menu.categories.${cat}`)}</h2>
+          <h2 class="menu-section__title" data-i18n={`menu.categories.${cat}`}>{t(`menu.categories.${cat}`)}</h2>
           <div class="menu-section__grid">
             {items.map((item) => (
               <MenuCard
@@ -33,7 +33,7 @@ const categories = ["platos", "pizzas", "empanadas", "bebidas", "postres"] as co
     })}
 
     <div class="menu__footer">
-      <a href="/pedido" class="hero__cta hero__cta--primary">
+      <a href="/pedido" class="hero__cta hero__cta--primary" data-i18n="nav.order">
         🛒 {t("nav.order")}
       </a>
     </div>
@@ -54,9 +54,9 @@ const categories = ["platos", "pizzas", "empanadas", "bebidas", "postres"] as co
   }
 
   .menu-section__title {
-    font-family: var(--font-display);
     font-size: 1.75rem;
-    letter-spacing: 3px;
+    font-weight: 700;
+    letter-spacing: 1px;
     margin-bottom: var(--space-md);
     color: var(--color-text);
   }
@@ -75,11 +75,11 @@ const categories = ["platos", "pizzas", "empanadas", "bebidas", "postres"] as co
   .hero__cta {
     display: inline-block;
     padding: var(--space-sm) var(--space-xl);
-    font-family: var(--font-display);
+    font-weight: 700;
     font-size: 1.25rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     transition: transform 0.15s, box-shadow 0.2s;
   }

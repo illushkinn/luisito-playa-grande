@@ -11,10 +11,10 @@ import { t } from "../utils/i18n";
       Bienvenido a
       <img src="/images/luisito-logo-rotiseria-mdq(1).jpg" alt="Luisito Playa Grande" class="split-hero__logo-inline" />
     </h1>
-    <p class="split-hero__subtitle">{t("hero.subtitle")}</p>
+    <p class="split-hero__subtitle" data-i18n="hero.subtitle">{t("hero.subtitle")}</p>
     <div class="split-hero__actions">
-      <a href="/menu" class="split-hero__cta">{t("hero.cta")}</a>
-      <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="split-hero__cta--wpp">{t("hero.wpp")}</a>
+      <a href="/menu" class="split-hero__cta" data-i18n="hero.cta">{t("hero.cta")}</a>
+      <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="split-hero__cta--wpp" data-i18n="hero.wpp">{t("hero.wpp")}</a>
     </div>
   </div>
 </section>
@@ -50,9 +50,9 @@ import { t } from "../utils/i18n";
   }
 
   .split-hero__title {
-    font-family: var(--font-display);
     font-size: clamp(2.5rem, 5vw, 4rem);
-    letter-spacing: 2px;
+    font-weight: 800;
+    letter-spacing: 1px;
     color: #000;
     line-height: 1.1;
     display: flex;
@@ -73,9 +73,9 @@ import { t } from "../utils/i18n";
     margin-top: var(--space-md);
     font-size: clamp(1rem, 1.5vw, 1.2rem);
     color: #000;
-    font-family: var(--font-serif, Georgia, serif);
     max-width: 420px;
     line-height: 1.5;
+    white-space: pre-line;
   }
 
   .split-hero__actions {
@@ -90,11 +90,11 @@ import { t } from "../utils/i18n";
     padding: var(--space-md) var(--space-xl);
     background: #000;
     color: #fff;
-    font-family: var(--font-display);
     font-size: clamp(1rem, 1.5vw, 1.2rem);
+    font-weight: 700;
     letter-spacing: 1px;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   }
@@ -110,11 +110,11 @@ import { t } from "../utils/i18n";
     padding: var(--space-md) var(--space-xl);
     background: #25d366;
     color: #fff;
-    font-family: var(--font-display);
     font-size: clamp(1rem, 1.5vw, 1.2rem);
+    font-weight: 700;
     letter-spacing: 1px;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     box-shadow: 0 4px 16px rgba(37, 211, 102, 0.15);
     transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   }

@@ -30,7 +30,7 @@ const { id, name, price, category, image } = Astro.props;
     <p class="menu-card__price">${price.toLocaleString("es-AR")}</p>
     <div class="menu-card__actions">
       <button class="menu-card__btn" data-add={id}>
-        <span class="menu-card__btn-icon">🛒</span> {t("menu.add")}
+        <span class="menu-card__btn-icon">🛒</span> <span data-i18n="menu.add">{t("menu.add")}</span>
       </button>
     </div>
   </div>
@@ -67,10 +67,11 @@ const { id, name, price, category, image } = Astro.props;
 <style>
   .menu-card {
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-md);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
@@ -114,7 +115,6 @@ const { id, name, price, category, image } = Astro.props;
     font-size: 1rem;
     font-weight: 700;
     margin-bottom: var(--space-xs);
-    font-family: var(--font-display);
   }
 
   .menu-card__price {
@@ -137,7 +137,7 @@ const { id, name, price, category, image } = Astro.props;
     font-weight: 700;
     font-size: 0.875rem;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: background 0.15s, transform 0.15s;
   }

@@ -27,7 +27,7 @@ const jsonLd = {
   <SplitHero />
 
   <section class="destacados">
-    <h2 class="section-title">🌟 Destacados</h2>
+    <h2 class="section-title">Destacados</h2>
     <div class="destacados__grid">
       {destacados.map((item) => (
         <div class="destacado-card">
@@ -37,13 +37,13 @@ const jsonLd = {
           <h3 class="destacado-card__name">{item.name}</h3>
           <p class="destacado-card__price">${item.price.toLocaleString("es-AR")}</p>
           <button class="destacado-card__btn" data-add={item.id} data-name={item.name} data-price={item.price}>
-            🛒 {t("menu.add")}
+            🛒 <span data-i18n="menu.add">{t("menu.add")}</span>
           </button>
         </div>
       ))}
     </div>
     <div class="destacados__cta">
-      <a href="/menu" class="hero__cta hero__cta--primary">{t("hero.cta")}</a>
+      <a href="/menu" class="hero__cta hero__cta--primary" data-i18n="hero.cta">{t("hero.cta")}</a>
     </div>
   </section>
 </BaseLayout>
@@ -61,7 +61,7 @@ const jsonLd = {
       const badge = document.getElementById("cart-badge");
       if (badge) {
         const items = JSON.parse(localStorage.getItem("luisito-cart") || "[]");
-        const count = items.reduce((s, i) => s + i.qty, 0);
+        const count = items.reduce((s: number, i: any) => s + i.qty, 0);
         badge.textContent = count > 0 ? String(count) : "";
         badge.style.display = count > 0 ? "flex" : "none";
       }
@@ -82,14 +82,20 @@ const jsonLd = {
   }
 
   .destacado-card {
-    border: var(--border-width) solid var(--color-text);
     padding: var(--space-lg);
     text-align: center;
-    background: var(--color-bg);
-    transition: transform 0.2s;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-md);
+    transition: transform 0.2s, box-shadow 0.2s;
   }
 
-  .destacado-card:hover { transform: scale(1.03); }
+  .destacado-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
 
   .destacado-card__emoji {
     font-size: 3rem;
@@ -98,26 +104,26 @@ const jsonLd = {
   }
 
   .destacado-card__name {
-    font-family: var(--font-display);
     font-size: 1.25rem;
+    font-weight: 700;
     margin-bottom: var(--space-xs);
   }
 
   .destacado-card__price {
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--color-primary);
+    color: var(--color-text);
     margin-bottom: var(--space-md);
   }
 
   .destacado-card__btn {
-    border: var(--border-width) solid var(--color-text);
     padding: var(--space-sm) var(--space-lg);
     background: var(--color-accent);
     color: var(--color-text);
     font-weight: 700;
     cursor: pointer;
     font-size: 0.875rem;
+    border-radius: var(--radius-sm);
     transition: transform 0.15s;
   }
 
@@ -125,8 +131,24 @@ const jsonLd = {
 
   .destacados__cta { text-align: center; }
 
+  .hero__cta {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-xl);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .hero__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  }
+  .hero__cta--primary { background: var(--color-primary); color: #fff; }
+
   @media (max-width: 768px) {
-    .hero__title { font-size: 2.5rem; }
-    .hero__logo { width: 120px; height: 120px; }
+    .destacados__grid { grid-template-columns: 1fr 1fr; }
   }
 </style>

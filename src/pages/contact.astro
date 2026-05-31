@@ -5,28 +5,28 @@ import { t } from "../utils/i18n";
 
 <BaseLayout title={`${t("contact.title")} | ${t("site.title")}`} description={t("site.description")}>
   <section class="contact">
-    <h1 class="section-title">{t("contact.title")}</h1>
+    <h1 class="section-title" data-i18n="contact.title">{t("contact.title")}</h1>
 
     <div class="contact__card">
       <div class="contact__row">
         <span class="contact__icon">📍</span>
         <div>
           <p class="contact__label">Dirección</p>
-          <p class="contact__value">{t("contact.address")}</p>
+          <p class="contact__value" data-i18n="contact.address">{t("contact.address")}</p>
         </div>
       </div>
       <div class="contact__row">
         <span class="contact__icon">📞</span>
         <div>
           <p class="contact__label">Teléfono</p>
-          <p class="contact__value">{t("contact.phone")}</p>
+          <p class="contact__value" data-i18n="contact.phone">{t("contact.phone")}</p>
         </div>
       </div>
       <div class="contact__row">
         <span class="contact__icon">🕐</span>
         <div>
           <p class="contact__label">Horarios</p>
-          <p class="contact__value">{t("contact.hours")}</p>
+          <p class="contact__value" data-i18n="contact.hours">{t("contact.hours")}</p>
         </div>
       </div>
       <div class="contact__row">
@@ -43,7 +43,7 @@ import { t } from "../utils/i18n";
     </div>
 
     <div class="contact__actions">
-      <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="hero__cta hero__cta--wpp">
+      <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="hero__cta hero__cta--wpp" data-i18n="contact.cta">
         📱 {t("contact.cta")}
       </a>
     </div>
@@ -56,10 +56,11 @@ import { t } from "../utils/i18n";
   .contact__card {
     padding: var(--space-lg);
     margin-bottom: var(--space-lg);
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-md);
   }
 
   .contact__row {
@@ -84,11 +85,11 @@ import { t } from "../utils/i18n";
   .hero__cta {
     display: inline-block;
     padding: var(--space-sm) var(--space-xl);
-    font-family: var(--font-display);
+    font-weight: 700;
     font-size: 1.25rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     transition: transform 0.15s, box-shadow 0.2s;
   }

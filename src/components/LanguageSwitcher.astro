@@ -3,14 +3,16 @@
 </button>
 
 <script>
-  import { setLocale } from "../utils/i18n";
   const btn = document.getElementById("lang-toggle")!;
 
   btn.addEventListener("click", () => {
     const current = document.documentElement.lang;
     const next = current === "es" ? "en" : "es";
-    setLocale(next);
-    document.documentElement.lang = next;
-    window.location.reload();
+    if (typeof window.applyLocale === "function") {
+      window.applyLocale(next);
+    } else {
+      localStorage.setItem("locale", next);
+      window.location.reload();
+    }
   });
 </script>

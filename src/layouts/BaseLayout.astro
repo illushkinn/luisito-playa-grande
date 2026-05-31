@@ -3,7 +3,8 @@ import Seo from "../components/Seo.astro";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import { t, getLocale } from "../utils/i18n";
 import type { SeoProps } from "../components/Seo.astro";
-
+import es from "../content/i18n/es.json";
+import en from "../content/i18n/en.json";
 
 export interface Props extends SeoProps {}
 
@@ -17,7 +18,7 @@ const { title, description, jsonLd } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <Seo {title} {description} {jsonLd} />
     <style>
       :root {
@@ -32,8 +33,6 @@ const { title, description, jsonLd } = Astro.props;
         --color-focus: #0d7986;
         --color-cream: #fff5e0;
         --font-sans: "Inter", system-ui, sans-serif;
-        --font-display: "Bangers", "Inter", system-ui, cursive;
-        --font-serif: "Playfair Display", "Georgia", serif;
         --border-width: 0;
         --space-xs: 0.25rem;
         --space-sm: 0.5rem;
@@ -41,6 +40,9 @@ const { title, description, jsonLd } = Astro.props;
         --space-lg: 2rem;
         --space-xl: 4rem;
         --max-width: 1100px;
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --card-bg: rgba(255, 255, 255, 0.85);
         --glass-bg: rgba(232, 244, 248, 0.85);
         --glass-border: 1px solid rgba(255, 255, 255, 0.4);
         --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
@@ -119,8 +121,8 @@ const { title, description, jsonLd } = Astro.props;
       }
 
       .header__title {
-        font-family: var(--font-display);
         font-size: 1.75rem;
+        font-weight: 700;
         letter-spacing: 4px;
         color: var(--color-text);
       }
@@ -138,12 +140,12 @@ const { title, description, jsonLd } = Astro.props;
       }
 
       .nav__link {
-        font-family: var(--font-display);
         font-size: 1.125rem;
+        font-weight: 600;
         color: var(--color-text);
         text-decoration: none;
         padding: var(--space-xs) var(--space-sm);
-        letter-spacing: 2px;
+        letter-spacing: 0.5px;
         transition: color 0.15s;
       }
 
@@ -152,11 +154,10 @@ const { title, description, jsonLd } = Astro.props;
       .nav__controls {
         display: flex;
         align-items: center;
-        gap: var(--space-xs);
+        gap: var(--space-sm);
       }
 
       .btn--icon {
-        background: var(--color-accent);
         padding: var(--space-sm) var(--space-md);
         cursor: pointer;
         font-weight: 700;
@@ -167,13 +168,18 @@ const { title, description, jsonLd } = Astro.props;
       .btn--icon:hover { transform: scale(1.1); }
 
       .lang-btn {
-        font-family: var(--font-display);
-        letter-spacing: 2px;
+        letter-spacing: 1px;
+        background: var(--color-accent);
       }
 
       .cart-toggle {
         position: relative;
         font-size: 1.25rem;
+        background: transparent;
+        border: none;
+        outline: none;
+        text-decoration: none;
+        color: var(--color-text);
       }
 
       #cart-badge {
@@ -186,7 +192,7 @@ const { title, description, jsonLd } = Astro.props;
         font-weight: 700;
         width: 20px;
         height: 20px;
-        border-radius: 999px;
+        border-radius: var(--radius-md);
         display: none;
         align-items: center;
         justify-content: center;
@@ -200,26 +206,118 @@ const { title, description, jsonLd } = Astro.props;
       }
 
       .footer {
-        text-align: center;
-        padding: var(--space-lg);
+        padding: var(--space-xl) var(--space-lg);
         margin-top: var(--space-xl);
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
       }
 
-      .footer__tagline {
-        font-family: var(--font-serif);
-        font-size: 1.25rem;
-        font-weight: 700;
+      .footer__inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+      }
+
+      .footer__brand {
+        text-align: center;
+        margin-bottom: var(--space-xl);
+      }
+
+      .footer__logo-name {
+        font-size: 1.75rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: var(--space-xs);
+      }
+
+      .footer__since {
+        font-size: 0.9rem;
         color: var(--color-text);
+        font-weight: 400;
+      }
+
+      .footer__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-xl);
+        margin-bottom: var(--space-xl);
+      }
+
+      .footer__section-title {
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: var(--space-md);
+      }
+
+      .footer__item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-sm);
         margin-bottom: var(--space-sm);
+        font-size: 0.9rem;
+        line-height: 1.5;
       }
 
-      .footer p {
+      .footer__item-icon {
+        flex-shrink: 0;
+        font-size: 1rem;
+      }
+
+      .footer__divider {
+        border: none;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        margin-bottom: var(--space-lg);
+      }
+
+      .footer__actions {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-lg);
+        margin-bottom: var(--space-lg);
+        flex-wrap: wrap;
+      }
+
+      .footer__cta {
+        display: inline-block;
+        padding: var(--space-sm) var(--space-lg);
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        border-radius: var(--radius-md);
+        transition: transform 0.15s;
+      }
+
+      .footer__cta:hover {
+        transform: translateY(-1px);
+      }
+
+      .footer__cta--wpp {
+        background: #25d366;
+        color: #fff;
+      }
+
+      .footer__cta--menu {
+        background: var(--color-primary);
+        color: #fff;
+      }
+
+      .footer__bottom {
+        text-align: center;
+        font-size: 0.8rem;
         color: var(--color-text);
-        font-size: 0.875rem;
+      }
+
+      .footer__bottom p {
+        margin-bottom: var(--space-xs);
+      }
+
+      .footer__made {
+        font-weight: 600;
       }
 
       .section-title {
-        font-family: var(--font-serif);
         font-size: 2.5rem;
         text-align: center;
         margin-bottom: var(--space-lg);
@@ -233,6 +331,8 @@ const { title, description, jsonLd } = Astro.props;
         .nav__list { gap: var(--space-xs); }
         .nav__link { font-size: 1rem; }
         .section-title { font-size: 1.75rem; }
+        .footer__grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+        .footer__actions { flex-direction: column; align-items: center; }
       }
     </style>
   </head>
@@ -250,7 +350,7 @@ const { title, description, jsonLd } = Astro.props;
           <li><a href="/contact" class="nav__link">{t("nav.contact")}</a></li>
         </ul>
         <div class="nav__controls">
-          <a href="/pedido" class="btn--icon cart-toggle" aria-label={t("nav.order")}>
+          <a href="/pedido" class="cart-toggle" aria-label={t("nav.order")}>
             🛒<span id="cart-badge"></span>
           </a>
           <LanguageSwitcher />
@@ -263,8 +363,56 @@ const { title, description, jsonLd } = Astro.props;
     </main>
 
     <footer class="footer" role="contentinfo" aria-label={t("accessibility.footerLabel")}>
-      <p class="footer__tagline">{t("footer.tagline")}</p>
-      <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <p class="footer__logo-name">Luisito Playa Grande</p>
+          <p class="footer__since">{t("footer.tagline")}</p>
+        </div>
+
+        <div class="footer__grid">
+          <div>
+            <p class="footer__section-title">Contacto</p>
+            <div class="footer__item">
+              <span class="footer__item-icon">📍</span>
+              <span>{t("contact.address")}</span>
+            </div>
+            <div class="footer__item">
+              <span class="footer__item-icon">📱</span>
+              <span>{t("contact.phone")}</span>
+            </div>
+          </div>
+          <div>
+            <p class="footer__section-title">Horarios</p>
+            <div class="footer__item">
+              <span class="footer__item-icon">🕐</span>
+              <span>{t("contact.hours")}</span>
+            </div>
+          </div>
+          <div>
+            <p class="footer__section-title">Encontranos</p>
+            <div class="footer__item">
+              <span class="footer__item-icon">📍</span>
+              <span>Bernardo de Irigoyen 3537, Mar del Plata</span>
+            </div>
+            <div class="footer__item">
+              <span class="footer__item-icon">📸</span>
+              <a href="https://www.instagram.com/luisito.playagrande/" target="_blank" rel="noopener">@luisito.playagrande</a>
+            </div>
+          </div>
+        </div>
+
+        <hr class="footer__divider" />
+
+        <div class="footer__actions">
+          <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="footer__cta footer__cta--wpp">📱 Pedí por WhatsApp</a>
+          <a href="/menu" class="footer__cta footer__cta--menu">🍽️ Ver la Carta</a>
+        </div>
+
+        <div class="footer__bottom">
+          <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
+          <p class="footer__made">Hecho con amor en Mar del Plata 🧉</p>
+        </div>
+      </div>
     </footer>
 
     <script>
@@ -276,6 +424,40 @@ const { title, description, jsonLd } = Astro.props;
           if (count > 0) { badge.textContent = String(count); badge.style.display = "flex"; }
         } catch {}
       }
+    </script>
+
+    <script define:vars={{ esData: es, enData: en }}>
+      function resolveKey(obj, key) {
+        return key.split(".").reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj);
+      }
+
+      function applyLocale(locale) {
+        var locales = { es: esData, en: enData };
+        if (!locales[locale]) return;
+        document.documentElement.lang = locale;
+
+        document.querySelectorAll("[data-i18n]").forEach(function(el) {
+          var key = el.getAttribute("data-i18n");
+          var value = resolveKey(locales[locale], key);
+          if (typeof value === "string") el.textContent = value;
+        });
+
+        document.querySelectorAll("[data-i18n-attr]").forEach(function(el) {
+          var key = el.getAttribute("data-i18n-attr");
+          var attr = el.getAttribute("data-i18n-attr-name") || "aria-label";
+          var value = resolveKey(locales[locale], key);
+          if (typeof value === "string") el.setAttribute(attr, value);
+        });
+
+        localStorage.setItem("locale", locale);
+      }
+
+      var stored = localStorage.getItem("locale");
+      if (stored && stored !== document.documentElement.lang) {
+        applyLocale(stored);
+      }
+
+      window.applyLocale = applyLocale;
     </script>
   </body>
 </html>

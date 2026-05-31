@@ -5,12 +5,12 @@ import { t } from "../utils/i18n";
 
 <BaseLayout title={`${t("order.title")} | ${t("site.title")}`} description={t("site.description")}>
   <section>
-    <h1 class="section-title">{t("order.title")}</h1>
+    <h1 class="section-title" data-i18n="order.title">{t("order.title")}</h1>
 
     <div id="cart-empty" class="cart-empty">
       <div class="cart-empty__emoji">🛒</div>
-      <p class="cart-empty__text">{t("order.empty")}</p>
-      <a href="/menu" class="hero__cta hero__cta--primary">{t("order.emptyCta")}</a>
+      <p class="cart-empty__text" data-i18n="order.empty">{t("order.empty")}</p>
+      <a href="/menu" class="hero__cta hero__cta--primary" data-i18n="order.emptyCta">{t("order.emptyCta")}</a>
     </div>
 
     <div id="cart-content" class="cart-content" style="display:none">
@@ -18,41 +18,41 @@ import { t } from "../utils/i18n";
 
       <div class="cart-summary">
         <div class="cart-summary__row">
-          <span>{t("order.subtotal")}</span>
+          <span data-i18n="order.subtotal">{t("order.subtotal")}</span>
           <span id="cart-subtotal">$0</span>
         </div>
         <div class="cart-summary__row cart-summary__row--total">
-          <span>{t("order.total")}</span>
+          <span data-i18n="order.total">{t("order.total")}</span>
           <span id="cart-total">$0</span>
         </div>
       </div>
 
       <div class="cart-service">
-        <h3 class="cart-service__title">{t("order.serviceType")}</h3>
+        <h3 class="cart-service__title" data-i18n="order.serviceType">{t("order.serviceType")}</h3>
         <div class="cart-service__options">
           <label class="cart-service__option">
             <input type="radio" name="service" value="delivery" checked />
-            <span>🚚 {t("order.delivery")}</span>
+            <span>🚚 <span data-i18n="order.delivery">{t("order.delivery")}</span></span>
           </label>
           <label class="cart-service__option">
             <input type="radio" name="service" value="takeaway" />
-            <span>🏪 {t("order.takeaway")}</span>
+            <span>🏪 <span data-i18n="order.takeaway">{t("order.takeaway")}</span></span>
           </label>
         </div>
       </div>
 
       <div id="address-field" class="cart-address">
-        <label for="address-input">{t("order.address")}</label>
-        <input type="text" id="address-input" placeholder={t("order.addressPlaceholder")} />
+        <label for="address-input" data-i18n="order.address">{t("order.address")}</label>
+        <input type="text" id="address-input" placeholder={t("order.addressPlaceholder")} data-i18n-attr="order.addressPlaceholder" data-i18n-attr-name="placeholder" />
       </div>
 
       <div class="cart-notes">
-        <label for="notes-input">{t("order.notes")}</label>
-        <textarea id="notes-input" placeholder={t("order.notesPlaceholder")} rows="2"></textarea>
+        <label for="notes-input" data-i18n="order.notes">{t("order.notes")}</label>
+        <textarea id="notes-input" placeholder={t("order.notesPlaceholder")} rows="2" data-i18n-attr="order.notesPlaceholder" data-i18n-attr-name="placeholder"></textarea>
       </div>
 
       <button id="send-wpp" class="cart-send">
-        📱 {t("order.send")}
+        📱 <span data-i18n="order.send">{t("order.send")}</span>
       </button>
     </div>
   </section>
@@ -184,18 +184,18 @@ import { t } from "../utils/i18n";
 
   .cart-empty__text {
     font-size: 1.125rem;
-    color: var(--color-text-muted);
+    color: var(--color-text);
     margin-bottom: var(--space-lg);
   }
 
   .hero__cta {
     display: inline-block;
     padding: var(--space-sm) var(--space-xl);
-    font-family: var(--font-display);
+    font-weight: 700;
     font-size: 1.25rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     transition: transform 0.15s, box-shadow 0.2s;
     color: var(--color-text);
@@ -216,7 +216,7 @@ import { t } from "../utils/i18n";
 
   .cart-item__info { flex: 1; }
   .cart-item__name { font-weight: 700; margin-bottom: 2px; }
-  .cart-item__price { color: var(--color-primary); font-weight: 600; }
+  .cart-item__price { color: var(--color-text); font-weight: 600; }
 
   .cart-item__qty {
     display: flex;
@@ -233,7 +233,7 @@ import { t } from "../utils/i18n";
     background: var(--color-accent);
     color: var(--color-text);
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
   }
 
   .qty-value {
@@ -249,7 +249,7 @@ import { t } from "../utils/i18n";
     font-size: 1.25rem;
     cursor: pointer;
     padding: var(--space-xs);
-    color: var(--color-text-muted);
+    color: var(--color-text);
   }
 
   .cart-summary {
@@ -273,8 +273,8 @@ import { t } from "../utils/i18n";
   }
 
   .cart-service__title {
-    font-family: var(--font-display);
     font-size: 1.25rem;
+    font-weight: 700;
     margin-bottom: var(--space-sm);
   }
 
@@ -310,7 +310,7 @@ import { t } from "../utils/i18n";
     background: transparent;
     color: var(--color-text);
     border: none;
-    border-bottom: 1px solid var(--color-text-muted);
+    border-bottom: 1px solid var(--color-text);
     outline: none;
   }
 
@@ -323,13 +323,13 @@ import { t } from "../utils/i18n";
     padding: var(--space-md);
     background: #25d366;
     color: #fff;
-    font-family: var(--font-display);
+    font-weight: 700;
     font-size: 1.5rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     cursor: pointer;
     border: none;
     outline: none;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     box-shadow: 0 4px 16px rgba(37, 211, 102, 0.15);
     transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
   }
