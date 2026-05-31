@@ -195,11 +195,13 @@ import { t } from "../utils/i18n";
     font-size: 1.25rem;
     letter-spacing: 2px;
     text-decoration: none;
-    transition: transform 0.15s;
-    color: var(--color-primary);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.15s, box-shadow 0.2s;
+    color: var(--color-text);
   }
-  .hero__cta:hover { color: var(--color-primary-hover); }
-  .hero__cta--primary { color: var(--color-primary); font-weight: 700; }
+  .hero__cta:hover { color: var(--color-text); }
+  .hero__cta--primary { background: var(--color-primary); color: #fff; font-weight: 700; }
 
   .cart-content { max-width: 600px; margin: 0 auto; }
 
@@ -230,6 +232,8 @@ import { t } from "../utils/i18n";
     cursor: pointer;
     background: var(--color-accent);
     color: var(--color-text);
+    border: none;
+    border-radius: 6px;
   }
 
   .qty-value {
@@ -323,9 +327,16 @@ import { t } from "../utils/i18n";
     font-size: 1.5rem;
     letter-spacing: 2px;
     cursor: pointer;
-    transition: opacity 0.2s;
     border: none;
+    outline: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.15);
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
   }
 
-  .cart-send:hover { opacity: 0.9; }
+  .cart-send:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.25);
+  }
 </style>

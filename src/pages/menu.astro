@@ -43,7 +43,7 @@ const categories = ["platos", "pizzas", "empanadas", "bebidas", "postres"] as co
 <style>
   .menu__subtitle {
     text-align: center;
-    color: var(--color-text-muted);
+    color: var(--color-text);
     margin-bottom: var(--space-xl);
     font-size: 1rem;
     margin-top: calc(-1 * var(--space-md));
@@ -58,8 +58,6 @@ const categories = ["platos", "pizzas", "empanadas", "bebidas", "postres"] as co
     font-size: 1.75rem;
     letter-spacing: 3px;
     margin-bottom: var(--space-md);
-    padding-bottom: var(--space-sm);
-    border-bottom: var(--border-width) dashed var(--color-border);
     color: var(--color-text);
   }
 
@@ -77,14 +75,18 @@ const categories = ["platos", "pizzas", "empanadas", "bebidas", "postres"] as co
   .hero__cta {
     display: inline-block;
     padding: var(--space-sm) var(--space-xl);
-    border: var(--border-width) solid var(--color-text);
     font-family: var(--font-display);
     font-size: 1.25rem;
     letter-spacing: 2px;
     text-decoration: none;
-    transition: transform 0.15s;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.15s, box-shadow 0.2s;
   }
 
-  .hero__cta:hover { transform: scale(1.05); }
+  .hero__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  }
   .hero__cta--primary { background: var(--color-primary); color: #fff; }
 </style>
