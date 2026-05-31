@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
 import { t } from "../utils/i18n";
 ---
 
@@ -9,28 +10,28 @@ import { t } from "../utils/i18n";
 
     <div class="contact__card">
       <div class="contact__row">
-        <span class="contact__icon">📍</span>
+        <Icon name="lucide:map-pin" size={18} class="contact__icon" />
         <div>
-          <p class="contact__label">Dirección</p>
+          <p class="contact__label">Direccion</p>
           <p class="contact__value" data-i18n="contact.address">{t("contact.address")}</p>
         </div>
       </div>
       <div class="contact__row">
-        <span class="contact__icon">📞</span>
+        <Icon name="lucide:phone" size={18} class="contact__icon" />
         <div>
-          <p class="contact__label">Teléfono</p>
+          <p class="contact__label">Telefono</p>
           <p class="contact__value" data-i18n="contact.phone">{t("contact.phone")}</p>
         </div>
       </div>
       <div class="contact__row">
-        <span class="contact__icon">🕐</span>
+        <Icon name="lucide:clock" size={18} class="contact__icon" />
         <div>
           <p class="contact__label">Horarios</p>
           <p class="contact__value" data-i18n="contact.hours">{t("contact.hours")}</p>
         </div>
       </div>
       <div class="contact__row">
-        <span class="contact__icon">📸</span>
+        <Icon name="lucide:camera" size={18} class="contact__icon" />
         <div>
           <p class="contact__label">Instagram</p>
           <p class="contact__value">
@@ -44,7 +45,7 @@ import { t } from "../utils/i18n";
 
     <div class="contact__actions">
       <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="hero__cta hero__cta--wpp" data-i18n="contact.cta">
-        📱 {t("contact.cta")}
+        {t("contact.cta")}
       </a>
     </div>
   </section>
@@ -59,43 +60,55 @@ import { t } from "../utils/i18n";
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--glass-shadow);
     border-radius: var(--radius-md);
   }
 
   .contact__row {
     display: flex;
-    gap: var(--space-md);
     align-items: flex-start;
+    gap: var(--space-md);
     padding: var(--space-md) 0;
   }
 
-  .contact__icon { font-size: 1.5rem; line-height: 1.4; }
-
-  .contact__label {
-    font-size: 0.875rem;
-    color: var(--color-text);
-    margin-bottom: 2px;
+  .contact__icon {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--color-primary);
   }
 
-  .contact__value { font-weight: 600; }
+  .contact__label {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 2px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .contact__value {
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
 
   .contact__actions { text-align: center; }
 
   .hero__cta {
     display: inline-block;
     padding: var(--space-sm) var(--space-xl);
-    font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: 1px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
     text-decoration: none;
-    border-radius: var(--radius-md);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.1);
     transition: transform 0.15s, box-shadow 0.2s;
   }
   .hero__cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.15);
   }
   .hero__cta--wpp { background: #25d366; color: #fff; }
 </style>

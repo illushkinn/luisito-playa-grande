@@ -1,6 +1,10 @@
 ---
 import Seo from "../components/Seo.astro";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
+import CartModal from "../components/CartModal.astro";
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
+import { Icon } from "astro-icon/components";
 import { t, getLocale } from "../utils/i18n";
 import type { SeoProps } from "../components/Seo.astro";
 import es from "../content/i18n/es.json";
@@ -10,6 +14,9 @@ export interface Props extends SeoProps {}
 
 const locale = getLocale();
 const { title, description, jsonLd } = Astro.props;
+const ogImageUrl = Astro.url.origin + "/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png";
+const whatsappUrl = "https://wa.me/5492235440230";
+const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 ---
 
 <!doctype html>
@@ -18,21 +25,27 @@ const { title, description, jsonLd } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
-    <Seo {title} {description} {jsonLd} />
-    <style>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png" />
+    <Seo {title} {description} {jsonLd} image={ogImageUrl} />
+    <style is:global>
       :root {
-        --color-bg: #e8f4f8;
-        --color-bg-alt: #d0e8f0;
-        --color-text: #000;
-        --color-text-muted: #000;
-        --color-primary: #0d7986;
-        --color-primary-hover: #0a5f6a;
-        --color-accent: #f5c800;
-        --color-border: #000;
-        --color-focus: #0d7986;
-        --color-cream: #fff5e0;
-        --font-sans: "Inter", system-ui, sans-serif;
+        --color-bg: #ece3d8;
+        --color-bg-alt: #e0d5c8;
+        --color-text: #2c2420;
+        --color-text-muted: #8c8279;
+        --color-primary: #c73e2b;
+        --color-primary-hover: #a83222;
+        --color-accent: #d4943a;
+        --color-accent-light: #f5e6c8;
+        --color-border: rgba(44, 36, 32, 0.12);
+        --color-focus: #c73e2b;
+        --color-cream: #faf6f1;
+        --color-footer-bg: #e0d5c8;
+        --font-heading: "Inter", system-ui, sans-serif;
+        --font-body: "Inter", system-ui, sans-serif;
+        --font-accent: "Inter", system-ui, sans-serif;
         --border-width: 0;
         --space-xs: 0.25rem;
         --space-sm: 0.5rem;
@@ -40,24 +53,34 @@ const { title, description, jsonLd } = Astro.props;
         --space-lg: 2rem;
         --space-xl: 4rem;
         --max-width: 1100px;
-        --radius-sm: 4px;
-        --radius-md: 8px;
-        --card-bg: rgba(255, 255, 255, 0.85);
-        --glass-bg: rgba(232, 244, 248, 0.85);
-        --glass-border: 1px solid rgba(255, 255, 255, 0.4);
-        --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        --radius-sm: 2px;
+        --radius-md: 4px;
+        --card-bg: rgba(255, 252, 248, 0.92);
+        --glass-bg: rgba(250, 246, 241, 0.85);
+        --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+        --glass-shadow: 0 4px 24px rgba(44, 36, 32, 0.06);
         --glass-blur: 12px;
       }
-
+    </style>
+    <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
       html { scroll-behavior: smooth; }
 
       body {
-        font-family: var(--font-sans);
+        font-family: var(--font-body);
         color: var(--color-text);
         background: var(--color-bg);
         line-height: 1.6;
         min-height: 100vh;
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      h1, h2, h3, .heading-font {
+        font-family: var(--font-heading);
+        font-weight: 700;
       }
 
       a {
@@ -106,6 +129,14 @@ const { title, description, jsonLd } = Astro.props;
         z-index: 100;
       }
 
+      .header.glass {
+        background: rgba(250, 246, 241, 0.3);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: var(--glass-shadow);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+      }
+
       .header__brand {
         display: flex;
         align-items: center;
@@ -115,22 +146,15 @@ const { title, description, jsonLd } = Astro.props;
       }
 
       .header__logo-img {
-        width: 72px;
-        height: 72px;
+        width: 64px;
+        height: 64px;
         object-fit: contain;
-      }
-
-      .header__title {
-        font-size: 1.75rem;
-        font-weight: 700;
-        letter-spacing: 4px;
-        color: var(--color-text);
       }
 
       .nav {
         display: flex;
         align-items: center;
-        gap: var(--space-lg);
+        gap: var(--space-md);
       }
 
       .nav__list {
@@ -140,12 +164,13 @@ const { title, description, jsonLd } = Astro.props;
       }
 
       .nav__link {
-        font-size: 1.125rem;
+        font-family: var(--font-heading);
+        font-size: 1rem;
         font-weight: 600;
         color: var(--color-text);
         text-decoration: none;
         padding: var(--space-xs) var(--space-sm);
-        letter-spacing: 0.5px;
+        letter-spacing: 0;
         transition: color 0.15s;
       }
 
@@ -157,45 +182,83 @@ const { title, description, jsonLd } = Astro.props;
         gap: var(--space-sm);
       }
 
-      .btn--icon {
-        padding: var(--space-sm) var(--space-md);
+      .nav__cta-wpp {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: var(--space-xs) var(--space-md);
+        background: #25d366;
+        color: #fff;
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 0.8rem;
         cursor: pointer;
-        font-weight: 700;
-        font-size: 0.875rem;
+        border: none;
+        border-radius: var(--radius-sm);
+        text-decoration: none;
+        transition: opacity 0.15s, transform 0.15s;
+        white-space: nowrap;
+      }
+
+      .nav__cta-wpp:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      .lang-btn {
+        letter-spacing: 0.5px;
+        background: var(--color-accent);
+        font-family: var(--font-body);
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: var(--space-xs) var(--space-sm);
+        cursor: pointer;
+        border: none;
+        border-radius: var(--radius-sm);
         transition: transform 0.15s;
       }
 
-      .btn--icon:hover { transform: scale(1.1); }
-
-      .lang-btn {
-        letter-spacing: 1px;
-        background: var(--color-accent);
-      }
+      .lang-btn:hover { transform: scale(1.05); }
 
       .cart-toggle {
         position: relative;
-        font-size: 1.25rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 600;
         background: transparent;
         border: none;
         outline: none;
+        cursor: pointer;
         text-decoration: none;
         color: var(--color-text);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        transition: background 0.15s;
+      }
+
+      .cart-toggle:hover {
+        background: rgba(0,0,0,0.04);
       }
 
       #cart-badge {
-        position: absolute;
-        top: -6px;
-        right: -6px;
-        background: var(--color-primary);
-        color: #fff;
-        font-size: 0.75rem;
-        font-weight: 700;
-        width: 20px;
-        height: 20px;
-        border-radius: var(--radius-md);
-        display: none;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
+        margin-left: 4px;
+        background: var(--color-primary);
+        color: #fff;
+        font-family: var(--font-body);
+        font-size: 0.65rem;
+        font-weight: 700;
+        min-width: 16px;
+        height: 16px;
+        padding: 0 4px;
+        border-radius: 50%;
+        display: none;
+        vertical-align: middle;
       }
 
       .main {
@@ -205,12 +268,35 @@ const { title, description, jsonLd } = Astro.props;
         min-height: 70vh;
       }
 
+      .info-strip {
+        padding: var(--space-md) var(--space-lg);
+        background: var(--color-footer-bg);
+      }
+
+      .info-strip__inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        gap: var(--space-xl);
+        flex-wrap: wrap;
+      }
+
+      .info-strip__item {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--color-text-muted);
+      }
+
+      .info-strip__item a {
+        color: var(--color-text);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
       .footer {
         padding: var(--space-xl) var(--space-lg);
-        margin-top: var(--space-xl);
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        background: var(--color-footer-bg);
       }
 
       .footer__inner {
@@ -220,19 +306,20 @@ const { title, description, jsonLd } = Astro.props;
 
       .footer__brand {
         text-align: center;
-        margin-bottom: var(--space-xl);
+        margin-bottom: var(--space-lg);
       }
 
       .footer__logo-name {
-        font-size: 1.75rem;
-        font-weight: 800;
-        letter-spacing: 2px;
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        font-weight: 700;
         margin-bottom: var(--space-xs);
+        letter-spacing: 0;
       }
 
       .footer__since {
-        font-size: 0.9rem;
-        color: var(--color-text);
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
         font-weight: 400;
       }
 
@@ -240,34 +327,52 @@ const { title, description, jsonLd } = Astro.props;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: var(--space-xl);
-        margin-bottom: var(--space-xl);
+        margin-bottom: var(--space-lg);
       }
 
       .footer__section-title {
+        font-family: var(--font-heading);
         font-size: 0.8rem;
-        font-weight: 800;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: var(--space-md);
+        letter-spacing: 1px;
+        margin-bottom: var(--space-sm);
+        color: var(--color-text);
       }
 
       .footer__item {
-        display: flex;
-        align-items: flex-start;
-        gap: var(--space-sm);
-        margin-bottom: var(--space-sm);
-        font-size: 0.9rem;
+        margin-bottom: var(--space-xs);
+        font-size: 0.85rem;
         line-height: 1.5;
+        color: var(--color-text-muted);
       }
 
-      .footer__item-icon {
-        flex-shrink: 0;
-        font-size: 1rem;
+      .footer__item a {
+        color: var(--color-text);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .footer__social {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
+
+      .footer__social-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        color: var(--color-text);
       }
 
       .footer__divider {
         border: none;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-top: 1px solid var(--color-border);
         margin-bottom: var(--space-lg);
       }
 
@@ -280,12 +385,15 @@ const { title, description, jsonLd } = Astro.props;
       }
 
       .footer__cta {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         padding: var(--space-sm) var(--space-lg);
-        font-weight: 700;
-        font-size: 0.9rem;
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 0.85rem;
         text-decoration: none;
-        border-radius: var(--radius-md);
+        border-radius: var(--radius-sm);
         transition: transform 0.15s;
       }
 
@@ -305,19 +413,16 @@ const { title, description, jsonLd } = Astro.props;
 
       .footer__bottom {
         text-align: center;
-        font-size: 0.8rem;
-        color: var(--color-text);
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
       }
 
       .footer__bottom p {
         margin-bottom: var(--space-xs);
       }
 
-      .footer__made {
-        font-weight: 600;
-      }
-
       .section-title {
+        font-family: var(--font-heading);
         font-size: 2.5rem;
         text-align: center;
         margin-bottom: var(--space-lg);
@@ -329,10 +434,12 @@ const { title, description, jsonLd } = Astro.props;
         .header { flex-wrap: wrap; gap: var(--space-sm); }
         .nav { order: 3; width: 100%; justify-content: space-between; }
         .nav__list { gap: var(--space-xs); }
-        .nav__link { font-size: 1rem; }
+        .nav__link { font-size: 0.9rem; }
+        .nav__cta-wpp { font-size: 0.75rem; padding: var(--space-xs) var(--space-sm); }
         .section-title { font-size: 1.75rem; }
         .footer__grid { grid-template-columns: 1fr; gap: var(--space-lg); }
         .footer__actions { flex-direction: column; align-items: center; }
+        .info-strip__inner { flex-direction: column; align-items: center; gap: var(--space-xs); }
       }
     </style>
   </head>
@@ -341,7 +448,7 @@ const { title, description, jsonLd } = Astro.props;
 
     <header class="header glass" role="banner">
       <a href="/" class="header__brand">
-        <img src="/images/luisito-logo-rotiseria-mdq(1).jpg" alt="Luisito Playa Grande" class="header__logo-img" />
+        <img src="/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png" alt="Luisito Playa Grande" class="header__logo-img" />
       </a>
       <nav class="nav" aria-label={t("accessibility.navLabel")}>
         <ul class="nav__list">
@@ -350,9 +457,10 @@ const { title, description, jsonLd } = Astro.props;
           <li><a href="/contact" class="nav__link">{t("nav.contact")}</a></li>
         </ul>
         <div class="nav__controls">
-          <a href="/pedido" class="cart-toggle" aria-label={t("nav.order")}>
-            🛒<span id="cart-badge"></span>
-          </a>
+          <a href={whatsappUrl} target="_blank" rel="noopener" class="nav__cta-wpp"><Icon name="lucide:message-circle" size={14} /> {t("nav.wpp")}</a>
+          <button class="cart-toggle" id="cart-toggle-btn" aria-label={t("nav.order")}>
+            <Icon name="lucide:shopping-bag" size={16} /> {t("nav.order")}<span id="cart-badge"></span>
+          </button>
           <LanguageSwitcher />
         </div>
       </nav>
@@ -361,6 +469,14 @@ const { title, description, jsonLd } = Astro.props;
     <main id="main-content" class="main" role="main">
       <slot />
     </main>
+
+    <section class="info-strip">
+      <div class="info-strip__inner">
+        <span class="info-strip__item">{t("contact.address")}</span>
+        <span class="info-strip__item">{t("contact.hours")}</span>
+        <span class="info-strip__item"><a href={whatsappUrl} target="_blank" rel="noopener">{t("contact.phone")}</a></span>
+      </div>
+    </section>
 
     <footer class="footer" role="contentinfo" aria-label={t("accessibility.footerLabel")}>
       <div class="footer__inner">
@@ -372,31 +488,18 @@ const { title, description, jsonLd } = Astro.props;
         <div class="footer__grid">
           <div>
             <p class="footer__section-title">Contacto</p>
-            <div class="footer__item">
-              <span class="footer__item-icon">📍</span>
-              <span>{t("contact.address")}</span>
-            </div>
-            <div class="footer__item">
-              <span class="footer__item-icon">📱</span>
-              <span>{t("contact.phone")}</span>
-            </div>
+            <p class="footer__item">{t("contact.address")}</p>
+            <p class="footer__item">{t("contact.phone")}</p>
           </div>
           <div>
             <p class="footer__section-title">Horarios</p>
-            <div class="footer__item">
-              <span class="footer__item-icon">🕐</span>
-              <span>{t("contact.hours")}</span>
-            </div>
+            <p class="footer__item">{t("contact.hours")}</p>
           </div>
           <div>
-            <p class="footer__section-title">Encontranos</p>
-            <div class="footer__item">
-              <span class="footer__item-icon">📍</span>
-              <span>Bernardo de Irigoyen 3537, Mar del Plata</span>
-            </div>
-            <div class="footer__item">
-              <span class="footer__item-icon">📸</span>
-              <a href="https://www.instagram.com/luisito.playagrande/" target="_blank" rel="noopener">@luisito.playagrande</a>
+            <p class="footer__section-title">Redes</p>
+            <div class="footer__social">
+              <a href={instagramUrl} target="_blank" rel="noopener" class="footer__social-link"><Icon name="lucide:instagram" size={14} /> Instagram</a>
+              <a href={whatsappUrl} target="_blank" rel="noopener" class="footer__social-link"><Icon name="lucide:message-circle" size={14} /> WhatsApp</a>
             </div>
           </div>
         </div>
@@ -404,26 +507,65 @@ const { title, description, jsonLd } = Astro.props;
         <hr class="footer__divider" />
 
         <div class="footer__actions">
-          <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="footer__cta footer__cta--wpp">📱 Pedí por WhatsApp</a>
-          <a href="/menu" class="footer__cta footer__cta--menu">🍽️ Ver la Carta</a>
+          <a href={whatsappUrl} target="_blank" rel="noopener" class="footer__cta footer__cta--wpp"><Icon name="lucide:message-circle" size={16} /> {t("contact.cta")}</a>
+          <a href="/menu" class="footer__cta footer__cta--menu"><Icon name="lucide:utensils-crossed" size={16} /> {t("hero.cta")}</a>
         </div>
 
         <div class="footer__bottom">
           <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
-          <p class="footer__made">Hecho con amor en Mar del Plata 🧉</p>
+          <p class="footer__made">Hecho con amor en Mar del Plata</p>
         </div>
       </div>
     </footer>
 
+    <CartModal />
+    <Analytics />
+    <SpeedInsights />
+
     <script>
       const badge = document.getElementById("cart-badge");
-      if (badge) {
+      function updateBadge() {
+        if (!badge) return;
         try {
           const items = JSON.parse(localStorage.getItem("luisito-cart") || "[]");
           const count = items.reduce((s, i) => s + i.qty, 0);
-          if (count > 0) { badge.textContent = String(count); badge.style.display = "flex"; }
+          if (count > 0) { badge.textContent = String(count); badge.style.display = "inline-flex"; }
+          else { badge.textContent = ""; badge.style.display = "none"; }
         } catch {}
       }
+      updateBadge();
+
+      function openCartModal() {
+        const modal = document.getElementById("cart-modal");
+        if (!modal) return;
+        modal.classList.add("cart-modal--open");
+        document.body.classList.add("modal-open");
+        if (window.CART_RENDER) window.CART_RENDER();
+      }
+
+      function closeCartModal() {
+        const modal = document.getElementById("cart-modal");
+        if (!modal) return;
+        modal.classList.remove("cart-modal--open");
+        document.body.classList.remove("modal-open");
+      }
+
+      document.getElementById("cart-toggle-btn")?.addEventListener("click", openCartModal);
+
+      document.addEventListener("click", function(e) {
+        var target = e.target;
+        if (target && (target.getAttribute("data-cart-close") !== null || target.closest("[data-cart-close]"))) {
+          closeCartModal();
+        }
+      });
+
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") closeCartModal();
+      });
+
+      window.openCartModal = openCartModal;
+      window.closeCartModal = closeCartModal;
+      window.updateCartBadge = updateBadge;
     </script>
 
     <script define:vars={{ esData: es, enData: en }}>

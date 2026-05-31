@@ -7,7 +7,8 @@
     "home": "Home",
     "menu": "Menu",
     "contact": "Contact",
-    "order": "My Order"
+    "order": "My Order",
+    "wpp": "Order via WhatsApp"
   },
   "theme": {
     "toggle": "Switch to {mode} mode",

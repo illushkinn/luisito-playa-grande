@@ -1,6 +1,9 @@
 {
   "trailingSlash": false,
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/pedido", "destination": "/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

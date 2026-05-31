@@ -1,0 +1,434 @@
+---
+import { Icon } from "astro-icon/components";
+---
+<div id="cart-modal" class="cart-modal" aria-hidden="true" role="dialog" aria-label="Carrito">
+  <div class="cart-modal__overlay" data-cart-close></div>
+  <div class="cart-modal__content">
+    <div class="cart-modal__header">
+      <h2 class="cart-modal__title" data-i18n="order.title">Mi Pedido</h2>
+      <button class="cart-modal__close" data-cart-close aria-label="Cerrar">✕</button>
+    </div>
+
+    <div id="cart-empty-state" class="cart-empty">
+      <p class="cart-empty__text" data-i18n="order.empty">Todavia no agregaste nada al pedido</p>
+      <a href="/menu" class="cart-empty__cta" data-cart-close data-i18n="order.emptyCta">Ver la carta</a>
+    </div>
+
+    <div id="cart-content" class="cart-content" style="display:none">
+      <div id="cart-items" class="cart-items"></div>
+
+      <div class="cart-summary">
+        <div class="cart-summary__row">
+          <span data-i18n="order.subtotal">Subtotal</span>
+          <span id="cart-subtotal">$0</span>
+        </div>
+        <div class="cart-summary__row cart-summary__row--total">
+          <span data-i18n="order.total">Total</span>
+          <span id="cart-total">$0</span>
+        </div>
+      </div>
+
+      <div class="cart-service">
+        <h3 class="cart-service__title" data-i18n="order.serviceType">Tipo de servicio</h3>
+        <div class="cart-service__options">
+          <label class="cart-service__option">
+            <input type="radio" name="service" value="delivery" checked />
+            <Icon name="lucide:truck" size={16} />
+            <span data-i18n="order.delivery">Delivery a domicilio</span>
+          </label>
+          <label class="cart-service__option">
+            <input type="radio" name="service" value="takeaway" />
+            <Icon name="lucide:store" size={16} />
+            <span data-i18n="order.takeaway">Pasar a buscar</span>
+          </label>
+        </div>
+      </div>
+
+      <div id="address-field" class="cart-field">
+        <label for="address-input" data-i18n="order.address">Direccion de entrega</label>
+        <input type="text" id="address-input" placeholder="Calle y altura" data-i18n-attr="order.addressPlaceholder" data-i18n-attr-name="placeholder" />
+      </div>
+
+      <div class="cart-field">
+        <label for="notes-input" data-i18n="order.notes">Notas (opcional)</label>
+        <textarea id="notes-input" placeholder="Ej: sin cebolla, bien cocido..." rows="2" data-i18n-attr="order.notesPlaceholder" data-i18n-attr-name="placeholder"></textarea>
+      </div>
+
+      <button id="send-wpp" class="cart-send">
+        <Icon name="lucide:send" size={18} />
+        <span data-i18n="order.send">Enviar pedido por WhatsApp</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { getCart, updateQty, removeFromCart, getCartTotal, getCartCount, generateWhatsAppMessage, openWhatsApp } from "../utils/cart";
+
+  function renderCart() {
+    const items = getCart();
+    const empty = document.getElementById("cart-empty-state");
+    const content = document.getElementById("cart-content");
+    const container = document.getElementById("cart-items");
+
+    if (!empty || !content || !container) return;
+
+    if (items.length === 0) {
+      empty.style.display = "block";
+      content.style.display = "none";
+      return;
+    }
+
+    empty.style.display = "none";
+    content.style.display = "block";
+
+    container.innerHTML = items.map((item) => `
+      <div class="cart-item" data-id="${item.id}">
+        <div class="cart-item__info">
+          <h4 class="cart-item__name">${item.name}</h4>
+          <p class="cart-item__price">$${(item.price * item.qty).toLocaleString("es-AR")}</p>
+        </div>
+        <div class="cart-item__qty">
+          <button class="qty-btn" data-dec="${item.id}">−</button>
+          <span class="qty-value">${item.qty}</span>
+          <button class="qty-btn" data-inc="${item.id}">+</button>
+        </div>
+        <button class="cart-item__remove" data-remove="${item.id}">✕</button>
+      </div>
+    `).join("");
+
+    updateTotals(items);
+
+    container.querySelectorAll("[data-dec]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-dec");
+        const item = items.find((i) => i.id === id);
+        if (item && item.qty > 1) updateQty(id, item.qty - 1);
+        else removeFromCart(id);
+        renderCart();
+        updateBadge();
+      })
+    );
+
+    container.querySelectorAll("[data-inc]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-inc");
+        const item = items.find((i) => i.id === id);
+        if (item) updateQty(id, item.qty + 1);
+        renderCart();
+        updateBadge();
+      })
+    );
+
+    container.querySelectorAll("[data-remove]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-remove");
+        removeFromCart(id);
+        renderCart();
+        updateBadge();
+      })
+    );
+  }
+
+  function updateTotals(items) {
+    const subtotal = getCartTotal(items);
+    const subEl = document.getElementById("cart-subtotal");
+    const totalEl = document.getElementById("cart-total");
+    if (subEl) subEl.textContent = "$" + subtotal.toLocaleString("es-AR");
+    if (totalEl) totalEl.textContent = "$" + subtotal.toLocaleString("es-AR");
+  }
+
+  function updateBadge() {
+    const badge = document.getElementById("cart-badge");
+    if (badge) {
+      const items = getCart();
+      const count = getCartCount(items);
+      badge.textContent = count > 0 ? String(count) : "";
+      badge.style.display = count > 0 ? "inline-flex" : "none";
+    }
+  }
+
+  document.addEventListener("change", (e) => {
+    const target = e.target;
+    if (target && target instanceof HTMLInputElement && target.name === "service") {
+      const addressField = document.getElementById("address-field");
+      if (addressField) {
+        addressField.style.display = target.value === "delivery" ? "block" : "none";
+      }
+    }
+  });
+
+  document.getElementById("send-wpp")?.addEventListener("click", () => {
+    const items = getCart();
+    if (items.length === 0) return;
+    const type = (document.querySelector("[name=service]:checked"))?.value || "delivery";
+    const address = document.getElementById("address-input")?.value || "";
+    const notes = document.getElementById("notes-input")?.value || "";
+
+    if (type === "delivery" && !address.trim()) {
+      alert("Por favor ingresá tu dirección de entrega");
+      return;
+    }
+
+    const msg = generateWhatsAppMessage({ items, type: type, address, notes, phone: "" });
+    openWhatsApp(msg);
+  });
+
+  window.CART_RENDER = renderCart;
+  window.CART_UPDATE_BADGE = updateBadge;
+</script>
+
+<style>
+  .cart-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart-modal--open {
+    display: flex;
+  }
+
+  .cart-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .cart-modal__content {
+    position: relative;
+    width: min(520px, 94vw);
+    max-height: 88vh;
+    overflow-y: auto;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 48px rgba(0,0,0,0.15);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    animation: cart-fade-in 0.2s ease;
+  }
+
+  @keyframes cart-fade-in {
+    from { opacity: 0; transform: scale(0.95) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .cart-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-lg);
+  }
+
+  .cart-modal__title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .cart-modal__close {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: var(--color-text);
+    border-radius: var(--radius-sm);
+    transition: background 0.15s;
+  }
+
+  .cart-modal__close:hover {
+    background: rgba(0,0,0,0.06);
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: var(--space-lg) 0;
+  }
+
+  .cart-empty__text { font-size: 1rem; color: var(--color-text-muted); margin-bottom: var(--space-lg); }
+
+  .cart-empty__cta {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s;
+  }
+  .cart-empty__cta:hover { background: var(--color-primary-hover); }
+
+  .cart-content { width: 100%; }
+
+  .cart-items { margin-bottom: var(--space-lg); }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cart-item:last-child { border-bottom: none; }
+  .cart-item__info { flex: 1; min-width: 0; }
+  .cart-item__name { font-family: var(--font-heading); font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+  .cart-item__price { font-size: 0.85rem; color: var(--color-text-muted); }
+
+  .cart-item__qty {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .qty-btn {
+    width: 30px;
+    height: 30px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    background: var(--color-accent);
+    color: var(--color-text);
+    border: none;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s;
+  }
+  .qty-btn:hover { filter: brightness(0.95); }
+
+  .qty-value {
+    font-weight: 700;
+    font-size: 1rem;
+    min-width: 22px;
+    text-align: center;
+  }
+
+  .cart-item__remove {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--color-text-muted);
+    transition: color 0.15s;
+  }
+  .cart-item__remove:hover { color: var(--color-primary); }
+
+  .cart-summary {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cart-summary__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 0.9rem;
+  }
+
+  .cart-summary__row--total {
+    font-size: 1.15rem;
+    font-weight: 800;
+    padding-top: var(--space-xs);
+  }
+
+  .cart-service { margin-bottom: var(--space-md); }
+
+  .cart-service__title {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+  }
+
+  .cart-service__options {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .cart-service__option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xs) var(--space-md);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s;
+  }
+  .cart-service__option:hover { background: rgba(0,0,0,0.04); }
+
+  .cart-field {
+    margin-bottom: var(--space-md);
+  }
+
+  .cart-field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--color-text-muted);
+  }
+
+  .cart-field input,
+  .cart-field textarea {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    background: rgba(0,0,0,0.03);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .cart-field input:focus,
+  .cart-field textarea:focus {
+    border-color: var(--color-primary);
+  }
+
+  .cart-field textarea { resize: vertical; }
+
+  .cart-send {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: var(--space-md);
+    margin-top: var(--space-md);
+    background: #25d366;
+    color: #fff;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.2);
+    transition: opacity 0.2s, transform 0.15s;
+  }
+
+  .cart-send:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+</style>

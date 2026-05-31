@@ -7,7 +7,8 @@
     "home": "Inicio",
     "menu": "Carta",
     "contact": "Contacto",
-    "order": "Mi Pedido"
+    "order": "Mi Pedido",
+    "wpp": "Pedí por WhatsApp"
   },
   "theme": {
     "toggle": "Cambiar a modo {mode}",

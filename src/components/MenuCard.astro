@@ -1,6 +1,6 @@
 ---
 import { t } from "../utils/i18n";
-import { getCart, addToCart, getCartCount } from "../utils/cart";
+import { addToCart } from "../utils/cart";
 
 export interface Props {
   id: string;
@@ -18,11 +18,7 @@ const { id, name, price, category, image } = Astro.props;
     {image ? (
       <img src={image} alt={name} loading="lazy" />
     ) : (
-      <div class="menu-card__placeholder">
-        <span class="menu-card__emoji">
-          {category === "pizzas" ? "🍕" : category === "empanadas" ? "🥟" : category === "bebidas" ? "🥤" : category === "postres" ? "🍰" : "🍽️"}
-        </span>
-      </div>
+      <div class="menu-card__placeholder"></div>
     )}
   </div>
   <div class="menu-card__body">
@@ -30,36 +26,30 @@ const { id, name, price, category, image } = Astro.props;
     <p class="menu-card__price">${price.toLocaleString("es-AR")}</p>
     <div class="menu-card__actions">
       <button class="menu-card__btn" data-add={id}>
-        <span class="menu-card__btn-icon">🛒</span> <span data-i18n="menu.add">{t("menu.add")}</span>
+        <span data-i18n="menu.add">{t("menu.add")}</span>
       </button>
     </div>
   </div>
 </div>
 
 <script>
-  import { addToCart, getCartCount } from "../utils/cart";
+  import { addToCart } from "../utils/cart";
 
   document.querySelectorAll("[data-add]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-add")!;
-      const card = btn.closest(".menu-card")!;
-      const name = card.querySelector(".menu-card__name")!.textContent!;
-      const priceText = card.querySelector(".menu-card__price")!.textContent!;
+      const id = btn.getAttribute("data-add");
+      const card = btn.closest(".menu-card");
+      const name = card.querySelector(".menu-card__name")?.textContent || "";
+      const priceText = card.querySelector(".menu-card__price")?.textContent || "";
       const price = parseInt(priceText.replace(/[^0-9]/g, ""));
 
       addToCart({ id, name, price, qty: 1, category: "" } as any);
 
-      const originalText = btn.innerHTML;
-      btn.innerHTML = "✅ Agregado";
-      setTimeout(() => { btn.innerHTML = originalText; }, 1500);
+      const original = btn.innerHTML;
+      btn.innerHTML = "Agregado";
+      setTimeout(() => { btn.innerHTML = original; }, 1500);
 
-      const badge = document.getElementById("cart-badge");
-      if (badge) {
-        const items = JSON.parse(localStorage.getItem("luisito-cart") || "[]");
-        const count = items.reduce((s: number, i: any) => s + i.qty, 0);
-        badge.textContent = count > 0 ? String(count) : "";
-        badge.style.display = count > 0 ? "flex" : "none";
-      }
+      if (window.updateCartBadge) window.updateCartBadge();
     });
   });
 </script>
@@ -70,19 +60,19 @@ const { id, name, price, category, image } = Astro.props;
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--glass-shadow);
     border-radius: var(--radius-md);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .menu-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(44, 36, 32, 0.08);
   }
 
   .menu-card__image {
     width: 100%;
-    height: 180px;
+    height: 160px;
     background: var(--color-bg-alt);
     overflow: hidden;
   }
@@ -99,12 +89,7 @@ const { id, name, price, category, image } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f5c800;
-  }
-
-  .menu-card__emoji {
-    font-size: 4rem;
-    filter: grayscale(1) contrast(1.5);
+    background: var(--color-accent-light);
   }
 
   .menu-card__body {
@@ -112,15 +97,17 @@ const { id, name, price, category, image } = Astro.props;
   }
 
   .menu-card__name {
-    font-size: 1rem;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
     font-weight: 700;
     margin-bottom: var(--space-xs);
   }
 
   .menu-card__price {
-    font-size: 1.25rem;
+    font-family: var(--font-body);
+    font-size: 1.2rem;
     font-weight: 800;
-    color: var(--color-text);
+    color: var(--color-primary);
     margin-bottom: var(--space-sm);
   }
 
@@ -134,20 +121,18 @@ const { id, name, price, category, image } = Astro.props;
     padding: var(--space-sm) var(--space-md);
     background: var(--color-primary);
     color: #fff;
-    font-weight: 700;
+    font-family: var(--font-body);
+    font-weight: 600;
     font-size: 0.875rem;
     cursor: pointer;
+    border: none;
     border-radius: var(--radius-sm);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(199, 62, 43, 0.1);
     transition: background 0.15s, transform 0.15s;
   }
 
   .menu-card__btn:hover {
     background: var(--color-primary-hover);
     transform: translateY(-1px);
-  }
-
-  .menu-card__btn-icon {
-    font-size: 1rem;
   }
 </style>

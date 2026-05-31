@@ -4,6 +4,14 @@ import SplitHero from "../components/SplitHero.astro";
 import { t } from "../utils/i18n";
 import { MENU_ITEMS } from "../utils/cart";
 
+const categories = [
+  { key: "pizzas", count: MENU_ITEMS.filter((i) => i.category === "pizzas").length },
+  { key: "empanadas", count: MENU_ITEMS.filter((i) => i.category === "empanadas").length },
+  { key: "platos", count: MENU_ITEMS.filter((i) => i.category === "platos").length },
+  { key: "bebidas", count: MENU_ITEMS.filter((i) => i.category === "bebidas").length },
+  { key: "postres", count: MENU_ITEMS.filter((i) => i.category === "postres").length },
+];
+
 const destacados = MENU_ITEMS.filter((_, i) => i < 4);
 const jsonLd = {
   "@context": "https://schema.org",
@@ -26,18 +34,27 @@ const jsonLd = {
 <BaseLayout title={t("site.title")} description={t("site.description")} jsonLd={jsonLd}>
   <SplitHero />
 
+  <section class="categories">
+    <h2 class="section-title" data-i18n="menu.title">{t("menu.title")}</h2>
+    <div class="categories__grid">
+      {categories.map((cat) => (
+        <a href={`/menu#${cat.key}`} class="category-card">
+          <h3 class="category-card__title" data-i18n={`menu.categories.${cat.key}`}>{t(`menu.categories.${cat.key}`)}</h3>
+          <span class="category-card__count">{cat.count} {cat.count === 1 ? t("order.item") : t("order.items")}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
   <section class="destacados">
     <h2 class="section-title">Destacados</h2>
     <div class="destacados__grid">
       {destacados.map((item) => (
         <div class="destacado-card">
-          <div class="destacado-card__emoji">
-            {item.category === "pizzas" ? "🍕" : item.category === "empanadas" ? "🥟" : item.category === "bebidas" ? "🥤" : item.category === "postres" ? "🍰" : "🍽️"}
-          </div>
           <h3 class="destacado-card__name">{item.name}</h3>
           <p class="destacado-card__price">${item.price.toLocaleString("es-AR")}</p>
           <button class="destacado-card__btn" data-add={item.id} data-name={item.name} data-price={item.price}>
-            🛒 <span data-i18n="menu.add">{t("menu.add")}</span>
+            <span data-i18n="menu.add">{t("menu.add")}</span>
           </button>
         </div>
       ))}
@@ -49,27 +66,85 @@ const jsonLd = {
 </BaseLayout>
 
 <script>
+  import gsap from "gsap";
   import { addToCart } from "../utils/cart";
+
+  window.addEventListener("load", () => {
+    gsap.from(".category-card", {
+      y: 30,
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: "power2.out",
+    });
+    gsap.from(".destacado-card", {
+      y: 30,
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.12,
+      ease: "power2.out",
+      delay: 0.2,
+    });
+  });
   document.querySelectorAll("[data-add]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-add")!;
-      const name = btn.getAttribute("data-name")!;
-      const price = parseInt(btn.getAttribute("data-price")!);
+      const id = btn.getAttribute("data-add");
+      const name = btn.getAttribute("data-name");
+      const price = parseInt(btn.getAttribute("data-price"));
       addToCart({ id, name, price, qty: 1, category: "" } as any);
-      btn.innerHTML = "✅ Agregado";
-      setTimeout(() => { btn.innerHTML = "🛒 Agregar"; }, 1500);
-      const badge = document.getElementById("cart-badge");
-      if (badge) {
-        const items = JSON.parse(localStorage.getItem("luisito-cart") || "[]");
-        const count = items.reduce((s: number, i: any) => s + i.qty, 0);
-        badge.textContent = count > 0 ? String(count) : "";
-        badge.style.display = count > 0 ? "flex" : "none";
-      }
+      btn.textContent = "Agregado";
+      const original = "Agregar";
+      setTimeout(() => { btn.textContent = original; }, 1500);
+      if (window.updateCartBadge) window.updateCartBadge();
     });
   });
 </script>
 
 <style>
+  .categories {
+    padding: var(--space-xl) 0;
+  }
+
+  .categories__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-lg) var(--space-md);
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(44, 36, 32, 0.08);
+  }
+
+  .category-card__title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .category-card__count {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
   .destacados {
     padding: var(--space-xl) 0;
   }
@@ -87,32 +162,28 @@ const jsonLd = {
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--glass-shadow);
     border-radius: var(--radius-md);
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
   .destacado-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  }
-
-  .destacado-card__emoji {
-    font-size: 3rem;
-    margin-bottom: var(--space-sm);
-    filter: grayscale(0.5);
+    box-shadow: 0 8px 32px rgba(44, 36, 32, 0.08);
   }
 
   .destacado-card__name {
-    font-size: 1.25rem;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
     font-weight: 700;
     margin-bottom: var(--space-xs);
   }
 
   .destacado-card__price {
-    font-size: 1.5rem;
+    font-family: var(--font-body);
+    font-size: 1.35rem;
     font-weight: 800;
-    color: var(--color-text);
+    color: var(--color-primary);
     margin-bottom: var(--space-md);
   }
 
@@ -120,35 +191,39 @@ const jsonLd = {
     padding: var(--space-sm) var(--space-lg);
     background: var(--color-accent);
     color: var(--color-text);
-    font-weight: 700;
+    font-family: var(--font-body);
+    font-weight: 600;
     cursor: pointer;
     font-size: 0.875rem;
+    border: none;
     border-radius: var(--radius-sm);
-    transition: transform 0.15s;
+    transition: transform 0.15s, filter 0.15s;
   }
 
-  .destacado-card__btn:hover { transform: scale(1.05); }
+  .destacado-card__btn:hover { transform: scale(1.05); filter: brightness(0.95); }
 
   .destacados__cta { text-align: center; }
 
   .hero__cta {
     display: inline-block;
     padding: var(--space-sm) var(--space-xl);
-    font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: 1px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
     text-decoration: none;
-    border-radius: var(--radius-md);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 16px rgba(199, 62, 43, 0.1);
     transition: transform 0.15s, box-shadow 0.2s;
   }
   .hero__cta:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 24px rgba(199, 62, 43, 0.15);
   }
   .hero__cta--primary { background: var(--color-primary); color: #fff; }
 
   @media (max-width: 768px) {
+    .categories__grid { grid-template-columns: repeat(2, 1fr); }
     .destacados__grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
