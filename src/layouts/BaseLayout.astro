@@ -1,6 +1,5 @@
 ---
 import Seo from "../components/Seo.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import { t, getLocale } from "../utils/i18n";
 import type { SeoProps } from "../components/Seo.astro";
@@ -13,7 +12,7 @@ const { title, description, jsonLd } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={locale} data-theme="light">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -41,18 +40,6 @@ const { title, description, jsonLd } = Astro.props;
         --space-lg: 2rem;
         --space-xl: 4rem;
         --max-width: 1100px;
-      }
-
-      [data-theme="dark"] {
-        --color-bg: #2a2a2a;
-        --color-bg-alt: #3a3a3a;
-        --color-text: #f0f0f0;
-        --color-text-muted: #aaa;
-        --color-primary: #14a0b0;
-        --color-primary-hover: #1db3c4;
-        --color-accent: #ffd700;
-        --color-border: #f0f0f0;
-        --color-cream: #3a3a3a;
       }
 
       * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -89,7 +76,6 @@ const { title, description, jsonLd } = Astro.props;
         z-index: 1000;
         font-weight: 700;
         border: var(--border-width) solid var(--color-text);
-        border-radius: 0 0 8px 8px;
         text-decoration: none;
       }
       .skip-link:focus { top: 0; }
@@ -121,7 +107,6 @@ const { title, description, jsonLd } = Astro.props;
           var(--color-focus) 20px,
           var(--color-focus) 30px
         );
-        border-radius: 3px;
       }
 
       .header__brand {
@@ -179,7 +164,6 @@ const { title, description, jsonLd } = Astro.props;
       .btn--icon {
         background: var(--color-accent);
         border: var(--border-width) solid var(--color-text);
-        border-radius: 999px;
         padding: var(--space-sm) var(--space-md);
         cursor: pointer;
         font-weight: 700;
@@ -267,8 +251,7 @@ const { title, description, jsonLd } = Astro.props;
 
     <header class="header" role="banner">
       <a href="/" class="header__brand">
-        <img src="/images/luisito-logo-rotiseria-mdq_1_.svg" alt="Luisito" class="header__logo-img" />
-        <span class="header__title">Luisito</span>
+        <img src="/images/luisito-logo-rotiseria-mdq(1).jpg" alt="Luisito Playa Grande" class="header__logo-img" />
       </a>
       <nav class="nav" aria-label={t("accessibility.navLabel")}>
         <ul class="nav__list">
@@ -280,7 +263,6 @@ const { title, description, jsonLd } = Astro.props;
           <a href="/pedido" class="btn--icon cart-toggle" aria-label={t("nav.order")}>
             🛒<span id="cart-badge"></span>
           </a>
-          <ThemeToggle />
           <LanguageSwitcher />
         </div>
       </nav>
