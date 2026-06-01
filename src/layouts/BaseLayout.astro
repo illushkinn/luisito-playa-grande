@@ -67,6 +67,27 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       * { box-sizing: border-box; margin: 0; padding: 0; }
       html { scroll-behavior: smooth; }
 
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--color-bg-alt);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-text-muted);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-text);
+      }
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-text-muted) var(--color-bg-alt);
+      }
+
+
       body {
         font-family: var(--font-body);
         color: var(--color-text);
@@ -156,11 +177,11 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
 
       .header.glass {
-        background: rgba(250, 246, 241, 0.3);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        box-shadow: var(--glass-shadow);
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(250, 246, 241, 0.25);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        box-shadow: 0 4px 32px rgba(44, 36, 32, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.35);
       }
 
       .header__brand {
@@ -409,14 +430,15 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         background: var(--color-primary);
         color: #fff;
         font-family: var(--font-body);
-        font-size: 0.65rem;
-        font-weight: 700;
-        min-width: 16px;
-        height: 16px;
-        padding: 0 4px;
-        border-radius: 50%;
+        font-size: 0.7rem;
+        font-weight: 800;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 5px;
+        border-radius: 10px;
         display: none;
         vertical-align: middle;
+        box-shadow: 0 2px 6px rgba(199, 62, 43, 0.3);
       }
 
       .main {
@@ -425,6 +447,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         padding: var(--space-lg);
         min-height: 70vh;
         background: var(--color-bg);
+        border-radius: 2px;
       }
 
       .info-strip {
@@ -475,6 +498,12 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         font-weight: 700;
         margin-bottom: var(--space-xs);
         letter-spacing: 0;
+      }
+      .footer__logo-img {
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+        margin-bottom: var(--space-sm);
       }
 
       .footer__since {
@@ -667,7 +696,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
     <footer class="footer" role="contentinfo" aria-label={t("accessibility.footerLabel")}>
       <div class="footer__inner">
         <div class="footer__brand">
-          <p class="footer__logo-name">Luisito Playa Grande</p>
+          <img src="/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png" alt="Luisito Playa Grande" class="footer__logo-img" />
           <p class="footer__since">Un clásico de Playa Grande desde 1955</p>
         </div>
 

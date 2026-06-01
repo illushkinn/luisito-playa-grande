@@ -247,12 +247,7 @@ const jsonLd = {
     text-transform: uppercase;
     text-shadow: 6px 6px 0 rgba(0,0,0,0.08);
   }
-  .desde-1955__tagline {
-    font-size: 0.85rem;
-    font-style: italic;
-    color: var(--color-text-muted);
-    margin-top: 4px;
-  }
+
 
   @media (max-width: 768px) {
     .desde-1955 { padding: var(--space-md) 0 var(--space-xs); }
@@ -299,6 +294,13 @@ const jsonLd = {
 
   .bento {
     padding: var(--space-lg) 0;
+    background: rgba(255, 252, 248, 0.35);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 4px;
+    margin: 0 calc(-1 * var(--space-md));
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
   }
 
   .bento__grid {
@@ -315,8 +317,6 @@ const jsonLd = {
     border-radius: var(--radius-md);
     box-shadow: 4px 4px 0 var(--color-text);
     border: 2px solid var(--color-text);
-    outline: 2px solid var(--color-accent);
-    outline-offset: 3px;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
     background: var(--color-bg);

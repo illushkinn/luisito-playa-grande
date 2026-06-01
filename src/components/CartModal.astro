@@ -54,6 +54,10 @@ import { Icon } from "astro-icon/components";
         <textarea id="notes-input" placeholder="Ej: sin cebolla, bien cocido..." rows="2" data-i18n-attr="order.notesPlaceholder" data-i18n-attr-name="placeholder"></textarea>
       </div>
 
+      <button id="clear-cart" class="cart-clear">
+        <Icon name="lucide:trash-2" size={16} />
+        <span>Vaciar pedido</span>
+      </button>
       <button id="send-wpp" class="cart-send">
         <Icon name="lucide:send" size={18} />
         <span data-i18n="order.send">Enviar pedido por WhatsApp</span>
@@ -174,6 +178,15 @@ import { Icon } from "astro-icon/components";
     openWhatsApp(msg);
   });
 
+  document.getElementById("clear-cart")?.addEventListener("click", () => {
+    if (confirm("¿Vaciar todo el pedido?")) {
+      localStorage.removeItem("luisito-cart");
+      window.CART_RENDER?.();
+      window.CART_UPDATE_BADGE?.();
+    }
+  });
+
+
   window.CART_RENDER = renderCart;
   window.CART_UPDATE_BADGE = updateBadge;
 </script>
@@ -195,9 +208,9 @@ import { Icon } from "astro-icon/components";
   .cart-modal__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .cart-modal__content {
@@ -205,11 +218,11 @@ import { Icon } from "astro-icon/components";
     width: min(520px, 94vw);
     max-height: 88vh;
     overflow-y: auto;
-    background: var(--card-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 8px 48px rgba(0,0,0,0.15);
-    border-radius: var(--radius-md);
+    background: rgba(255, 252, 248, 0.78);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 48px rgba(0,0,0,0.12);
+    border-radius: 8px;
     padding: var(--space-lg);
     animation: cart-fade-in 0.2s ease;
   }
@@ -272,14 +285,24 @@ import { Icon } from "astro-icon/components";
 
   .cart-content { width: 100%; }
 
-  .cart-items { margin-bottom: var(--space-lg); }
+  .cart-items {
+    margin-bottom: var(--space-lg);
+    max-height: 40vh;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
 
   .cart-item {
     display: flex;
     align-items: center;
     gap: var(--space-md);
-    padding: var(--space-sm) 0;
+    padding: var(--space-sm) var(--space-xs);
     border-bottom: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: background 0.15s;
+  }
+  .cart-item:hover {
+    background: rgba(255,255,255,0.4);
   }
 
   .cart-item:last-child { border-bottom: none; }
@@ -426,6 +449,30 @@ import { Icon } from "astro-icon/components";
   }
 
   .cart-field textarea { resize: vertical; }
+
+  .cart-clear {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: var(--space-sm) var(--space-md);
+    margin-top: var(--space-sm);
+    background: transparent;
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+  .cart-clear:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background: rgba(199, 62, 43, 0.04);
+  }
 
   .cart-send {
     width: 100%;
