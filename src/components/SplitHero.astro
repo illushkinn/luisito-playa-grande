@@ -4,9 +4,9 @@ import { t } from "../utils/i18n";
 ---
 
 <section class="hero">
+  <div class="hero__bg"></div>
   <div class="hero__content">
     <h1 class="hero__title">
-      Bienvenido a
       <img src="/images/luisito-logo-rotiseria-mdq(3)-remove-bg-io.png" alt="Luisito Playa Grande" class="hero__logo-inline" />
     </h1>
     <p class="hero__subtitle" data-i18n="hero.subtitle">{t("hero.subtitle")}</p>
@@ -16,12 +16,9 @@ import { t } from "../utils/i18n";
     </div>
     <div class="hero__trust">
       <span class="hero__trust-badge">Desde 1955</span>
-      <span class="hero__trust-dot">·</span>
-      <span class="hero__trust-badge">Delivery</span>
-      <span class="hero__trust-dot">·</span>
-      <span class="hero__trust-badge">Lun a Sab</span>
     </div>
   </div>
+  <div class="hero__spacer"></div>
 </section>
 
 <style>
@@ -34,10 +31,27 @@ import { t } from "../utils/i18n";
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-image: url('/images/hero-image.png');
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(236, 227, 216, 0.05) 0%,
+      rgba(236, 227, 216, 0.15) 50%,
+      rgba(236, 227, 216, 0.35) 100%
+    );
+    z-index: 1;
+  }
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/hero-image-upscaled.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    z-index: 0;
   }
 
   .hero__content {
@@ -46,6 +60,10 @@ import { t } from "../utils/i18n";
     max-width: 640px;
     text-align: center;
     padding: var(--space-xl) var(--space-lg);
+  }
+
+  .hero__spacer {
+    height: var(--space-xl);
   }
 
   .hero__title {

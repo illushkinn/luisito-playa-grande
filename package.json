@@ -6,21 +6,26 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/upscale-hero.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.111",
+    "@tensorflow/tfjs": "^4.22.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "astro": "^5.0.0",
     "astro-icon": "^1.1.5",
-    "gsap": "^3.15.0"
+    "gsap": "^3.15.0",
+    "pngjs": "^7.0.0",
+    "upscaler": "^1.0.0"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.0.0",
     "@astrojs/vercel": "^8.0.0",
+    "@types/pngjs": "^6.0.5",
     "typescript": "^5.5.0"
   }
 }
