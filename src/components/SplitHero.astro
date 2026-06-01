@@ -47,7 +47,10 @@ import { t } from "../utils/i18n";
   .hero__bg {
     position: absolute;
     inset: 0;
-    background-image: url('/images/hero-image-upscaled.png');
+    background-image: image-set(
+      url('/images/hero-image(1).webp') type('image/webp'),
+      url('/images/hero-image(1).png') type('image/png')
+    );
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
