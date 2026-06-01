@@ -16,7 +16,7 @@ const { id, name, price, category, image } = Astro.props;
 <div class="menu-card" data-id={id}>
   <div class="menu-card__image" role="img" aria-label={name}>
     {image ? (
-      <img src={image} alt={name} loading="lazy" />
+      <img src={image} alt={name} loading="lazy" data-lightbox={image} />
     ) : (
       <div class="menu-card__placeholder"></div>
     )}

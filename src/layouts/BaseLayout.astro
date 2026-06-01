@@ -2,6 +2,7 @@
 import Seo from "../components/Seo.astro";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import CartModal from "../components/CartModal.astro";
+import Lightbox from "../components/Lightbox.astro";
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { Icon } from "astro-icon/components";
@@ -149,6 +150,134 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         width: 64px;
         height: 64px;
         object-fit: contain;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        z-index: 110;
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--color-text);
+        border-radius: 1px;
+        transition: transform 0.25s, opacity 0.25s;
+      }
+      .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 105;
+      }
+      .mobile-nav--open { display: block; }
+      .mobile-nav__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+      }
+      .mobile-nav__panel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 280px;
+        height: 100%;
+        background: #faf6f1;
+        padding: var(--space-lg);
+        box-shadow: -4px 0 24px rgba(0,0,0,0.1);
+        animation: mobile-slide-in 0.25s ease;
+      }
+      @keyframes mobile-slide-in {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+      }
+      .mobile-nav__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-lg);
+      }
+      .mobile-nav__title {
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      .mobile-nav__close {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        font-size: 1.25rem;
+        cursor: pointer;
+        color: var(--color-text);
+        border-radius: var(--radius-sm);
+      }
+      .mobile-nav__close:hover { background: rgba(0,0,0,0.06); }
+      .mobile-nav__list {
+        list-style: none;
+        margin-bottom: var(--space-xl);
+      }
+      .mobile-nav__link {
+        display: block;
+        padding: var(--space-md) 0;
+        font-weight: 600;
+        color: var(--color-text);
+        text-decoration: none;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .mobile-nav__actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+      .mobile-nav__wpp {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: var(--space-sm) var(--space-md);
+        background: #25d366;
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+      }
+      .mobile-nav__cart {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: var(--space-sm) var(--space-md);
+        background: transparent;
+        border: 1px solid var(--color-border);
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--color-text);
+        cursor: pointer;
+        border-radius: var(--radius-sm);
+      }
+      .mobile-nav__lang {
+        display: flex;
+        justify-content: center;
+        margin-top: var(--space-sm);
+      }
+
+      .header--scrolled {
+        background: rgba(250, 246, 241, 0.92) !important;
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
       }
 
       .nav {
@@ -431,12 +560,14 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
 
       @media (max-width: 768px) {
-        .header { flex-wrap: wrap; gap: var(--space-sm); }
-        .nav { order: 3; width: 100%; justify-content: space-between; }
-        .nav__list { gap: var(--space-xs); }
-        .nav__link { font-size: 0.9rem; }
-        .nav__cta-wpp { font-size: 0.75rem; padding: var(--space-xs) var(--space-sm); }
-        .section-title { font-size: 1.75rem; }
+        .hamburger { display: flex; }
+        .nav { display: none; }
+        .header { flex-wrap: nowrap; gap: 0; padding: var(--space-sm) var(--space-md); }
+        .header__logo-img { width: 48px; height: 48px; }
+        .main { padding: var(--space-md); }
+        .section-title { font-size: 1.75rem; margin-bottom: var(--space-md); }
+        .categories { padding: var(--space-lg) 0; }
+        .destacados { padding: var(--space-lg) 0; }
         .footer__grid { grid-template-columns: 1fr; gap: var(--space-lg); }
         .footer__actions { flex-direction: column; align-items: center; }
         .info-strip__inner { flex-direction: column; align-items: center; gap: var(--space-xs); }
@@ -446,10 +577,13 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
   <body>
     <a href="#main-content" class="skip-link">{t("accessibility.skipToContent")}</a>
 
-    <header class="header glass" role="banner">
+    <header class="header glass" role="banner" id="header">
       <a href="/" class="header__brand">
         <img src="/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png" alt="Luisito Playa Grande" class="header__logo-img" />
       </a>
+      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
       <nav class="nav" aria-label={t("accessibility.navLabel")}>
         <ul class="nav__list">
           <li><a href="/" class="nav__link">{t("nav.home")}</a></li>
@@ -465,6 +599,26 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         </div>
       </nav>
     </header>
+
+    <div class="mobile-nav" id="mobile-nav">
+      <div class="mobile-nav__overlay" id="mobile-nav-overlay"></div>
+      <div class="mobile-nav__panel">
+        <div class="mobile-nav__header">
+          <span class="mobile-nav__title" data-i18n="nav.menu">Menú</span>
+          <button class="mobile-nav__close" id="mobile-nav-close" aria-label="Cerrar">✕</button>
+        </div>
+        <ul class="mobile-nav__list">
+          <li><a href="/" class="mobile-nav__link" data-i18n="nav.home">{t("nav.home")}</a></li>
+          <li><a href="/menu" class="mobile-nav__link" data-i18n="nav.menu">{t("nav.menu")}</a></li>
+          <li><a href="/contact" class="mobile-nav__link" data-i18n="nav.contact">{t("nav.contact")}</a></li>
+        </ul>
+        <div class="mobile-nav__actions">
+          <a href={whatsappUrl} target="_blank" rel="noopener" class="mobile-nav__wpp"><Icon name="lucide:message-circle" size={16} /> {t("nav.wpp")}</a>
+          <button class="mobile-nav__cart" id="mobile-nav-cart"><Icon name="lucide:shopping-bag" size={16} /> {t("nav.order")}</button>
+          <div class="mobile-nav__lang"><LanguageSwitcher /></div>
+        </div>
+      </div>
+    </div>
 
     <main id="main-content" class="main" role="main">
       <slot />
@@ -518,9 +672,50 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       </div>
     </footer>
 
+    <Lightbox />
     <CartModal />
     <Analytics />
     <SpeedInsights />
+
+    <script>
+      import gsap from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+      gsap.registerPlugin(ScrollTrigger);
+
+      window.addEventListener("load", () => {
+        gsap.to(".hero", {
+          backgroundPosition: "50% 20%",
+          ease: "none",
+          scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 },
+        });
+
+        ScrollTrigger.create({
+          start: "top -80px",
+          onEnter: () => document.getElementById("header")?.classList.add("header--scrolled"),
+          onLeaveBack: () => document.getElementById("header")?.classList.remove("header--scrolled"),
+        });
+      });
+    </script>
+
+    <script>
+      function openMobileNav() {
+        document.getElementById("mobile-nav")?.classList.add("mobile-nav--open");
+        document.getElementById("hamburger-btn")?.classList.add("active");
+        document.body.classList.add("modal-open");
+      }
+      function closeMobileNav() {
+        document.getElementById("mobile-nav")?.classList.remove("mobile-nav--open");
+        document.getElementById("hamburger-btn")?.classList.remove("active");
+        document.body.classList.remove("modal-open");
+      }
+
+      document.getElementById("hamburger-btn")?.addEventListener("click", openMobileNav);
+      document.getElementById("mobile-nav-close")?.addEventListener("click", closeMobileNav);
+      document.getElementById("mobile-nav-overlay")?.addEventListener("click", closeMobileNav);
+      document.getElementById("mobile-nav-cart")?.addEventListener("click", () => { closeMobileNav(); window.openCartModal?.(); });
+      document.querySelectorAll(".mobile-nav__link").forEach((link) => link.addEventListener("click", closeMobileNav));
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMobileNav(); });
+    </script>
 
     <script>
       const badge = document.getElementById("cart-badge");

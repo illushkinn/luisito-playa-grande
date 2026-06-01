@@ -67,23 +67,26 @@ const jsonLd = {
 
 <script>
   import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { addToCart } from "../utils/cart";
+  gsap.registerPlugin(ScrollTrigger);
 
   window.addEventListener("load", () => {
     gsap.from(".category-card", {
-      y: 30,
+      y: 40,
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.08,
+      ease: "power2.out",
+      scrollTrigger: { trigger: ".categories__grid", start: "top 85%" },
+    });
+    gsap.from(".destacado-card", {
+      y: 40,
       opacity: 0,
       duration: 0.5,
       stagger: 0.1,
       ease: "power2.out",
-    });
-    gsap.from(".destacado-card", {
-      y: 30,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.12,
-      ease: "power2.out",
-      delay: 0.2,
+      scrollTrigger: { trigger: ".destacados__grid", start: "top 85%" },
     });
   });
   document.querySelectorAll("[data-add]").forEach((btn) => {

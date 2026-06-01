@@ -48,6 +48,19 @@ import { t } from "../utils/i18n";
         {t("contact.cta")}
       </a>
     </div>
+
+    <div class="contact__map">
+      <iframe
+        src="https://maps.google.com/maps?q=Bernardo%20De%20Irigoyen%203537%20Mar%20del%20Plata&output=embed"
+        width="100%"
+        height="280"
+        style="border:0; border-radius: var(--radius-md);"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación Luisito Playa Grande"
+      ></iframe>
+    </div>
   </section>
 </BaseLayout>
 
@@ -93,6 +106,7 @@ import { t } from "../utils/i18n";
   }
 
   .contact__actions { text-align: center; }
+  .contact__map { margin-top: var(--space-lg); }
 
   .hero__cta {
     display: inline-block;
