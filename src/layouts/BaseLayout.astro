@@ -35,7 +35,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         --color-bg: #ece3d8;
         --color-bg-alt: #e0d5c8;
         --color-text: #2c2420;
-        --color-text-muted: #8c8279;
+        --color-text-muted: #6b6259;
         --color-primary: #c73e2b;
         --color-primary-hover: #a83222;
         --color-accent: #d4943a;
@@ -43,7 +43,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         --color-border: rgba(44, 36, 32, 0.12);
         --color-focus: #c73e2b;
         --color-cream: #faf6f1;
-        --color-footer-bg: #e0d5c8;
+        --color-footer-bg: #d4c8b8;
         --font-heading: "Inter", system-ui, sans-serif;
         --font-body: "Inter", system-ui, sans-serif;
         --font-accent: "Inter", system-ui, sans-serif;
@@ -73,8 +73,8 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         background: repeating-linear-gradient(
           135deg,
           #ece3d8 0px, #ece3d8 24px,
-          #f5e6c8 24px, #f5e6c8 48px,
-          #e8d5b8 48px, #e8d5b8 72px
+          #efe2cc 24px, #efe2cc 48px,
+          #dcc9b0 48px, #dcc9b0 72px
         );
         line-height: 1.6;
         min-height: 100vh;
@@ -112,6 +112,27 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         -webkit-backdrop-filter: blur(var(--glass-blur));
         box-shadow: var(--glass-shadow);
         border: var(--glass-border);
+      }
+
+      .vintage-border {
+        border: 2px solid var(--color-text);
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+      }
+
+      .hard-shadow {
+        box-shadow: 4px 4px 0 var(--color-text);
+      }
+
+      .noise-overlay {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: multiply;
+        opacity: 0.08;
       }
 
       .skip-link {
@@ -168,7 +189,11 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         background: none;
         border: none;
         cursor: pointer;
-        padding: 8px;
+        padding: 11px;
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
         z-index: 110;
       }
       .hamburger span {
@@ -436,6 +461,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       .footer {
         padding: var(--space-xl) var(--space-lg);
         background: var(--color-footer-bg);
+        box-shadow: 0 -2px 0 var(--color-text), 0 -4px 0 var(--color-accent);
       }
 
       .footer__inner {
@@ -457,9 +483,13 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
 
       .footer__since {
-        font-size: 0.85rem;
-        color: var(--color-text-muted);
-        font-weight: 400;
+        font-size: 1rem;
+        color: var(--color-accent);
+        font-weight: 600;
+        background: rgba(44, 36, 32, 0.06);
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: var(--radius-sm);
       }
 
       .footer__grid {
@@ -684,6 +714,14 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 
     <Lightbox />
     <CartModal />
+
+    <svg class="noise-overlay" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <filter id="vintage-noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+      <rect width="100%" height="100%" filter="url(#vintage-noise)" />
+    </svg>
     <Analytics />
     <SpeedInsights />
 

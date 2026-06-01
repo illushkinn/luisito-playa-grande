@@ -9,9 +9,8 @@ import { t } from "../utils/i18n";
     <h1 class="hero__title">
       <img src="/images/luisito-logo-rotiseria-mdq(3)-remove-bg-io.png" alt="Luisito Playa Grande" class="hero__logo-inline" />
     </h1>
-    <p class="hero__subtitle" data-i18n="hero.subtitle">{t("hero.subtitle")}</p>
     <div class="hero__actions">
-      <a href="/menu" class="hero__cta" data-i18n="hero.cta"><Icon name="lucide:utensils-crossed" size={16} /> {t("hero.cta")}</a>
+      <a href="#bento-grid" class="hero__cta" data-i18n="hero.cta"><Icon name="lucide:utensils-crossed" size={16} /> {t("hero.cta")}</a>
       <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="hero__cta--wpp" data-i18n="hero.wpp"><Icon name="lucide:message-circle" size={16} /> {t("hero.wpp")}</a>
     </div>
     <div class="hero__trust">
@@ -90,17 +89,6 @@ import { t } from "../utils/i18n";
     vertical-align: middle;
   }
 
-  .hero__subtitle {
-    margin-top: var(--space-md);
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-    color: var(--color-text);
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.5;
-    white-space: pre-line;
-    text-shadow: 0 1px 8px rgba(255, 252, 248, 0.8), 0 1px 3px rgba(44, 36, 32, 0.08);
-  }
 
   .hero__actions {
     display: flex;
@@ -179,7 +167,7 @@ import { t } from "../utils/i18n";
 
   @media (max-width: 768px) {
     .hero {
-      min-height: 90vh;
+      min-height: 80vh;
     }
 
     .hero__title {

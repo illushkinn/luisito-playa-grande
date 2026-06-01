@@ -325,6 +325,28 @@ import { Icon } from "astro-icon/components";
   }
   .cart-item__remove:hover { color: var(--color-primary); }
 
+  @media (max-width: 480px) {
+    .cart-modal__content {
+      width: 100vw;
+      max-width: 100%;
+      border-radius: 0;
+      max-height: 100vh;
+    }
+    .qty-btn {
+      width: 44px;
+      height: 44px;
+      font-size: 1.25rem;
+    }
+    .qty-value {
+      min-width: 32px;
+      font-size: 1.15rem;
+    }
+    .cart-item__remove {
+      padding: 10px;
+      font-size: 1.3rem;
+    }
+  }
+
   .cart-summary {
     margin-bottom: var(--space-lg);
     padding-bottom: var(--space-md);

@@ -4,15 +4,44 @@ import SplitHero from "../components/SplitHero.astro";
 import { t } from "../utils/i18n";
 import { MENU_ITEMS } from "../utils/cart";
 
-const categories = [
-  { key: "pizzas", count: MENU_ITEMS.filter((i) => i.category === "pizzas").length },
-  { key: "empanadas", count: MENU_ITEMS.filter((i) => i.category === "empanadas").length },
-  { key: "platos", count: MENU_ITEMS.filter((i) => i.category === "platos").length },
-  { key: "bebidas", count: MENU_ITEMS.filter((i) => i.category === "bebidas").length },
-  { key: "postres", count: MENU_ITEMS.filter((i) => i.category === "postres").length },
+const allCategories = [
+  { key: "empanadas", label: t("menu.categories.empanadas"), count: MENU_ITEMS.filter((i) => i.category === "empanadas").length },
+  { key: "pizzas", label: t("menu.categories.pizzas"), count: MENU_ITEMS.filter((i) => i.category === "pizzas").length },
+  { key: "tartas", label: t("menu.categories.tartas"), count: MENU_ITEMS.filter((i) => i.category === "tartas").length },
+  { key: "pollo-rostizado", label: t("menu.categories.pollo-rostizado"), count: MENU_ITEMS.filter((i) => i.category === "pollo-rostizado").length },
+  { key: "platos", label: t("menu.categories.platos"), count: MENU_ITEMS.filter((i) => i.category === "platos").length },
+  { key: "bebidas", label: t("menu.categories.bebidas"), count: MENU_ITEMS.filter((i) => i.category === "bebidas").length },
+  { key: "postres", label: t("menu.categories.postres"), count: MENU_ITEMS.filter((i) => i.category === "postres").length },
 ];
 
-const destacados = MENU_ITEMS.filter((_, i) => i < 4);
+const bentoLayout = [
+  { id: "milanesa-napolitana", span: "hero" },
+  { id: "pizza-muzzarella", span: "square" },
+  { id: "tarta-verdura", span: "tall" },
+  { id: "empanada-carne", span: "square" },
+  { id: "pollo-entero", span: "square" },
+  { id: "flan-con-dulce", span: "wide" },
+  { id: "coca-cola", span: "square" },
+  { id: "cerveza-stella", span: "tall" },
+  { id: "pizza-napolitana", span: "square" },
+  { id: "lomo-completo", span: "square" },
+];
+
+const bentoItems = bentoLayout.map((b) => {
+  const item = MENU_ITEMS.find((m) => m.id === b.id);
+  return item ? { ...item, span: b.span } : null;
+}).filter(Boolean);
+
+const categoryGradients: Record<string, string> = {
+  empanadas: "linear-gradient(135deg, #c73e2b, #e8a87c)",
+  pizzas: "linear-gradient(135deg, #d4943a, #f5d6a8)",
+  tartas: "linear-gradient(135deg, #6b8f5e, #b5d6a8)",
+  "pollo-rostizado": "linear-gradient(135deg, #a8643a, #d6a87c)",
+  platos: "linear-gradient(135deg, #5e6b8f, #a8b5d6)",
+  bebidas: "linear-gradient(135deg, #3a7ca8, #7cb5d6)",
+  postres: "linear-gradient(135deg, #a85e7c, #d6a8b5)",
+};
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
@@ -34,35 +63,70 @@ const jsonLd = {
 <BaseLayout title={t("site.title")} description={t("site.description")} jsonLd={jsonLd}>
   <SplitHero />
 
-  <section class="categories">
-    <h2 class="section-title" data-i18n="menu.title">{t("menu.title")}</h2>
-    <div class="categories__grid">
-      {categories.map((cat) => (
-        <a href={`/menu#${cat.key}`} class="category-card">
-          <h3 class="category-card__title" data-i18n={`menu.categories.${cat.key}`}>{t(`menu.categories.${cat.key}`)}</h3>
-          <span class="category-card__count">{cat.count} {cat.count === 1 ? t("order.item") : t("order.items")}</span>
-        </a>
+  <nav class="bento-nav" id="bento-nav" aria-label="Categorías">
+    <button class="bento-nav__item bento-nav__item--active" data-filter="all">Todo</button>
+    {allCategories.map((cat) => (
+      <button class="bento-nav__item" data-filter={cat.key} data-i18n={`menu.categories.${cat.key}`}>
+        {cat.label}
+      </button>
+    ))}
+  </nav>
+
+  <section class="bento">
+    <div class="bento__grid" id="bento-grid">
+      {bentoItems.map((item: any) => (
+        <div
+          class={`bento__card bento__card--${item.span}`}
+          data-category={item.category}
+        >
+          <div
+            class="bento__img"
+            style={`background: ${categoryGradients[item.category] || "#ece3d8"}`}
+          >
+            <div class="bento__overlay">
+              <span class="bento__cat" data-i18n={`menu.categories.${item.category}`}>
+                {t(`menu.categories.${item.category}`)}
+              </span>
+              <h3 class="bento__name">{item.name}</h3>
+              <span class="bento__price">${item.price.toLocaleString("es-AR")}</span>
+              <button
+                class="bento__add"
+                data-add={item.id}
+                data-name={item.name}
+                data-price={item.price}
+              >
+                <span data-i18n="menu.add">{t("menu.add")}</span>
+              </button>
+            </div>
+          </div>
+        </div>
       ))}
     </div>
   </section>
 
-  <section class="destacados">
-    <h2 class="section-title">Destacados</h2>
-    <div class="destacados__grid">
-      {destacados.map((item) => (
-        <div class="destacado-card">
-          <h3 class="destacado-card__name">{item.name}</h3>
-          <p class="destacado-card__price">${item.price.toLocaleString("es-AR")}</p>
-          <button class="destacado-card__btn" data-add={item.id} data-name={item.name} data-price={item.price}>
-            <span data-i18n="menu.add">{t("menu.add")}</span>
-          </button>
-        </div>
-      ))}
-    </div>
-    <div class="destacados__cta">
-      <a href="/menu" class="hero__cta hero__cta--primary" data-i18n="hero.cta">{t("hero.cta")}</a>
+  <section class="bento__cta">
+    <a href="/menu" class="hero__cta hero__cta--primary" data-i18n="hero.cta">{t("hero.cta")}</a>
+  </section>
+
+  <section class="map-section">
+    <div class="map-section__container">
+      <iframe
+        src="https://maps.google.com/maps?q=Bernardo%20De%20Irigoyen%203537%20Mar%20del%20Plata&output=embed"
+        width="100%"
+        height="320"
+        style="border:0; border-radius: var(--radius-md);"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación Luisito Playa Grande"
+      ></iframe>
+      <div class="map-section__badge">
+        <strong>Bernardo De Irigoyen 3537</strong>
+        <span>Mar del Plata, Argentina</span>
+      </div>
     </div>
   </section>
+
 </BaseLayout>
 
 <script>
@@ -71,162 +135,293 @@ const jsonLd = {
   import { addToCart } from "../utils/cart";
   gsap.registerPlugin(ScrollTrigger);
 
+  const grid = document.getElementById("bento-grid");
+  const nav = document.getElementById("bento-nav");
+
   window.addEventListener("load", () => {
-    gsap.from(".category-card", {
+    gsap.from(".bento__card", {
       y: 40,
       opacity: 0,
       duration: 0.5,
-      stagger: 0.08,
+      stagger: 0.06,
       ease: "power2.out",
-      scrollTrigger: { trigger: ".categories__grid", start: "top 85%" },
-    });
-    gsap.from(".destacado-card", {
-      y: 40,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.1,
-      ease: "power2.out",
-      scrollTrigger: { trigger: ".destacados__grid", start: "top 85%" },
+      scrollTrigger: { trigger: ".bento__grid", start: "top 85%" },
     });
   });
+
+  if (nav) {
+    nav.addEventListener("click", (e) => {
+      const btn = e.target.closest(".bento-nav__item");
+      if (!btn) return;
+      const filter = btn.getAttribute("data-filter");
+      if (!filter) return;
+
+      nav.querySelectorAll(".bento-nav__item").forEach((b) => b.classList.remove("bento-nav__item--active"));
+      btn.classList.add("bento-nav__item--active");
+
+      if (!grid) return;
+      const cards = grid.querySelectorAll(".bento__card");
+      cards.forEach((card: Element) => {
+        if (filter === "all" || card.getAttribute("data-category") === filter) {
+          (card as HTMLElement).style.display = "";
+        } else {
+          (card as HTMLElement).style.display = "none";
+        }
+      });
+    });
+  }
+
+  // Pulse highlight when arriving via #bento-grid
+  if (window.location.hash === "#bento-grid") {
+    setTimeout(() => {
+      document.getElementById("bento-grid")?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  }
+
+  document.addEventListener("scroll", function bentoArrive() {
+    const grid = document.getElementById("bento-grid");
+    const nav = document.getElementById("bento-nav");
+    if (!grid || !nav) return;
+    const rect = grid.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      nav.style.transition = "box-shadow 0.3s, transform 0.3s";
+      nav.style.boxShadow = "0 0 0 3px var(--color-accent), 0 0 20px rgba(212,148,58,0.3)";
+      nav.style.transform = "scale(1.02)";
+      setTimeout(() => {
+        nav.style.boxShadow = "none";
+        nav.style.transform = "scale(1)";
+      }, 2000);
+      document.removeEventListener("scroll", bentoArrive);
+    }
+  });
+
   document.querySelectorAll("[data-add]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-add");
       const name = btn.getAttribute("data-name");
-      const price = parseInt(btn.getAttribute("data-price"));
-      addToCart({ id, name, price, qty: 1, category: "" } as any);
+      const price = parseInt(btn.getAttribute("data-price") || "0");
+      addToCart({ id: id!, name: name!, price, qty: 1, category: "" });
       btn.textContent = "Agregado";
-      const original = "Agregar";
-      setTimeout(() => { btn.textContent = original; }, 1500);
+      setTimeout(() => { btn.textContent = "Agregar"; }, 1500);
       if (window.updateCartBadge) window.updateCartBadge();
     });
   });
 </script>
 
 <style>
-  .categories {
-    padding: var(--space-xl) 0;
+  .bento-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    position: sticky;
+    top: 80px;
+    z-index: 50;
+    background: var(--color-bg);
+    scrollbar-width: none;
+  }
+  .bento-nav::-webkit-scrollbar { display: none; }
+
+  .bento-nav__item {
+    flex-shrink: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 700;
+    padding: var(--space-xs) var(--space-md);
+    min-height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: color 0.15s, transform 0.15s;
+    letter-spacing: -0.02em;
+  }
+  .bento-nav__item:hover { color: var(--color-accent); }
+  .bento-nav__item--active {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--color-primary);
   }
 
-  .categories__grid {
+  .bento {
+    padding: var(--space-lg) 0;
+  }
+
+  .bento__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: dense;
     gap: var(--space-md);
     margin-bottom: var(--space-lg);
   }
 
-  .category-card {
+  .bento__card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    box-shadow: 4px 4px 0 var(--color-text);
+    border: 2px solid var(--color-text);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    background: var(--color-bg);
+    min-height: 120px;
+  }
+  .bento__card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-text);
+  }
+
+  .bento__card--hero {
+    grid-column: span 2;
+    grid-row: span 2;
+    min-height: 300px;
+  }
+  .bento__card--wide {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  .bento__card--tall {
+    grid-column: span 1;
+    grid-row: span 2;
+    min-height: 250px;
+  }
+  .bento__card--square {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .bento__img {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .bento__overlay {
+    width: 100%;
+    padding: var(--space-md);
+    background: linear-gradient(transparent, rgba(44, 36, 32, 0.85));
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: var(--space-lg) var(--space-md);
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: var(--glass-shadow);
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    color: var(--color-text);
-    transition: transform 0.2s, box-shadow 0.2s;
+    gap: 2px;
   }
 
-  .category-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(44, 36, 32, 0.08);
+  .bento__cat {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--color-accent);
   }
 
-  .category-card__title {
+  .bento__name {
     font-family: var(--font-heading);
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
     font-weight: 700;
-    text-align: center;
+    color: #fff;
+    line-height: 1.2;
   }
 
-  .category-card__count {
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-  }
-
-  .destacados {
-    padding: var(--space-xl) 0;
-  }
-
-  .destacados__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: var(--space-lg);
-    margin-bottom: var(--space-lg);
-  }
-
-  .destacado-card {
-    padding: var(--space-lg);
-    text-align: center;
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: var(--glass-shadow);
-    border-radius: var(--radius-md);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .destacado-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(44, 36, 32, 0.08);
-  }
-
-  .destacado-card__name {
-    font-family: var(--font-heading);
-    font-size: 1.15rem;
+  .bento__price {
     font-weight: 700;
-    margin-bottom: var(--space-xs);
+    color: var(--color-accent-light);
+    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
   }
 
-  .destacado-card__price {
+  .bento__add {
+    align-self: flex-start;
+    padding: 4px 12px;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
     font-family: var(--font-body);
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--color-primary);
-    margin-bottom: var(--space-md);
-  }
-
-  .destacado-card__btn {
-    padding: var(--space-sm) var(--space-lg);
-    background: var(--color-accent);
-    color: var(--color-text);
-    font-family: var(--font-body);
+    font-size: 0.75rem;
     font-weight: 600;
     cursor: pointer;
-    font-size: 0.875rem;
-    border: none;
     border-radius: var(--radius-sm);
-    transition: transform 0.15s, filter 0.15s;
+    transition: transform 0.15s;
+    margin-top: 4px;
   }
+  .bento__add:hover { transform: scale(1.05); }
 
-  .destacado-card__btn:hover { transform: scale(1.05); filter: brightness(0.95); }
+  .bento__card--hero .bento__overlay { padding: var(--space-lg); }
+  .bento__card--hero .bento__cat { font-size: 0.75rem; }
+  .bento__card--hero .bento__name { font-size: clamp(1.1rem, 2vw, 1.35rem); }
+  .bento__card--hero .bento__price { font-size: clamp(1rem, 2vw, 1.35rem); }
 
-  .destacados__cta { text-align: center; }
-
-  .hero__cta {
-    display: inline-block;
-    padding: var(--space-sm) var(--space-xl);
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 1.1rem;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 4px 16px rgba(199, 62, 43, 0.1);
-    transition: transform 0.15s, box-shadow 0.2s;
-  }
-  .hero__cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(199, 62, 43, 0.15);
-  }
-  .hero__cta--primary { background: var(--color-primary); color: #fff; }
+  .bento__cta { text-align: center; padding-bottom: var(--space-xl); }
 
   @media (max-width: 768px) {
-    .categories__grid { grid-template-columns: repeat(2, 1fr); }
-    .destacados__grid { grid-template-columns: 1fr 1fr; }
+    .bento__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+    }
+    .bento__card--hero { grid-column: span 2; grid-row: span 2; min-height: 220px; }
+    .bento__card--wide { grid-column: span 2; }
+    .bento__card--tall { grid-column: span 1; grid-row: span 2; min-height: 200px; }
+    .bento-nav { top: 64px; padding: var(--space-sm) 0; }
+    .bento-nav__item { font-size: clamp(1rem, 4vw, 1.5rem); padding: var(--space-xs) var(--space-sm); }
   }
+
+  @media (max-width: 480px) {
+    .bento__grid { grid-template-columns: 1fr; }
+    .bento__card--hero { grid-column: span 1; grid-row: span 1; min-height: 160px; }
+    .bento__card--wide { grid-column: span 1; }
+    .bento__card--tall { grid-column: span 1; grid-row: span 1; }
+    .bento__card { min-height: 140px; }
+  }
+
+  .map-section {
+    padding: 0 0 var(--space-xl);
+  }
+  .map-section__container {
+    position: relative;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--color-text);
+    border: 2px solid var(--color-text);
+  }
+  .map-section__badge {
+    position: absolute;
+    bottom: var(--space-md);
+    left: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(250, 246, 241, 0.92);
+    backdrop-filter: blur(8px);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+  .map-section__badge strong {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .map-section__badge span {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    .map-section__badge {
+      bottom: var(--space-sm);
+      left: var(--space-sm);
+      padding: var(--space-xs) var(--space-sm);
+    }
+    .map-section__badge strong { font-size: 0.85rem; }
+  }
+
 </style>

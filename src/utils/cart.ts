@@ -77,7 +77,7 @@ export function clearCart(): void {
 }
 
 export function generateWhatsAppMessage(order: OrderDetails): string {
-  let msg = "¡Hola Luisito! 🥟 Quiero hacer un pedido:\n\n";
+  let msg = "¡Hola Luisito! Quiero hacer un pedido:\n\n";
 
   order.items.forEach((item) => {
     msg += `• ${item.qty} x ${item.name} = $${(item.price * item.qty).toLocaleString("es-AR")}\n`;
@@ -96,11 +96,11 @@ export function generateWhatsAppMessage(order: OrderDetails): string {
     msg += `📝 Nota: ${order.notes}\n`;
   }
 
-  return encodeURIComponent(msg);
+  return msg;
 }
 
 export function openWhatsApp(message: string): void {
-  const url = `https://wa.me/${PHONE_NUMBER}?text=${message}`;
+  const url = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
   window.open(url, "_blank");
 }
 
@@ -135,4 +135,14 @@ export const MENU_ITEMS = [
   { id: "budin-de-pan", name: "Budín de Pan", price: 1200, category: "postres" },
   { id: "ensalada-frutas", name: "Ensalada de Frutas", price: 1300, category: "postres" },
   { id: "helado-dos-sabores", name: "Helado 2 Sabores 1/4", price: 1800, category: "postres" },
+  // Tartas
+  { id: "tarta-verdura", name: "Tarta de Verdura", price: 2800, category: "tartas" },
+  { id: "tarta-pollo", name: "Tarta de Pollo", price: 3000, category: "tartas" },
+  { id: "tarta-jyq", name: "Tarta de Jamón y Queso", price: 3000, category: "tartas" },
+  { id: "tarta-calabaza", name: "Tarta de Calabaza", price: 2800, category: "tartas" },
+  // Pollo Rostizado
+  { id: "pollo-entero", name: "Pollo Rostizado Entero", price: 6500, category: "pollo-rostizado" },
+  { id: "pollo-medio", name: "Medio Pollo Rostizado", price: 3800, category: "pollo-rostizado" },
+  { id: "pollo-con-papas", name: "Pollo Rostizado con Papas", price: 4800, category: "pollo-rostizado" },
+  { id: "suprema-pollo", name: "Suprema de Pollo", price: 3200, category: "pollo-rostizado" },
 ];
