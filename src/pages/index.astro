@@ -63,14 +63,23 @@ const jsonLd = {
 <BaseLayout title={t("site.title")} description={t("site.description")} jsonLd={jsonLd}>
   <SplitHero />
 
-  <nav class="bento-nav" id="bento-nav" aria-label="Categorías">
-    <button class="bento-nav__item bento-nav__item--active" data-filter="all">Todo</button>
-    {allCategories.map((cat) => (
-      <button class="bento-nav__item" data-filter={cat.key} data-i18n={`menu.categories.${cat.key}`}>
-        {cat.label}
-      </button>
-    ))}
-  </nav>
+  <section class="desde-1955">
+    <span class="desde-1955__year">Desde 1955</span>
+    <span class="desde-1955__tagline">Un clásico de Playa Grande</span>
+  </section>
+
+    <div class="bento-nav-wrapper">
+    <button class="bento-nav__arrow bento-nav__arrow--left" aria-label="Anterior">‹</button>
+    <nav class="bento-nav" id="bento-nav" aria-label="Categorías">
+      <button class="bento-nav__item bento-nav__item--active" data-filter="all">Todo</button>
+      {allCategories.map((cat) => (
+        <button class="bento-nav__item" data-filter={cat.key} data-i18n={cat.key === "pollo-rostizado" ? null : "menu.categories." + cat.key}>
+          {cat.label}
+        </button>
+      ))}
+    </nav>
+    <button class="bento-nav__arrow bento-nav__arrow--right" aria-label="Siguiente">›</button>
+  </div>
 
   <section class="bento">
     <div class="bento__grid" id="bento-grid">
@@ -195,6 +204,17 @@ const jsonLd = {
     }
   });
 
+  // Pagination arrows for bento-nav
+  document.querySelectorAll(".bento-nav__arrow").forEach((arrow) => {
+    arrow.addEventListener("click", () => {
+      const nav = document.getElementById("bento-nav");
+      if (!nav) return;
+      const isLeft = arrow.classList.contains("bento-nav__arrow--left");
+      const scrollAmount = nav.clientWidth * 0.6;
+      nav.scrollBy({ left: isLeft ? -scrollAmount : scrollAmount, behavior: "smooth" });
+    });
+  });
+
   document.querySelectorAll("[data-add]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-add");
@@ -209,6 +229,36 @@ const jsonLd = {
 </script>
 
 <style>
+
+  .desde-1955 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-lg) 0 var(--space-sm);
+    text-align: center;
+  }
+  .desde-1955__year {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    color: var(--color-text);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-transform: uppercase;
+    text-shadow: 6px 6px 0 rgba(0,0,0,0.08);
+  }
+  .desde-1955__tagline {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .desde-1955 { padding: var(--space-md) 0 var(--space-xs); }
+    .desde-1955__year { font-size: clamp(2.5rem, 10vw, 4rem); }
+  }
+
   .bento-nav {
     display: flex;
     flex-wrap: nowrap;

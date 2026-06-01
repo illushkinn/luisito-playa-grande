@@ -70,12 +70,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       body {
         font-family: var(--font-body);
         color: var(--color-text);
-        background: repeating-linear-gradient(
-          135deg,
-          #ece3d8 0px, #ece3d8 24px,
-          #efe2cc 24px, #efe2cc 48px,
-          #dcc9b0 48px, #dcc9b0 72px
-        );
+        background: var(--color-bg);
         line-height: 1.6;
         min-height: 100vh;
       }
@@ -483,13 +478,10 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
 
       .footer__since {
-        font-size: 1rem;
-        color: var(--color-accent);
-        font-weight: 600;
-        background: rgba(44, 36, 32, 0.06);
-        display: inline-block;
-        padding: 4px 12px;
-        border-radius: var(--radius-sm);
+        font-size: 0.75rem;
+        color: #000;
+        font-style: italic;
+        font-weight: 400;
       }
 
       .footer__grid {
