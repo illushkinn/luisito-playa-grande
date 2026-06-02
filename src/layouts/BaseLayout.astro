@@ -521,11 +521,27 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         font-weight: 400;
       }
 
-      .footer__grid {
+      .footer__flip {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr 1fr;
         gap: var(--space-xl);
         margin-bottom: var(--space-lg);
+        direction: rtl;
+      }
+      .footer__flip > * {
+        direction: ltr;
+      }
+      .footer__flip-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+      }
+      .footer__flip-visual {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
       }
 
       .footer__section-title {
@@ -603,7 +619,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         .section-title { font-size: 1.75rem; margin-bottom: var(--space-md); }
         .categories { padding: var(--space-lg) 0; }
         .destacados { padding: var(--space-lg) 0; }
-        .footer__grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+        .footer__flip { grid-template-columns: 1fr; gap: var(--space-lg); direction: ltr; }
         .footer__actions { flex-direction: column; align-items: center; }
         .info-strip__inner { flex-direction: column; align-items: center; gap: var(--space-xs); }
       }
@@ -669,27 +685,29 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 
     <footer class="footer" role="contentinfo" aria-label={t("accessibility.footerLabel")}>
       <div class="footer__inner">
-        <div class="footer__brand">
-          <img src="/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png" alt="Luisito Playa Grande" class="footer__logo-img" />
-          <p class="footer__since">Un clásico de Playa Grande desde 1955</p>
-        </div>
 
-        <div class="footer__grid">
-          <div>
-            <p class="footer__section-title">Contacto</p>
-            <p class="footer__item">{t("contact.address")}</p>
-            <p class="footer__item">{t("contact.phone")}</p>
-          </div>
-          <div>
-            <p class="footer__section-title">Horarios</p>
-            <p class="footer__item">{t("contact.hours")}</p>
-          </div>
-          <div>
-            <p class="footer__section-title">Redes</p>
-            <div class="footer__social">
-              <a href={instagramUrl} target="_blank" rel="noopener" class="footer__social-link"><Icon name="lucide:instagram" size={14} /> Instagram</a>
-              <a href={whatsappUrl} target="_blank" rel="noopener" class="footer__social-link"><Icon name="lucide:message-circle" size={14} /> WhatsApp</a>
+        <div class="footer__flip">
+          <div class="footer__flip-content">
+            <div>
+              <p class="footer__section-title">Contacto</p>
+              <p class="footer__item">{t("contact.address")}</p>
+              <p class="footer__item">{t("contact.phone")}</p>
             </div>
+            <div>
+              <p class="footer__section-title">Horarios</p>
+              <p class="footer__item">{t("contact.hours")}</p>
+            </div>
+            <div>
+              <p class="footer__section-title">Redes</p>
+              <div class="footer__social">
+                <a href={instagramUrl} target="_blank" rel="noopener" class="footer__social-link"><Icon name="lucide:instagram" size={14} /> Instagram</a>
+                <a href={whatsappUrl} target="_blank" rel="noopener" class="footer__social-link"><Icon name="lucide:message-circle" size={14} /> WhatsApp</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer__flip-visual">
+            <img src="/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png" alt="Luisito Playa Grande" class="footer__logo-img" />
+            <p class="footer__since">Un clásico de Playa Grande desde 1955</p>
           </div>
         </div>
 

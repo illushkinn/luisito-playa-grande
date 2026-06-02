@@ -25,6 +25,8 @@ const bentoLayout = [
   { id: "cerveza-stella", span: "tall" },
   { id: "pizza-napolitana", span: "square" },
   { id: "lomo-completo", span: "square" },
+  { id: "empanada-pollo", span: "square" },
+  { id: "empanada-jyq", span: "square" },
 ];
 
 const bentoItems = bentoLayout.map((b) => {
@@ -364,26 +366,20 @@ const jsonLd = {
     gap: 2px;
   }
 
-  .bento__cat {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-    color: var(--color-accent);
-  }
 
   .bento__name {
     font-family: var(--font-heading);
-    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    font-size: 1.25rem;
     font-weight: 700;
+    letter-spacing: -0.025em;
     color: #fff;
     line-height: 1.2;
   }
 
   .bento__price {
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 900;
     color: var(--color-accent-light);
-    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
   }
 
   .bento__add {
@@ -403,9 +399,9 @@ const jsonLd = {
   .bento__add:hover { transform: scale(1.05); }
 
   .bento__card--hero .bento__overlay { padding: var(--space-lg); }
-  .bento__card--hero .bento__cat { font-size: 0.75rem; }
-  .bento__card--hero .bento__name { font-size: clamp(1.1rem, 2vw, 1.35rem); }
-  .bento__card--hero .bento__price { font-size: clamp(1rem, 2vw, 1.35rem); }
+
+
+
 
   .bento__cta { text-align: center; padding-bottom: var(--space-xl); }
 
