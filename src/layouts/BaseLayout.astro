@@ -28,7 +28,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png" />
+    <link rel="icon" type="image/png" href="/images/luisito-logo-rotiseria-mdq(3)-remove-bg-io.png" />
     <Seo {title} {description} {jsonLd} image={ogImageUrl} />
     <style is:global>
       :root {
@@ -61,6 +61,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         --glass-border: 1px solid rgba(255, 255, 255, 0.5);
         --glass-shadow: 0 4px 24px rgba(44, 36, 32, 0.06);
         --glass-blur: 12px;
+        --header-height: 0px;
       }
     </style>
     <style>
@@ -596,9 +597,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       .footer__flip-visual .footer__logo-img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        padding: var(--space-lg);
-        background: var(--color-footer-bg);
+        object-fit: cover;
         border-right: 2px solid var(--color-text);
       }
       .footer__flip-visual .footer__since {
@@ -718,19 +717,20 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
 
       @media (max-width: 768px) {
+        :root { --header-height: 112px; }
         .hamburger { display: flex; }
-        .header.glass { background: rgba(250, 246, 241, 0.85); }
-        .nav { display: none; }
-        .header { flex-wrap: nowrap; gap: 0; padding: var(--space-sm) var(--space-md); }
+        .header.glass { background: rgba(250, 246, 241, 0.25); }
+        .header { position: fixed; flex-wrap: nowrap; gap: 0; padding: var(--space-sm) var(--space-md); }
         .header__logo-img { width: 96px; height: 96px; }
-        .main { padding: var(--space-md); }
+        .nav { display: none; }
+        .main { padding: var(--space-md); padding-top: var(--header-height); }
         .section-title { font-size: 1.75rem; margin-bottom: var(--space-md); }
         .categories { padding: var(--space-lg) 0; }
         .destacados { padding: var(--space-lg) 0; }
         .footer__flip { flex-direction: column; gap: var(--space-sm); }
         .footer__flip-content { width: 100%; max-width: 100%; gap: var(--space-sm); }
         .footer__flip-visual { position: relative; left: auto; width: 100vw; margin-left: calc(-50vw + 50%); height: 300px; }
-        .footer__flip-visual .footer__logo-img { width: 100%; height: 100%; object-fit: contain; padding: var(--space-lg); border-right: none; }
+        .footer__flip-visual .footer__logo-img { width: 100%; height: 100%; object-fit: cover; border-right: none; }
         .footer__flip-visual .footer__since { font-size: 0.7rem; bottom: var(--space-sm); }
         .footer__actions { flex-direction: column; align-items: center; }
         .footer { padding: var(--space-lg) var(--space-md); }
@@ -744,7 +744,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 
     <header class="header glass" role="banner" id="header">
       <a href="/" class="header__brand">
-        <img src="/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png" alt="Luisito Playa Grande" class="header__logo-img" />
+        <img src="/images/luisito-logo-rotiseria-mdq(3)-remove-bg-io.png" alt="Luisito Playa Grande" class="header__logo-img" />
       </a>
       <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -810,7 +810,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
             </div>
           </div>
           <div class="footer__flip-visual">
-            <img src="/images/luisito-logo-rotiseria-mdq(1)-remove-bg-io.png" alt="Luisito Playa Grande" class="footer__logo-img" />
+            <img src="/images/luisito-y-su-gente.jpg" alt="Luisito y su gente" class="footer__logo-img" />
             <p class="footer__since">Un clásico de Playa Grande desde 1955</p>
           </div>
         </div>
