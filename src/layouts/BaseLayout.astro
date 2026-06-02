@@ -113,7 +113,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 
       a:hover { color: var(--color-accent); }
       .nav__cta-wpp:hover, .hero__cta:hover, .hero__cta--wpp:hover,
-      .footer__cta:hover, .mobile-nav__wpp:hover,
+      .mobile-nav__wpp:hover,
       .destacado-card__btn:hover, .menu-card__btn:hover,
       .cart-send:hover { color: #fff !important; }
 
@@ -574,40 +574,6 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         margin-bottom: var(--space-lg);
       }
 
-      .footer__actions {
-        display: flex;
-        justify-content: center;
-        gap: var(--space-lg);
-        margin-bottom: var(--space-lg);
-        flex-wrap: wrap;
-      }
-
-      .footer__cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: var(--space-sm) var(--space-lg);
-        font-family: var(--font-body);
-        font-weight: 600;
-        font-size: 0.85rem;
-        text-decoration: none;
-        border-radius: var(--radius-sm);
-        transition: transform 0.15s;
-      }
-
-      .footer__cta:hover {
-        transform: translateY(-1px);
-      }
-
-      .footer__cta--wpp {
-        background: #25d366;
-        color: #fff;
-      }
-
-      .footer__cta--menu {
-        background: var(--color-primary);
-        color: #fff;
-      }
 
       .footer__bottom {
         text-align: center;
@@ -729,11 +695,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 
         <hr class="footer__divider" />
 
-        <div class="footer__actions">
-          <a href={whatsappUrl} target="_blank" rel="noopener" class="footer__cta footer__cta--wpp"><Icon name="lucide:message-circle" size={16} /> {t("contact.cta")}</a>
-          <a href="/menu" class="footer__cta footer__cta--menu"><Icon name="lucide:utensils-crossed" size={16} /> {t("hero.cta")}</a>
-        </div>
-
+        
         <div class="footer__bottom">
           <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
           <p class="footer__made">Hecho con amor en Mar del Plata</p>
