@@ -95,20 +95,26 @@ const jsonLd = {
     display: inline-block;
     padding: var(--space-sm) var(--space-xl);
     font-family: var(--font-body);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.1rem;
     letter-spacing: 0.5px;
     text-decoration: none;
+    background: var(--color-primary);
+    color: #fff;
+    border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
-    box-shadow: 0 4px 16px rgba(199, 62, 43, 0.1);
-    transition: transform 0.15s, box-shadow 0.2s;
+    box-shadow: 4px 4px 0 var(--color-text);
+    transition: transform 0.1s, box-shadow 0.1s;
     cursor: pointer;
-    border: none;
   }
 
   .hero__cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(199, 62, 43, 0.15);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-text);
+    color: #fff;
   }
-  .hero__cta--primary { background: var(--color-primary); color: #fff; }
+  .hero__cta:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--color-text);
+  }
 </style>
