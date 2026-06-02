@@ -273,25 +273,26 @@ const jsonLd = {
 
   .bento-nav__item {
     flex-shrink: 0;
-    font-family: var(--font-heading);
-    font-size: clamp(1.25rem, 3vw, 2rem);
-    font-weight: 700;
+    font-family: "Caveat", cursive;
+    font-size: clamp(1.35rem, 3.5vw, 2.2rem);
+    font-weight: 600;
     padding: var(--space-xs) var(--space-md);
     min-height: 44px;
     background: transparent;
     border: none;
     cursor: pointer;
-    color: var(--color-text-muted);
+    color: #f0ead8;
     transition: color 0.15s, transform 0.15s;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
-  .bento-nav__item:hover { color: var(--color-accent); }
+  .bento-nav__item:hover { color: #f5d442; }
   .bento-nav__item--active {
-    color: var(--color-text);
+    color: #f5d442;
     text-decoration: underline;
     text-underline-offset: 4px;
-    text-decoration-thickness: 3px;
-    text-decoration-color: var(--color-primary);
+    text-decoration-thickness: 2px;
+    text-decoration-color: #f5d442;
+    text-shadow: 0 0 8px rgba(245, 212, 66, 0.3);
   }
 
   .bento {

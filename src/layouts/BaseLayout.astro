@@ -27,7 +27,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
     <meta name="viewport" content="width=device-width" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href="/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png" />
     <Seo {title} {description} {jsonLd} image={ogImageUrl} />
     <style is:global>
@@ -535,6 +535,8 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         display: flex;
         flex-direction: column;
         gap: var(--space-lg);
+        align-items: flex-end;
+        text-align: right;
       }
       .footer__flip-visual {
         display: flex;
@@ -542,6 +544,10 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         align-items: center;
         justify-content: center;
         text-align: center;
+      }
+      .footer__flip-visual .footer__logo-img {
+        width: 140px;
+        height: 140px;
       }
 
       .footer__section-title {
@@ -588,6 +594,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         border: none;
         border-top: 1px solid var(--color-border);
         margin-bottom: var(--space-lg);
+        direction: ltr;
       }
 
 
