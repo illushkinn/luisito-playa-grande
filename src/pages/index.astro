@@ -192,23 +192,6 @@ const jsonLd = {
     }, 100);
   }
 
-  document.addEventListener("scroll", function bentoArrive() {
-    const grid = document.getElementById("bento-grid");
-    const nav = document.getElementById("bento-nav");
-    if (!grid || !nav) return;
-    const rect = grid.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      nav.style.transition = "box-shadow 0.3s, transform 0.3s";
-      nav.style.boxShadow = "0 0 0 3px var(--color-accent), 0 0 20px rgba(212,148,58,0.3)";
-      nav.style.transform = "scale(1.02)";
-      setTimeout(() => {
-        nav.style.boxShadow = "none";
-        nav.style.transform = "scale(1)";
-      }, 2000);
-      document.removeEventListener("scroll", bentoArrive);
-    }
-  });
-
   // Pagination arrows for bento-nav
   document.querySelectorAll(".bento-nav__arrow").forEach((arrow) => {
     arrow.addEventListener("click", () => {
