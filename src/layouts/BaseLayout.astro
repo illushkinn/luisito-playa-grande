@@ -566,7 +566,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 
       .footer__since {
         font-size: 0.75rem;
-        color: #000;
+        color: var(--color-text-muted);
         font-style: italic;
         font-weight: 400;
       }
@@ -596,7 +596,9 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       .footer__flip-visual .footer__logo-img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        padding: var(--space-lg);
+        background: var(--color-footer-bg);
         border-right: 2px solid var(--color-text);
       }
       .footer__flip-visual .footer__since {
@@ -604,7 +606,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         bottom: var(--space-md);
         left: 50%;
         transform: translateX(-50%);
-        color: #fff;
+        color: var(--color-text-muted);
         font-size: 0.8rem;
         font-weight: 600;
         text-shadow: 0 2px 8px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.5);
@@ -728,7 +730,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         .footer__flip { flex-direction: column; gap: var(--space-sm); }
         .footer__flip-content { width: 100%; max-width: 100%; gap: var(--space-sm); }
         .footer__flip-visual { position: relative; left: auto; width: 100vw; margin-left: calc(-50vw + 50%); height: 300px; }
-        .footer__flip-visual .footer__logo-img { width: 100%; height: 100%; object-fit: cover; border-right: none; }
+        .footer__flip-visual .footer__logo-img { width: 100%; height: 100%; object-fit: contain; padding: var(--space-lg); border-right: none; }
         .footer__flip-visual .footer__since { font-size: 0.7rem; bottom: var(--space-sm); }
         .footer__actions { flex-direction: column; align-items: center; }
         .footer { padding: var(--space-lg) var(--space-md); }
@@ -808,7 +810,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
             </div>
           </div>
           <div class="footer__flip-visual">
-            <img src="/images/luisito-y-su-gente.jpg" alt="Luisito y su gente" class="footer__logo-img" />
+            <img src="/images/luisito-logo-rotiseria-mdq(1)-remove-bg-io.png" alt="Luisito Playa Grande" class="footer__logo-img" />
             <p class="footer__since">Un clásico de Playa Grande desde 1955</p>
           </div>
         </div>
@@ -818,7 +820,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         
         <div class="footer__bottom">
           <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
-          <p class="footer__made">Hecho con amor en Mar del Plata</p>
+          <p class="footer__made">Hecho con amor en Mar del Plata.</p>
         </div>
 
         <div class="footer__top-wrap">

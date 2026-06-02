@@ -94,8 +94,9 @@ import { t } from "../utils/i18n";
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: var(--glass-shadow);
+    border: 2px solid var(--color-text);
     border-radius: var(--radius-md);
+    box-shadow: 4px 4px 0 var(--color-text);
   }
 
   .contact__row {
@@ -103,6 +104,11 @@ import { t } from "../utils/i18n";
     align-items: flex-start;
     gap: var(--space-md);
     padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contact__row:last-child {
+    border-bottom: none;
   }
 
   .contact__icon {
@@ -127,23 +133,35 @@ import { t } from "../utils/i18n";
   }
 
   .contact__actions { text-align: center; }
-  .contact__map { margin-top: var(--space-lg); }
+  .contact__map {
+    margin-top: var(--space-lg);
+    border: 2px solid var(--color-text);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--color-text);
+  }
 
   .hero__cta {
     display: inline-block;
     padding: var(--space-sm) var(--space-xl);
     font-family: var(--font-body);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.1rem;
     letter-spacing: 0.5px;
     text-decoration: none;
+    border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
-    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.1);
-    transition: transform 0.15s, box-shadow 0.2s;
+    box-shadow: 4px 4px 0 var(--color-text);
+    transition: transform 0.1s, box-shadow 0.1s;
   }
   .hero__cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.15);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-text);
+    color: #fff;
+  }
+  .hero__cta:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--color-text);
   }
   .hero__cta--wpp { background: #25d366; color: #fff; }
 </style>
