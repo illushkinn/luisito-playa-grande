@@ -9,9 +9,6 @@ import { t } from "../utils/i18n";
     <h1 class="hero__title">
       <img src="/images/luisito-logo-rotiseria-mdq(3)-remove-bg-io.png" alt="Luisito Playa Grande" class="hero__logo-inline" />
     </h1>
-    <div class="hero__actions">
-      <a href="#bento-grid" class="hero__cta" data-i18n="hero.cta"><Icon name="lucide:utensils-crossed" size={16} /> {t("hero.cta")}</a>
-    </div>
   </div>
   <div class="hero__spacer"></div>
 </section>
@@ -87,37 +84,6 @@ import { t } from "../utils/i18n";
   }
 
 
-  .hero__actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-lg);
-    margin-top: var(--space-lg);
-    flex-wrap: wrap;
-  }
-
-  .hero__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: var(--space-md) var(--space-xl);
-    background: #000;
-    color: #fff;
-    font-size: clamp(1rem, 1.5vw, 1.1rem);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    border-radius: var(--radius-sm);
-    box-shadow: 4px 4px 0 var(--color-text);
-    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  }
-
-  .hero__cta:hover {
-    background: #222;
-    transform: translateY(-2px);
-    box-shadow: 6px 6px 0 var(--color-text);
-  }
-
   .hero__trust {
     display: flex;
     align-items: center;
@@ -153,9 +119,5 @@ import { t } from "../utils/i18n";
       display: none;
     }
 
-    .hero__actions {
-      flex-direction: column;
-      gap: var(--space-md);
-    }
   }
 </style>
