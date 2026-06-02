@@ -4,96 +4,26 @@ import { t } from "../utils/i18n";
 ---
 
 <section class="hero">
-  <div class="hero__bg"></div>
   <div class="hero__content">
-    <h1 class="hero__title">
-      <img src="/images/luisito-logo-rotiseria-mdq(3)-remove-bg-io.png" alt="Luisito Playa Grande" class="hero__logo-inline" />
-    </h1>
-    <div class="hero__actions">
-      <a href="#bento-grid" class="hero__cta" data-i18n="hero.cta"><Icon name="lucide:utensils-crossed" size={16} /> {t("hero.cta")}</a>
-      <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="hero__cta--wpp" data-i18n="hero.wpp"><Icon name="lucide:message-circle" size={16} /> {t("hero.wpp")}</a>
-    </div>
+    <a href="#bento-grid" class="hero__cta" data-i18n="hero.cta"><Icon name="lucide:utensils-crossed" size={16} /> {t("hero.cta")}</a>
   </div>
-  <div class="hero__spacer"></div>
 </section>
 
 <style>
   .hero {
-    position: relative;
     min-height: 100vh;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(236, 227, 216, 0.05) 0%,
-      rgba(236, 227, 216, 0.15) 50%,
-      rgba(236, 227, 216, 0.35) 100%
-    );
-    z-index: 1;
-  }
-  .hero__bg {
-    position: absolute;
-    inset: 0;
-    background-image: image-set(
-      url('/images/hero-image(1).webp') type('image/webp'),
-      url('/images/hero-image(1).png') type('image/png')
-    );
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
+    background: #000;
   }
 
   .hero__content {
-    position: relative;
-    z-index: 2;
     max-width: 640px;
     text-align: center;
     padding: var(--space-xl) var(--space-lg);
-  }
-
-  .hero__spacer {
-    height: var(--space-xl);
-  }
-
-  .hero__title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    letter-spacing: 0;
-    color: var(--color-text);
-    line-height: 1.15;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
-    text-shadow: 0 2px 12px rgba(255, 252, 248, 0.7), 0 1px 4px rgba(44, 36, 32, 0.1);
-  }
-
-  .hero__logo-inline {
-    height: 3.9em;
-    width: auto;
-    object-fit: contain;
-    vertical-align: middle;
-  }
-
-
-  .hero__actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-lg);
-    margin-top: var(--space-lg);
-    flex-wrap: wrap;
   }
 
   .hero__cta {
@@ -108,76 +38,19 @@ import { t } from "../utils/i18n";
     letter-spacing: 0.5px;
     text-decoration: none;
     border-radius: var(--radius-sm);
-    box-shadow: 4px 4px 0 var(--color-text);
+    box-shadow: 4px 4px 0 #fff;
     transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   }
 
   .hero__cta:hover {
     background: #222;
     transform: translateY(-2px);
-    box-shadow: 6px 6px 0 var(--color-text);
-  }
-
-  .hero__cta--wpp {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: var(--space-md) var(--space-xl);
-    background: #25d366;
-    color: #fff;
-    font-size: clamp(1rem, 1.5vw, 1.1rem);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.15);
-    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  }
-
-  .hero__cta--wpp:hover {
-    background: #1da851;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.25);
-  }
-
-  .hero__trust {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-sm);
-    margin-top: var(--space-lg);
-    flex-wrap: wrap;
-  }
-
-  .hero__trust-badge {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-text);
-    text-shadow: 0 1px 6px rgba(255, 252, 248, 0.7), 0 1px 3px rgba(44, 36, 32, 0.06);
-  }
-
-  .hero__trust-dot {
-    color: var(--color-accent);
-    font-weight: 700;
-    font-size: 1.25rem;
+    box-shadow: 6px 6px 0 #fff;
   }
 
   @media (max-width: 768px) {
     .hero {
       min-height: 80vh;
-    }
-
-    .hero__title {
-      justify-content: center;
-    }
-
-    .hero__logo-inline {
-      display: none;
-    }
-
-    .hero__actions {
-      flex-direction: column;
-      gap: var(--space-md);
     }
   }
 </style>

@@ -202,7 +202,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         display: none;
         flex-direction: column;
         gap: 5px;
-        background: none;
+        background: rgba(44, 36, 32, 0.06);
         border: none;
         cursor: pointer;
         padding: 11px;
@@ -211,18 +211,20 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         align-items: center;
         justify-content: center;
         z-index: 110;
+        border-radius: var(--radius-sm);
       }
+      .hamburger:focus-visible { outline: 2px solid var(--color-primary); }
       .hamburger span {
         display: block;
         width: 22px;
-        height: 2px;
+        height: 3px;
         background: var(--color-text);
-        border-radius: 1px;
+        border-radius: 2px;
         transition: transform 0.25s, opacity 0.25s;
       }
-      .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
       .hamburger.active span:nth-child(2) { opacity: 0; }
-      .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
       .mobile-nav {
         display: none;
@@ -242,8 +244,12 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         right: 0;
         width: 280px;
         height: 100%;
-        background: #faf6f1;
+        background: rgba(250, 246, 241, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         padding: var(--space-lg);
+        padding-top: calc(var(--space-lg) + env(safe-area-inset-top, 0px));
+        padding-right: calc(var(--space-lg) + env(safe-area-inset-right, 0px));
         box-shadow: -4px 0 24px rgba(0,0,0,0.1);
         animation: mobile-slide-in 0.25s ease;
       }
@@ -262,8 +268,8 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         font-size: 1.1rem;
       }
       .mobile-nav__close {
-        width: 36px;
-        height: 36px;
+        width: 44px;
+        height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -619,6 +625,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 
       @media (max-width: 768px) {
         .hamburger { display: flex; }
+        .header.glass { background: rgba(250, 246, 241, 0.85); }
         .nav { display: none; }
         .header { flex-wrap: nowrap; gap: 0; padding: var(--space-sm) var(--space-md); }
         .header__logo-img { width: 48px; height: 48px; }
@@ -639,7 +646,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       <a href="/" class="header__brand">
         <img src="/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png" alt="Luisito Playa Grande" class="header__logo-img" />
       </a>
-      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
+      <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <nav class="nav" aria-label={t("accessibility.navLabel")}>
@@ -747,12 +754,6 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       gsap.registerPlugin(ScrollTrigger);
 
       window.addEventListener("load", () => {
-        gsap.to(".hero", {
-          backgroundPosition: "50% 20%",
-          ease: "none",
-          scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 },
-        });
-
         ScrollTrigger.create({
           start: "top -80px",
           onEnter: () => document.getElementById("header")?.classList.add("header--scrolled"),
@@ -765,11 +766,13 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       function openMobileNav() {
         document.getElementById("mobile-nav")?.classList.add("mobile-nav--open");
         document.getElementById("hamburger-btn")?.classList.add("active");
+        document.getElementById("hamburger-btn")?.setAttribute("aria-expanded", "true");
         document.body.classList.add("modal-open");
       }
       function closeMobileNav() {
         document.getElementById("mobile-nav")?.classList.remove("mobile-nav--open");
         document.getElementById("hamburger-btn")?.classList.remove("active");
+        document.getElementById("hamburger-btn")?.setAttribute("aria-expanded", "false");
         document.body.classList.remove("modal-open");
       }
 
