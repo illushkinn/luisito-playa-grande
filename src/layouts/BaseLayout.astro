@@ -113,8 +113,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
 
       a:hover { color: var(--color-accent); }
-      .nav__cta-wpp:hover, .hero__cta:hover, .hero__cta--wpp:hover,
-      .mobile-nav__wpp:hover,
+      .hero__cta:hover, .hero__cta--wpp:hover,
       .destacado-card__btn:hover, .menu-card__btn:hover,
       .cart-send:hover { color: #fff !important; }
 
@@ -247,7 +246,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         position: absolute;
         top: 0;
         right: 0;
-        width: 280px;
+        width: 420px;
         height: 100%;
         background: rgba(0,0,0,0.95);
         backdrop-filter: blur(16px);
@@ -431,29 +430,6 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         display: flex;
         align-items: center;
         gap: var(--space-sm);
-      }
-
-      .nav__cta-wpp {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: var(--space-xs) var(--space-md);
-        background: #25d366;
-        color: #fff;
-        font-family: var(--font-body);
-        font-weight: 600;
-        font-size: 0.8rem;
-        cursor: pointer;
-        border: none;
-        border-radius: var(--radius-sm);
-        text-decoration: none;
-        transition: opacity 0.15s, transform 0.15s;
-        white-space: nowrap;
-      }
-
-      .nav__cta-wpp:hover {
-        opacity: 0.9;
-        transform: translateY(-1px);
       }
 
       .lang-btn {
@@ -752,7 +728,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         .header.glass { background: rgba(250, 246, 241, 0.85); }
         .nav { display: none; }
         .header { flex-wrap: nowrap; gap: 0; padding: var(--space-sm) var(--space-md); }
-        .header__logo-img { width: 48px; height: 48px; }
+        .header__logo-img { width: 72px; height: 72px; }
         .main { padding: var(--space-md); }
         .section-title { font-size: 1.75rem; margin-bottom: var(--space-md); }
         .categories { padding: var(--space-lg) 0; }
@@ -787,7 +763,6 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
           <li><a href="/contact" class="nav__link">{t("nav.contact")}</a></li>
         </ul>
         <div class="nav__controls">
-          <a href={whatsappUrl} target="_blank" rel="noopener" class="nav__cta-wpp"><Icon name="lucide:message-circle" size={14} /> {t("nav.wpp")}</a>
           <button class="cart-toggle" id="cart-toggle-btn" aria-label={t("nav.order")}>
             <Icon name="lucide:shopping-bag" size={16} /> {t("nav.order")}<span id="cart-badge"></span>
           </button>
@@ -900,6 +875,21 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
           onEnter: () => document.getElementById("header")?.classList.add("header--scrolled"),
           onLeaveBack: () => document.getElementById("header")?.classList.remove("header--scrolled"),
         });
+        var footer = document.querySelector(".footer");
+        if (footer) {
+          ScrollTrigger.create({
+            trigger: footer,
+            start: "top bottom",
+            onEnter: function() {
+              var h = document.getElementById("header");
+              if (h) { h.style.position = "relative"; h.style.top = "auto"; }
+            },
+            onLeaveBack: function() {
+              var h = document.getElementById("header");
+              if (h) { h.style.position = ""; h.style.top = ""; }
+            }
+          });
+        }
       });
     </script>
 
