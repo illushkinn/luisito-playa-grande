@@ -326,6 +326,24 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         color: var(--color-text);
         cursor: pointer;
         border-radius: var(--radius-sm);
+        position: relative;
+      }
+      .mobile-nav__cart-badge {
+        display: none;
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        min-width: 18px;
+        height: 18px;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-primary);
+        color: #fff;
+        font-size: 0.65rem;
+        font-weight: 800;
+        padding: 0 4px;
+        border-radius: 9px;
+        box-shadow: 0 2px 4px rgba(199, 62, 43, 0.3);
       }
       .mobile-nav__lang {
         display: flex;
@@ -682,7 +700,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         </ul>
         <div class="mobile-nav__actions">
           <a href={whatsappUrl} target="_blank" rel="noopener" class="mobile-nav__wpp"><Icon name="lucide:message-circle" size={16} /> {t("nav.wpp")}</a>
-          <button class="mobile-nav__cart" id="mobile-nav-cart"><Icon name="lucide:shopping-bag" size={16} /> {t("nav.order")}</button>
+          <button class="mobile-nav__cart" id="mobile-nav-cart"><Icon name="lucide:shopping-bag" size={16} /> {t("nav.order")}<span id="mobile-cart-badge" class="mobile-nav__cart-badge"></span></button>
           <div class="mobile-nav__lang"><LanguageSwitcher /></div>
         </div>
       </div>
@@ -789,13 +807,19 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 
     <script>
       const badge = document.getElementById("cart-badge");
+      const mobileBadge = document.getElementById("mobile-cart-badge");
       function updateBadge() {
-        if (!badge) return;
         try {
           const items = JSON.parse(localStorage.getItem("luisito-cart") || "[]");
           const count = items.reduce((s, i) => s + i.qty, 0);
-          if (count > 0) { badge.textContent = String(count); badge.style.display = "inline-flex"; }
-          else { badge.textContent = ""; badge.style.display = "none"; }
+          if (badge) {
+            if (count > 0) { badge.textContent = String(count); badge.style.display = "inline-flex"; }
+            else { badge.textContent = ""; badge.style.display = "none"; }
+          }
+          if (mobileBadge) {
+            if (count > 0) { mobileBadge.textContent = String(count); mobileBadge.style.display = "inline-flex"; }
+            else { mobileBadge.textContent = ""; mobileBadge.style.display = "none"; }
+          }
         } catch {}
       }
       updateBadge();
