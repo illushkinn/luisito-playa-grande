@@ -74,7 +74,8 @@
   },
   "footer": {
     "copyright": "\u00a9 {year} Luisito Playa Grande. All rights reserved.",
-    "tagline": "Luisito, a Playa Grande classic since 1955"
+    "tagline": "Luisito, a Playa Grande classic since 1955",
+    "backToTop": "Back to top"
   },
   "cart": {
     "added": "Added to order",
