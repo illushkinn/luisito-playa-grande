@@ -325,21 +325,26 @@ import { Icon } from "astro-icon/components";
   }
 
   .qty-btn {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 1rem;
+    font-weight: 800;
+    font-size: 1.15rem;
     cursor: pointer;
-    background: var(--color-accent-light);
+    background: var(--color-accent);
     color: var(--color-text);
     border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
-    box-shadow: 2px 2px 0 var(--color-text);
-    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 3px 3px 0 var(--color-text);
+    transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
     line-height: 1;
+  }
+  .qty-btn:hover {
+    background: #e8a040;
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--color-text);
   }
   .qty-btn:active {
     transform: translate(1px, 1px);
