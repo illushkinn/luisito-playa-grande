@@ -253,17 +253,27 @@ import { Icon } from "astro-icon/components";
     display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-    border: none;
-    font-size: 1.25rem;
+    background: var(--color-cream);
+    border: 2px solid var(--color-text);
+    font-size: 1.1rem;
+    font-weight: 700;
     cursor: pointer;
     color: var(--color-text);
     border-radius: var(--radius-sm);
-    transition: background 0.15s;
+    box-shadow: 2px 2px 0 var(--color-text);
+    transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+    line-height: 1;
   }
 
   .cart-modal__close:hover {
-    background: rgba(0,0,0,0.06);
+    background: #fff;
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--color-text);
+  }
+
+  .cart-modal__close:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--color-text);
   }
 
   .cart-empty {
@@ -364,19 +374,22 @@ import { Icon } from "astro-icon/components";
   }
 
   .cart-item__remove {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background: var(--color-primary);
     border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
     cursor: pointer;
     color: #fff;
     box-shadow: 3px 3px 0 var(--color-text);
     transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+    line-height: 1;
+    padding: 0;
   }
   .cart-item__remove:hover {
     background: var(--color-primary-hover);
@@ -496,23 +509,30 @@ import { Icon } from "astro-icon/components";
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     padding: var(--space-sm) var(--space-md);
     margin-top: var(--space-sm);
     background: transparent;
     color: var(--color-text-muted);
     font-family: var(--font-body);
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.85rem;
     cursor: pointer;
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
     border-radius: var(--radius-sm);
-    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    box-shadow: 2px 2px 0 var(--color-border);
+    transition: all 0.15s;
   }
   .cart-clear:hover {
     color: var(--color-primary);
     border-color: var(--color-primary);
     background: rgba(199, 62, 43, 0.04);
+    box-shadow: 3px 3px 0 var(--color-primary);
+    transform: translate(-1px, -1px);
+  }
+  .cart-clear:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--color-primary);
   }
 
   .cart-send {

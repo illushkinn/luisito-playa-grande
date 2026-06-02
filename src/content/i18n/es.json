@@ -1,7 +1,9 @@
 {
   "site": {
     "title": "Luisito Playa Grande",
-    "description": "Luisito, un clásico de Playa Grande desde 1955. Comidas caseras, pizzas, empanadas y más. Delivery y Take Away."
+    "description": "Luisito, un clásico de Playa Grande desde 1955. Comidas caseras, pizzas, empanadas y más. Delivery y Take Away.",
+    "descriptionMenu": "Carta completa de Luisito Playa Grande: empanadas caseras, pizzas, tartas, pollo rostizado, platos, bebidas y postres. Delivery en Mar del Plata.",
+    "descriptionContact": "Contacto, dirección y horarios de Luisito Playa Grande. Bernardo de Irigoyen 3537, Mar del Plata. Delivery y Take Away."
   },
   "nav": {
     "home": "Inicio",

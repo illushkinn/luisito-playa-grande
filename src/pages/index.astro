@@ -242,10 +242,8 @@ const jsonLd = {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    position: sticky;
-    top: 80px;
     z-index: 50;
-    background: var(--color-bg);
+    background: transparent;
   }
   .bento-nav-wrapper .bento-nav {
     flex: 1;
@@ -316,9 +314,9 @@ const jsonLd = {
 
   .bento {
     padding: var(--space-lg) 0;
-    background: rgba(255, 252, 248, 0.35);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(250, 246, 241, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-radius: 4px;
     margin: 0 calc(-1 * var(--space-md));
     padding-left: var(--space-md);

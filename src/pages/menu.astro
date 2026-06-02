@@ -5,9 +5,27 @@ import { t } from "../utils/i18n";
 import { MENU_ITEMS } from "../utils/cart";
 
 const categories = ["platos", "pizzas", "empanadas", "tartas", "pollo-rostizado", "bebidas", "postres"] as const;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Menu",
+  name: t("menu.title"),
+  description: t("site.descriptionMenu"),
+  url: Astro.url.href,
+  hasMenuItem: MENU_ITEMS.map((item) => ({
+    "@type": "MenuItem",
+    name: item.name,
+    offers: {
+      "@type": "Offer",
+      price: item.price,
+      priceCurrency: "ARS",
+    },
+    category: item.category,
+  })),
+};
 ---
 
-<BaseLayout title={`${t("menu.title")} | ${t("site.title")}`} description={t("site.description")}>
+<BaseLayout title={`${t("menu.title")} | ${t("site.title")}`} description={t("site.descriptionMenu")} jsonLd={jsonLd}>
   <section>
     <h1 class="section-title" data-i18n="menu.title">{t("menu.title")}</h1>
     <p class="menu__subtitle" data-i18n="menu.subtitle">{t("menu.subtitle")}</p>

@@ -15,7 +15,7 @@ export interface Props extends SeoProps {}
 
 const locale = getLocale();
 const { title, description, jsonLd } = Astro.props;
-const ogImageUrl = Astro.url.origin + "/images/luisito-logo-rotiseria-mdq(2)-remove-bg-io.png";
+const ogImageUrl = Astro.url.origin + "/images/hero-image(1).webp";
 const whatsappUrl = "https://wa.me/5492235440230";
 const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 ---
@@ -202,7 +202,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         display: none;
         flex-direction: column;
         gap: 5px;
-        background: rgba(44, 36, 32, 0.06);
+        background: transparent;
         border: none;
         cursor: pointer;
         padding: 11px;
@@ -249,14 +249,15 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         width: 100vw;
         max-width: 520px;
         height: 100%;
-        background: rgba(0,0,0,0.95);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        background: rgba(0,0,0,0.75);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         padding: var(--space-xl);
         padding-top: calc(var(--space-xl) + env(safe-area-inset-top, 0px));
         padding-right: calc(var(--space-xl) + env(safe-area-inset-right, 0px));
         box-shadow: -4px 0 24px rgba(0,0,0,0.3);
         animation: mobile-slide-in 0.25s ease;
+        border-left: 1px solid rgba(255,255,255,0.06);
       }
       @keyframes mobile-slide-in {
         from { transform: translateX(100%); }
@@ -313,26 +314,26 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         justify-content: center;
         gap: 10px;
         padding: var(--space-md) var(--space-lg);
-        background: transparent;
-        border: 2px solid rgba(255,255,255,0.4);
+        background: #fff;
+        border: 2px solid var(--color-text);
         font-weight: 700;
         font-size: 1.1rem;
-        color: #fff;
+        color: var(--color-text);
         cursor: pointer;
         border-radius: var(--radius-sm);
-        box-shadow: 3px 3px 0 rgba(255,255,255,0.2);
-        transition: transform 0.1s, box-shadow 0.1s, border-color 0.15s;
+        box-shadow: 3px 3px 0 var(--color-text);
+        transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
         position: relative;
       }
       .mobile-nav__cart:hover {
-        border-color: #fff;
-        color: #fff;
+        background: #f5f5f5;
+        color: var(--color-text);
         transform: translate(-1px, -1px);
-        box-shadow: 4px 4px 0 rgba(255,255,255,0.35);
+        box-shadow: 4px 4px 0 var(--color-text);
       }
       .mobile-nav__cart:active {
         transform: translate(1px, 1px);
-        box-shadow: 1px 1px 0 rgba(255,255,255,0.2);
+        box-shadow: 1px 1px 0 var(--color-text);
       }
       .mobile-nav__cart-badge {
         display: none;
@@ -357,19 +358,25 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         margin-top: var(--space-sm);
       }
       .mobile-nav__lang .lang-btn {
-        background: transparent;
-        color: #fff;
-        border-color: rgba(255,255,255,0.4);
-        box-shadow: 3px 3px 0 rgba(255,255,255,0.2);
-        font-size: 1rem;
-        padding: var(--space-sm) var(--space-md);
+        background: var(--color-accent);
+        color: var(--color-text);
+        border: 2px solid var(--color-text);
+        box-shadow: 3px 3px 0 var(--color-text);
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: var(--space-sm) var(--space-lg);
+        letter-spacing: 0.5px;
+        transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
       }
       .mobile-nav__lang .lang-btn:hover {
-        border-color: #fff;
-        box-shadow: 4px 4px 0 rgba(255,255,255,0.35);
+        background: #e8a040;
+        border-color: var(--color-text);
+        box-shadow: 4px 4px 0 var(--color-text);
+        transform: translate(-1px, -1px);
       }
       .mobile-nav__lang .lang-btn:active {
-        box-shadow: 1px 1px 0 rgba(255,255,255,0.2);
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 0 var(--color-text);
       }
 
       .wpp-float {
@@ -517,32 +524,6 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         min-height: 70vh;
         background: var(--color-bg);
         border-radius: 2px;
-      }
-
-      .info-strip {
-        padding: var(--space-md) var(--space-lg);
-        background: var(--color-footer-bg);
-      }
-
-      .info-strip__inner {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        gap: var(--space-xl);
-        flex-wrap: wrap;
-      }
-
-      .info-strip__item {
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: var(--color-text-muted);
-      }
-
-      .info-strip__item a {
-        color: var(--color-text);
-        text-decoration: underline;
-        text-underline-offset: 2px;
       }
 
       .footer {
@@ -746,8 +727,6 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         .footer { padding: var(--space-lg) var(--space-md); }
         .footer__divider { margin-bottom: var(--space-md); }
         .footer__top-wrap { margin-top: var(--space-md); }
-        .info-strip__inner { flex-direction: column; align-items: center; gap: 2px; }
-        .info-strip { padding: var(--space-sm) var(--space-md); }
       }
     </style>
   </head>
@@ -798,14 +777,6 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
     <main id="main-content" class="main" role="main">
       <slot />
     </main>
-
-    <section class="info-strip">
-      <div class="info-strip__inner">
-        <span class="info-strip__item">{t("contact.address")}</span>
-        <span class="info-strip__item">{t("contact.hours")}</span>
-        <span class="info-strip__item"><a href={whatsappUrl} target="_blank" rel="noopener">{t("contact.phone")}</a></span>
-      </div>
-    </section>
 
     <footer class="footer" role="contentinfo" aria-label={t("accessibility.footerLabel")}>
       <div class="footer__inner">
