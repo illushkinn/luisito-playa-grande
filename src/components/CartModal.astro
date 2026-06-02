@@ -319,7 +319,7 @@ import { Icon } from "astro-icon/components";
 
   .cart-item:last-child { border-bottom: none; }
   .cart-item__info { flex: 1; min-width: 0; }
-  .cart-item__name { font-family: var(--font-heading); font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+  .cart-item__name { font-family: var(--font-heading); font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; overflow-wrap: break-word; hyphens: auto; }
   .cart-item__price { font-size: 0.85rem; color: var(--color-text-muted); }
 
   .cart-item__actions {
@@ -335,70 +335,71 @@ import { Icon } from "astro-icon/components";
   }
 
   .qty-btn {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     cursor: pointer;
     background: var(--color-accent);
     color: var(--color-text);
-    border: 3px solid var(--color-text);
+    border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
-    box-shadow: 3px 3px 0 var(--color-text);
+    box-shadow: 4px 4px 0 var(--color-text);
     transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
     line-height: 1;
+    padding: 0;
   }
   .qty-btn:hover {
     background: #e8a040;
-    transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0 var(--color-text);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-text);
   }
   .qty-btn:active {
     transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0 var(--color-text);
+    box-shadow: 2px 2px 0 var(--color-text);
   }
 
   .qty-value {
     font-weight: 800;
     font-size: 1.05rem;
-    min-width: 28px;
+    min-width: 32px;
     text-align: center;
-    padding: 2px 8px;
+    padding: 4px 10px;
     background: var(--color-cream);
     border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
-    box-shadow: inset 1px 1px 0 rgba(0,0,0,0.08);
+    box-shadow: inset 2px 2px 0 rgba(0,0,0,0.08), 2px 2px 0 var(--color-text);
   }
 
   .cart-item__remove {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background: var(--color-primary);
     border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     cursor: pointer;
     color: #fff;
-    box-shadow: 3px 3px 0 var(--color-text);
+    box-shadow: 4px 4px 0 var(--color-text);
     transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
     line-height: 1;
     padding: 0;
   }
   .cart-item__remove:hover {
     background: var(--color-primary-hover);
-    transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0 var(--color-text);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-text);
   }
   .cart-item__remove:active {
     transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0 var(--color-text);
+    box-shadow: 2px 2px 0 var(--color-text);
   }
 
   @media (max-width: 480px) {
@@ -409,17 +410,17 @@ import { Icon } from "astro-icon/components";
       padding: var(--space-md);
     }
     .qty-btn {
-      width: 44px;
-      height: 44px;
-      font-size: 1.25rem;
+      width: 42px;
+      height: 42px;
+      font-size: 1.3rem;
     }
     .qty-value {
-      min-width: 32px;
-      font-size: 1.15rem;
+      min-width: 34px;
+      font-size: 1.1rem;
     }
     .cart-item__remove {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       font-size: 1.3rem;
     }
   }
@@ -515,24 +516,24 @@ import { Icon } from "astro-icon/components";
     background: transparent;
     color: var(--color-text-muted);
     font-family: var(--font-body);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.85rem;
     cursor: pointer;
-    border: 2px solid var(--color-border);
+    border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
-    box-shadow: 2px 2px 0 var(--color-border);
-    transition: all 0.15s;
+    box-shadow: 4px 4px 0 var(--color-text);
+    transition: transform 0.1s, box-shadow 0.1s, color 0.15s, background 0.15s;
   }
   .cart-clear:hover {
     color: var(--color-primary);
     border-color: var(--color-primary);
-    background: rgba(199, 62, 43, 0.04);
-    box-shadow: 3px 3px 0 var(--color-primary);
-    transform: translate(-1px, -1px);
+    background: rgba(199, 62, 43, 0.06);
+    box-shadow: 6px 6px 0 var(--color-primary);
+    transform: translate(-2px, -2px);
   }
   .cart-clear:active {
     transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0 var(--color-primary);
+    box-shadow: 2px 2px 0 var(--color-primary);
   }
 
   .cart-send {
@@ -550,15 +551,18 @@ import { Icon } from "astro-icon/components";
     font-size: 1.125rem;
     letter-spacing: 0.5px;
     cursor: pointer;
-    border: none;
-    outline: none;
+    border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
-    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.2);
-    transition: opacity 0.2s, transform 0.15s;
+    box-shadow: 4px 4px 0 var(--color-text);
+    transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
   }
-
   .cart-send:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+    background: #22c35e;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-text);
+  }
+  .cart-send:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--color-text);
   }
 </style>

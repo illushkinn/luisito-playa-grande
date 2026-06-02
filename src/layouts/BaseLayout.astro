@@ -593,25 +593,13 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         width: 50vw;
         height: 100%;
         overflow: hidden;
+        border: 2px solid var(--color-text);
+        box-shadow: 4px 4px 0 var(--color-text);
       }
       .footer__flip-visual .footer__logo-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-right: 2px solid var(--color-text);
-      }
-      .footer__flip-visual .footer__since {
-        position: absolute;
-        bottom: var(--space-md);
-        left: 50%;
-        transform: translateX(-50%);
-        color: var(--color-text-muted);
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.5);
-        white-space: nowrap;
-        pointer-events: none;
-        z-index: 1;
       }
 
       .footer__section-title {
@@ -729,9 +717,8 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         .destacados { padding: var(--space-lg) 0; }
         .footer__flip { flex-direction: column; gap: var(--space-sm); }
         .footer__flip-content { width: 100%; max-width: 100%; gap: var(--space-sm); }
-        .footer__flip-visual { position: relative; left: auto; width: 100vw; margin-left: calc(-50vw + 50%); height: 300px; }
-        .footer__flip-visual .footer__logo-img { width: 100%; height: 100%; object-fit: cover; border-right: none; }
-        .footer__flip-visual .footer__since { font-size: 0.7rem; bottom: var(--space-sm); }
+        .footer__flip-visual { position: relative; left: auto; width: 100vw; margin-left: calc(-50vw + 50%); height: 300px; border: 2px solid var(--color-text); box-shadow: 4px 4px 0 var(--color-text); }
+        .footer__flip-visual .footer__logo-img { width: 100%; height: 100%; object-fit: cover; }
         .footer__actions { flex-direction: column; align-items: center; }
         .footer { padding: var(--space-lg) var(--space-md); }
         .footer__divider { margin-bottom: var(--space-md); }
@@ -811,7 +798,6 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
           </div>
           <div class="footer__flip-visual">
             <img src="/images/luisito-y-su-gente.jpg" alt="Luisito y su gente" class="footer__logo-img" />
-            <p class="footer__since">Un clásico de Playa Grande desde 1955</p>
           </div>
         </div>
 
