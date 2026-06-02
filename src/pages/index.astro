@@ -141,9 +141,6 @@ const jsonLd = {
   import { addToCart } from "../utils/cart";
   gsap.registerPlugin(ScrollTrigger);
 
-  // Clear hash on load to prevent auto-scroll from scroll-behavior:smooth
-  if (window.location.hash) history.replaceState(null, "", window.location.pathname);
-
   const grid = document.getElementById("bento-grid");
   const nav = document.getElementById("bento-nav");
 

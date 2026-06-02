@@ -66,7 +66,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
     </style>
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
-      html { scroll-behavior: smooth; }
+      html { scroll-behavior: auto; }
 
       /* Custom scrollbar */
       ::-webkit-scrollbar {
@@ -363,7 +363,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         background: var(--color-accent);
         color: var(--color-text);
         border: 2px solid var(--color-text);
-        box-shadow: 3px 3px 0 rgba(44,36,32,0.2);
+        box-shadow: 4px 4px 0 var(--color-text);
         font-size: 0.95rem;
         font-weight: 700;
         padding: 10px var(--space-xl);
@@ -373,12 +373,12 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
       .mobile-nav__lang .lang-btn:hover {
         background: #e8a040;
-        box-shadow: 4px 4px 0 rgba(44,36,32,0.25);
-        transform: translate(-1px, -1px);
+        box-shadow: 6px 6px 0 var(--color-text);
+        transform: translate(-2px, -2px);
       }
       .mobile-nav__lang .lang-btn:active {
         transform: translate(1px, 1px);
-        box-shadow: 1px 1px 0 rgba(44,36,32,0.2);
+        box-shadow: 2px 2px 0 var(--color-text);
       }
 
       .wpp-float {
@@ -451,22 +451,24 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         background: var(--color-accent);
         font-family: var(--font-body);
         font-size: 0.8rem;
-        font-weight: 600;
+        font-weight: 700;
         padding: var(--space-xs) var(--space-sm);
         cursor: pointer;
         border: 2px solid var(--color-text);
         border-radius: var(--radius-sm);
-        box-shadow: 3px 3px 0 var(--color-text);
-        transition: transform 0.1s, box-shadow 0.1s;
+        box-shadow: 4px 4px 0 var(--color-text);
+        transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
         -webkit-tap-highlight-color: transparent;
+        line-height: 1;
       }
       .lang-btn:hover {
-        transform: translate(-1px, -1px);
-        box-shadow: 4px 4px 0 var(--color-text);
+        background: #e8a040;
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 var(--color-text);
       }
       .lang-btn:active {
         transform: translate(1px, 1px);
-        box-shadow: 1px 1px 0 var(--color-text);
+        box-shadow: 2px 2px 0 var(--color-text);
       }
 
       .cart-toggle {
@@ -579,7 +581,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         gap: var(--space-xl);
         margin-bottom: var(--space-lg);
         position: relative;
-        justify-content: flex-end;
+        align-items: flex-start;
       }
       .footer__flip-content {
         display: flex;
@@ -589,18 +591,27 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         max-width: 480px;
       }
       .footer__flip-visual {
-        position: absolute;
-        left: calc(50% - 50vw);
-        top: 0;
-        width: 50vw;
-        height: 100%;
+        order: -1;
+        width: 30%;
+        max-width: 300px;
+        height: 200px;
+        padding: var(--space-sm);
         background: var(--color-footer-bg);
         box-shadow: 0 0 0 2px var(--color-text), 4px 4px 0 var(--color-text);
+        align-self: flex-start;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-      .footer__flip-visual .footer__logo-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+      .footer__flip-visual img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        margin: 0;
       }
 
       .footer__section-title {
@@ -716,14 +727,16 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         .destacados { padding: var(--space-lg) 0; }
         .footer__flip { flex-direction: column; gap: var(--space-sm); }
         .footer__flip-content { width: 100%; max-width: 100%; gap: var(--space-sm); }
-        .footer__flip-visual { position: relative; left: auto; width: 100vw; margin-left: calc(-50vw + 50%); height: 300px; background: var(--color-footer-bg); box-shadow: 0 0 0 2px var(--color-text), 4px 4px 0 var(--color-text); }
-        .footer__flip-visual .footer__logo-img { width: 100%; height: 100%; object-fit: cover; }
+        .footer__flip-visual { order: 0; width: 100%; max-width: 100%; height: 200px; padding: var(--space-md); background: var(--color-footer-bg); box-shadow: 0 0 0 2px var(--color-text), 4px 4px 0 var(--color-text); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .footer__flip-visual img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; margin: 0; }
         .footer__actions { flex-direction: column; align-items: center; }
         .footer { padding: var(--space-lg) var(--space-md); }
         .footer__divider { margin-bottom: var(--space-md); }
         .footer__top-wrap { margin-top: var(--space-md); }
       }
     </style>
+    <style>html{visibility:hidden}</style>
+    <script is:inline>if(history.scrollRestoration)history.scrollRestoration="manual";window.scrollTo(0,0);window.addEventListener("pageshow",function(e){if(e.persisted)window.scrollTo(0,0)});document.documentElement.style.visibility="visible";</script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">{t("accessibility.skipToContent")}</a>
@@ -796,7 +809,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
             </div>
           </div>
           <div class="footer__flip-visual">
-            <img src="/images/luisito-y-su-gente.jpg" alt="Luisito y su gente" class="footer__logo-img" />
+            <img src="/images/luisito-y-su-gente.jpg" alt="Luisito y su gente" />
           </div>
         </div>
 
@@ -840,6 +853,8 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       gsap.registerPlugin(ScrollTrigger);
 
       window.addEventListener("load", () => {
+        if (window.location.hash) history.replaceState(null, "", window.location.pathname);
+        window.scrollTo(0, 0);
         ScrollTrigger.create({
           start: "top -80px",
           onEnter: () => document.getElementById("header")?.classList.add("header--scrolled"),
