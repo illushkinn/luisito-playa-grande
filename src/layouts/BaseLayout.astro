@@ -239,9 +239,9 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       .mobile-nav__overlay {
         position: absolute;
         inset: 0;
-        background: rgba(0,0,0,0.4);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        background: rgba(250, 246, 241, 0.25);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
       }
       .mobile-nav__panel {
         position: absolute;
@@ -250,15 +250,15 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         width: 100vw;
         max-width: 520px;
         height: 100%;
-        background: rgba(0,0,0,0.75);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        background: rgba(250, 246, 241, 0.25);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
         padding: var(--space-xl);
         padding-top: calc(var(--space-xl) + env(safe-area-inset-top, 0px));
         padding-right: calc(var(--space-xl) + env(safe-area-inset-right, 0px));
-        box-shadow: -4px 0 24px rgba(0,0,0,0.3);
+        box-shadow: -4px 0 32px rgba(44, 36, 32, 0.08);
         animation: mobile-slide-in 0.25s ease;
-        border-left: 1px solid rgba(255,255,255,0.06);
+        border-left: 1px solid rgba(255, 255, 255, 0.35);
       }
       @keyframes mobile-slide-in {
         from { transform: translateX(100%); }
@@ -273,7 +273,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       .mobile-nav__title {
         font-weight: 700;
         font-size: 1.5rem;
-        color: #fff;
+        color: var(--color-text);
       }
       .mobile-nav__close {
         width: 52px;
@@ -285,10 +285,10 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         border: none;
         font-size: 1.5rem;
         cursor: pointer;
-        color: #fff;
+        color: var(--color-text);
         border-radius: var(--radius-sm);
       }
-      .mobile-nav__close:hover { background: rgba(255,255,255,0.1); }
+      .mobile-nav__close:hover { background: rgba(44,36,32,0.08); }
       .mobile-nav__list {
         list-style: none;
         margin-bottom: var(--space-xl);
@@ -298,9 +298,9 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         padding: var(--space-lg) 0;
         font-weight: 700;
         font-size: 1.3rem;
-        color: #fff;
+        color: var(--color-text);
         text-decoration: none;
-        border-bottom: 1px solid rgba(255,255,255,0.15);
+        border-bottom: 1px solid rgba(44,36,32,0.1);
         letter-spacing: 0;
       }
       .mobile-nav__link:hover { color: var(--color-accent); }
@@ -362,7 +362,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         background: var(--color-accent);
         color: var(--color-text);
         border: 2px solid var(--color-text);
-        box-shadow: 3px 3px 0 rgba(255,255,255,0.25);
+        box-shadow: 3px 3px 0 rgba(44,36,32,0.2);
         font-size: 0.95rem;
         font-weight: 700;
         padding: 10px var(--space-xl);
@@ -372,12 +372,12 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
       .mobile-nav__lang .lang-btn:hover {
         background: #e8a040;
-        box-shadow: 4px 4px 0 rgba(255,255,255,0.35);
+        box-shadow: 4px 4px 0 rgba(44,36,32,0.25);
         transform: translate(-1px, -1px);
       }
       .mobile-nav__lang .lang-btn:active {
         transform: translate(1px, 1px);
-        box-shadow: 1px 1px 0 rgba(255,255,255,0.25);
+        box-shadow: 1px 1px 0 rgba(44,36,32,0.2);
       }
 
       .wpp-float {
