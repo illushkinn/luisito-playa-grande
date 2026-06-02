@@ -11,7 +11,6 @@ import { t } from "../utils/i18n";
     </h1>
     <div class="hero__actions">
       <a href="#bento-grid" class="hero__cta" data-i18n="hero.cta"><Icon name="lucide:utensils-crossed" size={16} /> {t("hero.cta")}</a>
-      <a href="https://wa.me/5492235440230" target="_blank" rel="noopener" class="hero__cta--wpp" data-i18n="hero.wpp"><Icon name="lucide:message-circle" size={16} /> {t("hero.wpp")}</a>
     </div>
   </div>
   <div class="hero__spacer"></div>
@@ -116,28 +115,6 @@ import { t } from "../utils/i18n";
     background: #222;
     transform: translateY(-2px);
     box-shadow: 6px 6px 0 var(--color-text);
-  }
-
-  .hero__cta--wpp {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: var(--space-md) var(--space-xl);
-    background: #25d366;
-    color: #fff;
-    font-size: clamp(1rem, 1.5vw, 1.1rem);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.15);
-    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  }
-
-  .hero__cta--wpp:hover {
-    background: #1da851;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.25);
   }
 
   .hero__trust {

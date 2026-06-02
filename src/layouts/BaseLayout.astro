@@ -94,6 +94,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         background: var(--color-bg);
         line-height: 1.6;
         min-height: 100vh;
+        -webkit-tap-highlight-color: transparent;
       }
 
       body.modal-open {
@@ -212,6 +213,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         justify-content: center;
         z-index: 110;
         border-radius: var(--radius-sm);
+        -webkit-tap-highlight-color: transparent;
       }
       .hamburger:focus-visible { outline: 2px solid var(--color-primary); }
       .hamburger span {
@@ -220,7 +222,8 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         height: 3px;
         background: var(--color-text);
         border-radius: 2px;
-        transition: transform 0.25s, opacity 0.25s;
+        transform-origin: center;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       }
       .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
       .hamburger.active span:nth-child(2) { opacity: 0; }

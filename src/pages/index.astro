@@ -146,6 +146,9 @@ const jsonLd = {
   import { addToCart } from "../utils/cart";
   gsap.registerPlugin(ScrollTrigger);
 
+  // Clear hash on load to prevent auto-scroll from scroll-behavior:smooth
+  if (window.location.hash) history.replaceState(null, "", window.location.pathname);
+
   const grid = document.getElementById("bento-grid");
   const nav = document.getElementById("bento-nav");
 
@@ -396,6 +399,7 @@ const jsonLd = {
     border-radius: var(--radius-sm);
     transition: transform 0.15s;
     margin-top: 4px;
+    touch-action: manipulation;
   }
   .bento__add:hover { transform: scale(1.05); }
 
