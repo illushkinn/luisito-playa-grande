@@ -1,18 +1,18 @@
-<button id="lang-toggle" class="btn--icon lang-btn" aria-label="Cambiar idioma">
+<button class="lang-btn" aria-label="Cambiar idioma">
   ES/EN
 </button>
 
 <script>
-  const btn = document.getElementById("lang-toggle")!;
-
-  btn.addEventListener("click", () => {
-    const current = document.documentElement.lang;
-    const next = current === "es" ? "en" : "es";
-    if (typeof window.applyLocale === "function") {
-      window.applyLocale(next);
-    } else {
-      localStorage.setItem("locale", next);
-      window.location.reload();
-    }
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const current = document.documentElement.lang;
+      const next = current === "es" ? "en" : "es";
+      if (typeof window.applyLocale === "function") {
+        window.applyLocale(next);
+      } else {
+        localStorage.setItem("locale", next);
+        window.location.reload();
+      }
+    });
   });
 </script>

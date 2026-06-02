@@ -502,8 +502,16 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       .footer__logo-img {
         width: 72px;
         height: 72px;
+        max-width: 100%;
         object-fit: contain;
         margin-bottom: var(--space-sm);
+      }
+
+      @media (max-width: 768px) {
+        .footer__logo-img {
+          width: 56px;
+          height: 56px;
+        }
       }
 
       .footer__since {
