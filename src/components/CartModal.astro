@@ -92,12 +92,14 @@ import { Icon } from "astro-icon/components";
           <h4 class="cart-item__name">${item.name}</h4>
           <p class="cart-item__price">$${(item.price * item.qty).toLocaleString("es-AR")}</p>
         </div>
-        <div class="cart-item__qty">
-          <button class="qty-btn" data-dec="${item.id}">−</button>
-          <span class="qty-value">${item.qty}</span>
-          <button class="qty-btn" data-inc="${item.id}">+</button>
+        <div class="cart-item__actions">
+          <div class="cart-item__qty">
+            <button class="qty-btn" data-dec="${item.id}">−</button>
+            <span class="qty-value">${item.qty}</span>
+            <button class="qty-btn" data-inc="${item.id}">+</button>
+          </div>
+          <button class="cart-item__remove" data-remove="${item.id}" aria-label="Eliminar">✕</button>
         </div>
-        <button class="cart-item__remove" data-remove="${item.id}">✕</button>
       </div>
     `).join("");
 
@@ -310,6 +312,12 @@ import { Icon } from "astro-icon/components";
   .cart-item__name { font-family: var(--font-heading); font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
   .cart-item__price { font-size: 0.85rem; color: var(--color-text-muted); }
 
+  .cart-item__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
   .cart-item__qty {
     display: flex;
     align-items: center;
@@ -319,34 +327,55 @@ import { Icon } from "astro-icon/components";
   .qty-btn {
     width: 30px;
     height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
     background: var(--color-accent);
     color: var(--color-text);
-    border: none;
+    border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
-    transition: background 0.15s;
+    box-shadow: 2px 2px 0 var(--color-text);
+    transition: transform 0.1s, box-shadow 0.1s;
   }
-  .qty-btn:hover { filter: brightness(0.95); }
+  .qty-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--color-text);
+  }
 
   .qty-value {
     font-weight: 700;
     font-size: 1rem;
-    min-width: 22px;
+    min-width: 24px;
     text-align: center;
   }
 
   .cart-item__remove {
-    background: none;
-    border: none;
-    font-size: 1.1rem;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 2px solid var(--color-text-muted);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
     cursor: pointer;
-    padding: 4px;
     color: var(--color-text-muted);
-    transition: color 0.15s;
+    box-shadow: 2px 2px 0 var(--color-text-muted);
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.1s;
   }
-  .cart-item__remove:hover { color: var(--color-primary); }
+  .cart-item__remove:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 2px 2px 0 var(--color-primary);
+  }
+  .cart-item__remove:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--color-primary);
+  }
 
   @media (max-width: 480px) {
     .cart-modal__content {
@@ -365,7 +394,8 @@ import { Icon } from "astro-icon/components";
       font-size: 1.15rem;
     }
     .cart-item__remove {
-      padding: 10px;
+      width: 44px;
+      height: 44px;
       font-size: 1.3rem;
     }
   }
