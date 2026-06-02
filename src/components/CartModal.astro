@@ -335,7 +335,7 @@ import { Icon } from "astro-icon/components";
     cursor: pointer;
     background: var(--color-accent);
     color: var(--color-text);
-    border: 2px solid var(--color-text);
+    border: 3px solid var(--color-text);
     border-radius: var(--radius-sm);
     box-shadow: 3px 3px 0 var(--color-text);
     transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
@@ -358,8 +358,9 @@ import { Icon } from "astro-icon/components";
     text-align: center;
     padding: 2px 8px;
     background: var(--color-cream);
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,0.08);
   }
 
   .cart-item__remove {
@@ -368,23 +369,23 @@ import { Icon } from "astro-icon/components";
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-    border: 2px solid var(--color-text-muted);
+    background: var(--color-primary);
+    border: 2px solid var(--color-text);
     border-radius: var(--radius-sm);
     font-size: 1rem;
     cursor: pointer;
-    color: var(--color-text-muted);
-    box-shadow: 2px 2px 0 var(--color-text-muted);
-    transition: color 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+    color: #fff;
+    box-shadow: 3px 3px 0 var(--color-text);
+    transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
   }
   .cart-item__remove:hover {
-    color: var(--color-primary);
-    border-color: var(--color-primary);
-    box-shadow: 2px 2px 0 var(--color-primary);
+    background: var(--color-primary-hover);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--color-text);
   }
   .cart-item__remove:active {
     transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0 var(--color-primary);
+    box-shadow: 1px 1px 0 var(--color-text);
   }
 
   @media (max-width: 480px) {

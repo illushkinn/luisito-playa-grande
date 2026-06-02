@@ -240,6 +240,8 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         position: absolute;
         inset: 0;
         background: rgba(0,0,0,0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
       }
       .mobile-nav__panel {
         position: absolute;
@@ -247,13 +249,13 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         right: 0;
         width: 280px;
         height: 100%;
-        background: rgba(250, 246, 241, 0.92);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        background: rgba(0,0,0,0.95);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         padding: var(--space-lg);
         padding-top: calc(var(--space-lg) + env(safe-area-inset-top, 0px));
         padding-right: calc(var(--space-lg) + env(safe-area-inset-right, 0px));
-        box-shadow: -4px 0 24px rgba(0,0,0,0.1);
+        box-shadow: -4px 0 24px rgba(0,0,0,0.3);
         animation: mobile-slide-in 0.25s ease;
       }
       @keyframes mobile-slide-in {
@@ -269,6 +271,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       .mobile-nav__title {
         font-weight: 700;
         font-size: 1.1rem;
+        color: #fff;
       }
       .mobile-nav__close {
         width: 44px;
@@ -280,10 +283,10 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         border: none;
         font-size: 1.25rem;
         cursor: pointer;
-        color: var(--color-text);
+        color: #fff;
         border-radius: var(--radius-sm);
       }
-      .mobile-nav__close:hover { background: rgba(0,0,0,0.06); }
+      .mobile-nav__close:hover { background: rgba(255,255,255,0.1); }
       .mobile-nav__list {
         list-style: none;
         margin-bottom: var(--space-xl);
@@ -292,10 +295,11 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         display: block;
         padding: var(--space-md) 0;
         font-weight: 600;
-        color: var(--color-text);
+        color: #fff;
         text-decoration: none;
-        border-bottom: 1px solid var(--color-border);
+        border-bottom: 1px solid rgba(255,255,255,0.15);
       }
+      .mobile-nav__link:hover { color: var(--color-accent); }
       .mobile-nav__actions {
         display: flex;
         flex-direction: column;
@@ -320,14 +324,15 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         gap: 8px;
         padding: var(--space-sm) var(--space-md);
         background: transparent;
-        border: 1px solid var(--color-border);
+        border: 1px solid rgba(255,255,255,0.3);
         font-weight: 600;
         font-size: 0.9rem;
-        color: var(--color-text);
+        color: #fff;
         cursor: pointer;
         border-radius: var(--radius-sm);
         position: relative;
       }
+      .mobile-nav__cart:hover { border-color: var(--color-accent); color: var(--color-accent); }
       .mobile-nav__cart-badge {
         display: none;
         position: absolute;
@@ -419,12 +424,20 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         font-weight: 600;
         padding: var(--space-xs) var(--space-sm);
         cursor: pointer;
-        border: none;
+        border: 2px solid var(--color-text);
         border-radius: var(--radius-sm);
-        transition: transform 0.15s;
+        box-shadow: 3px 3px 0 var(--color-text);
+        transition: transform 0.1s, box-shadow 0.1s;
+        -webkit-tap-highlight-color: transparent;
       }
-
-      .lang-btn:hover { transform: scale(1.05); }
+      .lang-btn:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 4px 4px 0 var(--color-text);
+      }
+      .lang-btn:active {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 0 var(--color-text);
+      }
 
       .cart-toggle {
         position: relative;
@@ -549,23 +562,25 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
 
       .footer__flip {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
         gap: var(--space-xl);
         margin-bottom: var(--space-lg);
-        direction: rtl;
-      }
-      .footer__flip > * {
-        direction: ltr;
+        position: relative;
+        justify-content: flex-end;
       }
       .footer__flip-content {
         display: flex;
         flex-direction: column;
         gap: var(--space-lg);
-        align-items: flex-end;
-        text-align: right;
+        width: 50%;
+        max-width: 480px;
       }
       .footer__flip-visual {
+        position: absolute;
+        left: calc(50% - 50vw);
+        top: 0;
+        width: 50vw;
+        height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -573,8 +588,8 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         text-align: center;
       }
       .footer__flip-visual .footer__logo-img {
-        width: 140px;
-        height: 140px;
+        width: 200px;
+        height: 200px;
       }
 
       .footer__section-title {
@@ -654,7 +669,9 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         .section-title { font-size: 1.75rem; margin-bottom: var(--space-md); }
         .categories { padding: var(--space-lg) 0; }
         .destacados { padding: var(--space-lg) 0; }
-        .footer__flip { grid-template-columns: 1fr; gap: var(--space-lg); direction: ltr; }
+        .footer__flip { flex-direction: column; gap: var(--space-lg); }
+        .footer__flip-content { width: 100%; max-width: 100%; }
+        .footer__flip-visual { position: relative; left: auto; width: 100%; height: auto; padding: var(--space-lg) 0; }
         .footer__actions { flex-direction: column; align-items: center; }
         .info-strip__inner { flex-direction: column; align-items: center; gap: var(--space-xs); }
       }
