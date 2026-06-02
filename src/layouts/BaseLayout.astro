@@ -61,7 +61,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         --glass-border: 1px solid rgba(255, 255, 255, 0.5);
         --glass-shadow: 0 4px 24px rgba(44, 36, 32, 0.06);
         --glass-blur: 12px;
-        --header-height: 0px;
+        --header-height: 120px;
       }
     </style>
     <style>
@@ -169,11 +169,12 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: var(--space-md) var(--space-lg);
-        max-width: var(--max-width);
-        margin: 0 auto;
-        position: sticky;
+        padding: 28px var(--space-lg);
+        position: fixed;
         top: 0;
+        left: 0;
+        right: 0;
+        max-width: none;
         z-index: 100;
       }
 
@@ -522,6 +523,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         max-width: var(--max-width);
         margin: 0 auto;
         padding: var(--space-lg);
+        padding-top: var(--header-height);
         min-height: 70vh;
         background: var(--color-bg);
         border-radius: 2px;
@@ -708,7 +710,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         :root { --header-height: 112px; }
         .hamburger { display: flex; }
         .header.glass { background: rgba(250, 246, 241, 0.25); }
-        .header { position: fixed; left: 0; right: 0; flex-wrap: nowrap; gap: 0; padding: var(--space-sm) var(--space-md); margin: 0; max-width: none; }
+        .header { flex-wrap: nowrap; gap: 0; padding: var(--space-sm) var(--space-md); }
         .header__logo-img { width: 96px; height: 96px; }
         .nav { display: none; }
         .main { padding: var(--space-md); padding-top: var(--header-height); }
