@@ -35,13 +35,13 @@ const bentoItems = bentoLayout.map((b) => {
 }).filter(Boolean);
 
 const categoryGradients: Record<string, string> = {
-  empanadas: "linear-gradient(135deg, #c73e2b, #e8a87c)",
-  pizzas: "linear-gradient(135deg, #d4943a, #f5d6a8)",
-  tartas: "linear-gradient(135deg, #6b8f5e, #b5d6a8)",
-  "pollo-rostizado": "linear-gradient(135deg, #a8643a, #d6a87c)",
-  platos: "linear-gradient(135deg, #5e6b8f, #a8b5d6)",
-  bebidas: "linear-gradient(135deg, #3a7ca8, #7cb5d6)",
-  postres: "linear-gradient(135deg, #a85e7c, #d6a8b5)",
+  empanadas: "var(--ds-gradient-empanadas)",
+  pizzas: "var(--ds-gradient-pizzas)",
+  tartas: "var(--ds-gradient-tartas)",
+  "pollo-rostizado": "var(--ds-gradient-pollo-rostizado)",
+  platos: "var(--ds-gradient-platos)",
+  bebidas: "var(--ds-gradient-bebidas)",
+  postres: "var(--ds-gradient-postres)",
 };
 
 const jsonLd = {
@@ -120,7 +120,7 @@ const jsonLd = {
         src="https://maps.google.com/maps?q=Bernardo%20De%20Irigoyen%203537%20Mar%20del%20Plata&output=embed"
         width="100%"
         height="320"
-        style="border:0; border-radius: var(--radius-md);"
+        style="border:0; border-radius: var(--radius-md); aspect-ratio: 16 / 9;"
         allowfullscreen=""
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -269,7 +269,7 @@ const jsonLd = {
     box-shadow: 3px 3px 0 var(--color-text);
   }
   .bento-nav__arrow:active {
-    transform: translate(1px, 1px);
+    transform: translate(1px, 1px) scale(0.96);
     box-shadow: 1px 1px 0 var(--color-text);
   }
 
@@ -412,6 +412,7 @@ const jsonLd = {
     touch-action: manipulation;
   }
   .bento__add:hover { transform: scale(1.05); }
+  .bento__add:active { transform: scale(0.96); }
 
   .bento__card--hero .bento__overlay { padding: var(--space-lg); }
 

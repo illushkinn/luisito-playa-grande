@@ -1,0 +1,219 @@
+/* ============================================================
+   🎨 LUISITO PLAYA GRANDE — Design Tokens (3-Layer Architecture)
+   ============================================================
+   Layer 1: Primitives (--ds-*) — raw values, no semantics
+   Layer 2: Semantic Aliases (--color-*, --space-*, etc.)
+   Layer 3: Component-specific tokens (component-specific overrides)
+   ============================================================ */
+
+/* ═══════════════════════════════════════════════════════════
+   LAYER 1 — Design Primitives (--ds-*)
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  /* ── Brand Colors (OKLCH) ── */
+  --ds-color-brand-primary: oklch(0.55 0.195 30);
+  --ds-color-brand-primary-hover: oklch(0.45 0.175 28);
+  --ds-color-brand-accent: oklch(0.68 0.16 70);
+  --ds-color-brand-accent-hover: oklch(0.71 0.14 70);
+  --ds-color-brand-accent-light: oklch(0.91 0.035 75);
+
+  /* ── Neutral Colors (OKLCH) ── */
+  --ds-color-neutral-bg: oklch(0.89 0.025 75);
+  --ds-color-neutral-bg-alt: oklch(0.85 0.03 65);
+  --ds-color-neutral-text: oklch(0.28 0.035 45);
+  --ds-color-neutral-text-muted: oklch(0.45 0.035 55);
+  --ds-color-neutral-border: oklch(0.28 0.035 45 / 0.12);
+  --ds-color-neutral-cream: oklch(0.96 0.015 75);
+  --ds-color-neutral-footer: oklch(0.8 0.03 60);
+  --ds-color-neutral-card: oklch(0.99 0.01 70 / 0.92);
+  --ds-color-neutral-glass: oklch(0.96 0.015 75 / 0.85);
+
+  /* ── Function Colors (OKLCH) ── */
+  --ds-color-func-green: oklch(0.57 0.095 140);
+  --ds-color-func-blue: oklch(0.55 0.115 240);
+  --ds-color-func-whatsapp: oklch(0.72 0.18 145);
+  --ds-color-func-whatsapp-hover: oklch(0.7 0.18 145);
+  --ds-color-func-focus: oklch(0.55 0.195 30);
+
+  /* ── Category Gradients (OKLCH) ── */
+  --ds-gradient-empanadas: linear-gradient(135deg, oklch(0.55 0.195 30), oklch(0.72 0.085 40));
+  --ds-gradient-pizzas: linear-gradient(135deg, oklch(0.68 0.16 70), oklch(0.88 0.04 75));
+  --ds-gradient-tartas: linear-gradient(135deg, oklch(0.57 0.095 140), oklch(0.78 0.075 135));
+  --ds-gradient-pollo-rostizado: linear-gradient(135deg, oklch(0.58 0.11 50), oklch(0.7 0.07 50));
+  --ds-gradient-platos: linear-gradient(135deg, oklch(0.45 0.08 270), oklch(0.72 0.07 265));
+  --ds-gradient-bebidas: linear-gradient(135deg, oklch(0.55 0.115 240), oklch(0.7 0.08 235));
+  --ds-gradient-postres: linear-gradient(135deg, oklch(0.5 0.12 0), oklch(0.72 0.06 350));
+
+  /* ── Overlay Colors ── */
+  --ds-color-overlay-dark: oklch(0 0 0 / 0.85);
+  --ds-color-overlay-modal: oklch(0.28 0.035 45 / 0.45);
+
+  /* ── Spacing Scale (8-step) ── */
+  --ds-space-0: 0;
+  --ds-space-1: 0.25rem;   /* 4px  */
+  --ds-space-2: 0.5rem;    /* 8px  */
+  --ds-space-3: 0.75rem;   /* 12px */
+  --ds-space-4: 1rem;      /* 16px */
+  --ds-space-5: 1.5rem;    /* 24px */
+  --ds-space-6: 2rem;      /* 32px */
+  --ds-space-7: 2.5rem;    /* 40px */
+  --ds-space-8: 4rem;      /* 64px */
+  --ds-space-9: 6rem;      /* 96px */
+
+  /* ── Typography (Inter + Caveat) ── */
+  --ds-font-heading: "Inter", system-ui, -apple-system, sans-serif;
+  --ds-font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --ds-font-accent: "Caveat", cursive;
+
+  /* ── Font Weights ── */
+  --ds-font-weight-normal: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-semibold: 600;
+  --ds-font-weight-bold: 700;
+  --ds-font-weight-extrabold: 800;
+  --ds-font-weight-black: 900;
+
+  /* ── Line Heights ── */
+  --ds-line-height-tight: 1.1;
+  --ds-line-height-normal: 1.5;
+  --ds-line-height-relaxed: 1.6;
+
+  /* ── Letter Spacing ── */
+  --ds-letter-spacing-tight: -0.03em;
+  --ds-letter-spacing-normal: 0;
+  --ds-letter-spacing-wide: 0.5px;
+  --ds-letter-spacing-wider: 1px;
+
+  /* ── Border Radius ── */
+  --ds-radius-sm: 2px;
+  --ds-radius-md: 4px;
+  --ds-radius-lg: 8px;
+  --ds-radius-xl: 12px;
+  --ds-radius-full: 50%;
+
+  /* ── Shadows ── */
+  --ds-shadow-hard: 4px 4px 0 var(--ds-color-neutral-text);
+  --ds-shadow-hard-sm: 2px 2px 0 var(--ds-color-neutral-text);
+  --ds-shadow-hard-lg: 6px 6px 0 var(--ds-color-neutral-text);
+  --ds-shadow-glass: 0 4px 24px oklch(0.28 0.035 45 / 0.06);
+  --ds-shadow-glass-lg: 0 4px 32px oklch(0.28 0.035 45 / 0.08);
+  --ds-shadow-inset: inset 2px 2px 0 oklch(0 0 0 / 0.06);
+  --ds-shadow-inset-sm: inset 2px 2px 0 oklch(0 0 0 / 0.08);
+
+  /* ── Z-Index Scale ── */
+  --ds-z-base: 1;
+  --ds-z-header: 100;
+  --ds-z-mobile-nav: 105;
+  --ds-z-hamburger: 110;
+  --ds-z-wpp-float: 90;
+  --ds-z-modal: 1000;
+  --ds-z-lightbox: 2000;
+  --ds-z-noise: 9999;
+
+  /* ── Motion ── */
+  --ds-motion-duration-fast: 0.1s;
+  --ds-motion-duration-normal: 0.15s;
+  --ds-motion-duration-slow: 0.2s;
+  --ds-motion-duration-enter: 0.25s;
+  --ds-motion-easing-enter: cubic-bezier(0.4, 0, 0.2, 1);
+  --ds-motion-easing-exit: cubic-bezier(0.4, 0, 0.2, 1);
+  --ds-motion-easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Glass Effects ── */
+  --ds-glass-border: 1px solid oklch(1 0 0 / 0.5);
+  --ds-glass-blur: 12px;
+  --ds-glass-blur-lg: 24px;
+
+  /* ── Layout ── */
+  --ds-max-width: 960px;
+  --ds-header-height: 128px;
+  --ds-header-height-mobile: 112px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LAYER 2 — Semantic Aliases
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  /* ── Color Aliases ── */
+  --color-bg: var(--ds-color-neutral-bg);
+  --color-bg-alt: var(--ds-color-neutral-bg-alt);
+  --color-text: var(--ds-color-neutral-text);
+  --color-text-muted: var(--ds-color-neutral-text-muted);
+  --color-primary: var(--ds-color-brand-primary);
+  --color-primary-hover: var(--ds-color-brand-primary-hover);
+  --color-accent: var(--ds-color-brand-accent);
+  --color-accent-hover: var(--ds-color-brand-accent-hover);
+  --color-accent-light: var(--ds-color-brand-accent-light);
+  --color-border: var(--ds-color-neutral-border);
+  --color-focus: var(--ds-color-func-focus);
+  --color-cream: var(--ds-color-neutral-cream);
+  --color-footer-bg: var(--ds-color-neutral-footer);
+  --color-card-bg: var(--ds-color-neutral-card);
+  --color-glass-bg: var(--ds-color-neutral-glass);
+  --color-green: var(--ds-color-func-green);
+  --color-blue: var(--ds-color-func-blue);
+  --color-whatsapp: var(--ds-color-func-whatsapp);
+  --color-whatsapp-hover: var(--ds-color-func-whatsapp-hover);
+
+  /* ── Override old variable names for backward compat ── */
+  --card-bg: var(--ds-color-neutral-card);
+  --glass-bg: var(--ds-color-neutral-glass);
+  --glass-border: var(--ds-glass-border);
+  --glass-shadow: var(--ds-shadow-glass);
+  --glass-blur: var(--ds-glass-blur);
+
+  /* ── Spacing Aliases ── */
+  --space-xs: var(--ds-space-1);
+  --space-sm: var(--ds-space-2);
+  --space-md: var(--ds-space-4);
+  --space-lg: var(--ds-space-6);
+  --space-xl: var(--ds-space-8);
+
+  /* ── Typography Aliases ── */
+  --font-heading: var(--ds-font-heading);
+  --font-body: var(--ds-font-body);
+  --font-accent: var(--ds-font-accent);
+
+  /* ── Radius Aliases ── */
+  --radius-sm: var(--ds-radius-sm);
+  --radius-md: var(--ds-radius-md);
+
+  /* ── Shadow Aliases ── */
+  --shadow-hard: var(--ds-shadow-hard);
+  --shadow-hard-sm: var(--ds-shadow-hard-sm);
+  --shadow-hard-lg: var(--ds-shadow-hard-lg);
+  --shadow-glass: var(--ds-shadow-glass);
+  --shadow-glass-lg: var(--ds-shadow-glass-lg);
+  --shadow-inset: var(--ds-shadow-inset);
+  --shadow-inset-sm: var(--ds-shadow-inset-sm);
+
+  /* ── Z-Index Aliases ── */
+  --z-header: var(--ds-z-header);
+  --z-mobile-nav: var(--ds-z-mobile-nav);
+  --z-hamburger: var(--ds-z-hamburger);
+  --z-modal: var(--ds-z-modal);
+  --z-lightbox: var(--ds-z-lightbox);
+  --z-noise: var(--ds-z-noise);
+
+  /* ── Motion Aliases ── */
+  --motion-fast: var(--ds-motion-duration-fast);
+  --motion-normal: var(--ds-motion-duration-normal);
+  --motion-slow: var(--ds-motion-duration-slow);
+  --motion-enter: var(--ds-motion-duration-enter);
+  --motion-easing-enter: var(--ds-motion-easing-enter);
+  --motion-easing-exit: var(--ds-motion-easing-exit);
+  --motion-easing-bounce: var(--ds-motion-easing-bounce);
+
+  /* ── Layout Aliases ── */
+  --max-width: var(--ds-max-width);
+  --header-height: var(--ds-header-height);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LAYER 3 — Responsive Overrides
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root {
+    --header-height: var(--ds-header-height-mobile);
+  }
+}

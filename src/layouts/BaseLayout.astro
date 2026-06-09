@@ -1,4 +1,5 @@
 ---
+import "../tokens.css";
 import Seo from "../components/Seo.astro";
 import LanguageSwitcher from "../components/LanguageSwitcher.astro";
 import CartModal from "../components/CartModal.astro";
@@ -24,49 +25,45 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 <html lang={locale}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="/fonts/Caveat-Bold.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Caveat-Medium.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Caveat-Regular.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Caveat-SemiBold.ttf" as="font" type="font/ttf" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href="/images/luisito-logo-rotiseria-mdq(3)-remove-bg-io.png" />
     <Seo {title} {description} {jsonLd} image={ogImageUrl} />
     <style is:global>
-      :root {
-        --color-bg: #ece3d8;
-        --color-bg-alt: #e0d5c8;
-        --color-text: #2c2420;
-        --color-text-muted: #6b6259;
-        --color-primary: #c73e2b;
-        --color-primary-hover: #a83222;
-        --color-accent: #d4943a;
-        --color-accent-light: #f5e6c8;
-        --color-border: rgba(44, 36, 32, 0.12);
-        --color-focus: #c73e2b;
-        --color-cream: #faf6f1;
-        --color-footer-bg: #d4c8b8;
-        --font-heading: "Inter", system-ui, sans-serif;
-        --font-body: "Inter", system-ui, sans-serif;
-        --font-accent: "Inter", system-ui, sans-serif;
-        --border-width: 0;
-        --space-xs: 0.25rem;
-        --space-sm: 0.5rem;
-        --space-md: 1rem;
-        --space-lg: 2rem;
-        --space-xl: 4rem;
-        --max-width: 960px;
-        --radius-sm: 2px;
-        --radius-md: 4px;
-        --card-bg: rgba(255, 252, 248, 0.92);
-        --glass-bg: rgba(250, 246, 241, 0.85);
-        --glass-border: 1px solid rgba(255, 255, 255, 0.5);
-        --glass-shadow: 0 4px 24px rgba(44, 36, 32, 0.06);
-        --glass-blur: 12px;
-        --header-height: 128px;
+      @font-face {
+        font-family: 'Caveat';
+        src: url('/fonts/Caveat-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Caveat';
+        src: url('/fonts/Caveat-Medium.ttf') format('truetype');
+        font-weight: 500;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Caveat';
+        src: url('/fonts/Caveat-SemiBold.ttf') format('truetype');
+        font-weight: 600;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Caveat';
+        src: url('/fonts/Caveat-Bold.ttf') format('truetype');
+        font-weight: 700;
+        font-display: swap;
       }
     </style>
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
-      html { scroll-behavior: auto; }
+      html { scroll-behavior: smooth; }
 
       /* Custom scrollbar */
       ::-webkit-scrollbar {
@@ -94,7 +91,9 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         color: var(--color-text);
         background: var(--color-bg);
         line-height: 1.6;
-        min-height: 100vh;
+        min-height: 100dvh;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         -webkit-tap-highlight-color: transparent;
       }
 
@@ -105,7 +104,10 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       h1, h2, h3, .heading-font {
         font-family: var(--font-heading);
         font-weight: 700;
+        text-wrap: balance;
       }
+
+      p { text-wrap: pretty; }
 
       a {
         color: var(--color-primary);
@@ -114,9 +116,10 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
 
       a:hover { color: var(--color-accent); }
-      .hero__cta:hover, .hero__cta--wpp:hover,
-      .destacado-card__btn:hover, .menu-card__btn:hover,
-      .cart-send:hover { color: #fff !important; }
+      .hero__cta--primary:hover,
+      .hero__cta--wpp:hover,
+      .menu-card__btn:hover,
+      .cart-send:hover { color: #fff; }
 
       a:focus-visible, button:focus-visible {
         outline: 3px solid var(--color-focus);
@@ -196,7 +199,8 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
 
       .header__logo-img {
         width: 96px;
-        height: 96px;
+        height: auto;
+        aspect-ratio: 1 / 1;
         object-fit: contain;
       }
 
@@ -225,6 +229,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         border-radius: 2px;
         transform-origin: center;
         transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform, opacity;
       }
       .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
       .hamburger.active span:nth-child(2) { opacity: 0; }
@@ -326,6 +331,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         box-shadow: 3px 3px 0 var(--color-text);
         transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
         position: relative;
+        -webkit-tap-highlight-color: transparent;
       }
       .mobile-nav__cart:hover {
         background: #f5f5f5;
@@ -334,7 +340,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         box-shadow: 4px 4px 0 var(--color-text);
       }
       .mobile-nav__cart:active {
-        transform: translate(1px, 1px);
+        transform: translate(1px, 1px) scale(0.96);
         box-shadow: 1px 1px 0 var(--color-text);
       }
       .mobile-nav__cart-badge {
@@ -377,7 +383,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         transform: translate(-2px, -2px);
       }
       .mobile-nav__lang .lang-btn:active {
-        transform: translate(1px, 1px);
+        transform: translate(1px, 1px) scale(0.96);
         box-shadow: 2px 2px 0 var(--color-text);
       }
 
@@ -405,7 +411,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         color: #fff;
       }
       .wpp-float:active {
-        transform: translate(1px, 1px);
+        transform: translate(1px, 1px) scale(0.96);
         box-shadow: 2px 2px 0 var(--color-text);
       }
 
@@ -467,7 +473,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         box-shadow: 6px 6px 0 var(--color-text);
       }
       .lang-btn:active {
-        transform: translate(1px, 1px);
+        transform: translate(1px, 1px) scale(0.96);
         box-shadow: 2px 2px 0 var(--color-text);
       }
 
@@ -498,7 +504,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       }
 
       .cart-toggle:active {
-        transform: translate(1px, 1px);
+        transform: translate(1px, 1px) scale(0.96);
         box-shadow: 1px 1px 0 var(--color-text);
       }
 
@@ -686,7 +692,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         box-shadow: 5px 5px 0 var(--color-text);
       }
       .footer__top-btn:active {
-        transform: translate(1px, 1px);
+        transform: translate(1px, 1px) scale(0.96);
         box-shadow: 2px 2px 0 var(--color-text);
       }
 
@@ -721,15 +727,14 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         .footer__top-wrap { margin-top: var(--space-md); }
       }
     </style>
-    <style>html{visibility:hidden}</style>
-    <script is:inline>if(history.scrollRestoration)history.scrollRestoration="manual";window.scrollTo(0,0);window.addEventListener("pageshow",function(e){if(e.persisted)window.scrollTo(0,0)});document.documentElement.style.visibility="visible";</script>
+    <script is:inline>if(history.scrollRestoration)history.scrollRestoration="manual";window.scrollTo(0,0);window.addEventListener("pageshow",function(e){if(e.persisted)window.scrollTo(0,0)});</script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">{t("accessibility.skipToContent")}</a>
 
     <header class="header glass" role="banner" id="header">
       <a href="/" class="header__brand">
-        <img src="/images/luisito-logo-rotiseria-mdq(3)-remove-bg-io.png" alt="Luisito Playa Grande" class="header__logo-img" />
+        <img src="/images/luisito-logo-rotiseria-mdq(3)-remove-bg-io.png" alt="Luisito Playa Grande" class="header__logo-img" width="96" height="96" />
       </a>
       <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>

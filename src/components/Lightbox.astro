@@ -38,12 +38,13 @@
     z-index: 2000;
     align-items: center;
     justify-content: center;
+    will-change: opacity;
   }
   .lightbox--open { display: flex; }
   .lightbox__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.85);
+    background: var(--ds-color-overlay-dark);
   }
   .lightbox__close {
     position: absolute;

@@ -73,7 +73,7 @@ const { id, name, price, category, image } = Astro.props;
 
   .menu-card__image {
     width: 100%;
-    height: 160px;
+    aspect-ratio: 4 / 3;
     background: var(--color-bg-alt);
     overflow: hidden;
     border-bottom: 2px solid var(--color-text);
@@ -140,7 +140,7 @@ const { id, name, price, category, image } = Astro.props;
   }
 
   .menu-card__btn:active {
-    transform: translate(1px, 1px);
+    transform: translate(1px, 1px) scale(0.96);
     box-shadow: 1px 1px 0 var(--color-text);
   }
 </style>
