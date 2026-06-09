@@ -219,19 +219,19 @@ const jsonLd = {
   }
   .desde-1955__year {
     font-family: var(--font-heading);
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
     color: var(--color-text);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     line-height: 1;
     text-transform: uppercase;
-    text-shadow: 6px 6px 0 rgba(0,0,0,0.08);
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.06);
   }
 
 
   @media (max-width: 768px) {
     .desde-1955 { padding: var(--space-lg) 0 var(--space-md); }
-    .desde-1955__year { font-size: clamp(2.5rem, 10vw, 4rem); }
+    .desde-1955__year { font-size: clamp(1.5rem, 6vw, 2.5rem); }
   }
 
   .bento-nav-wrapper {
@@ -286,26 +286,69 @@ const jsonLd = {
 
   .bento-nav__item {
     flex-shrink: 0;
-    font-family: "Caveat", cursive;
-    font-size: clamp(1.35rem, 3.5vw, 2.2rem);
+    appearance: none;
+    font-style: normal;
+    font-variant-ligatures: common-ligatures;
+    font-variant-caps: normal;
+    font-variant-numeric: oldstyle-nums;
+    font-variant-east-asian: normal;
+    font-variant-alternates: normal;
+    font-variant-position: normal;
+    font-variant-emoji: auto;
     font-weight: 600;
-    padding: var(--space-xs) var(--space-md);
-    min-height: 44px;
-    background: transparent;
-    border: none;
+    font-stretch: normal;
+    font-size: clamp(1.35rem, 3.5vw, 2.2rem);
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+    font-size-adjust: none;
+    font-kerning: normal;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    font-language-override: normal;
+    text-rendering: optimizeLegibility;
+    color: var(--color-text);
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: 1.2;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.06);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     cursor: pointer;
-    color: var(--color-text);
-    transition: color 0.15s, transform 0.15s;
-    letter-spacing: 0;
+    box-sizing: border-box;
+    padding: var(--space-xs) var(--space-md);
+    padding-block: 6px;
+    padding-inline: 16px;
+    min-height: 44px;
+    background: var(--color-cream);
+    border: 2px solid var(--color-text);
+    border-radius: var(--radius-sm);
+    box-shadow: 3px 3px 0 var(--color-text);
+    transition: transform 0.12s, box-shadow 0.12s, background 0.15s, color 0.15s;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
   }
-  .bento-nav__item:hover { color: var(--color-accent); }
+  .bento-nav__item:hover {
+    background: var(--color-bg);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--color-text);
+  }
+  .bento-nav__item:active {
+    transform: translate(1px, 1px) scale(0.97);
+    box-shadow: 1px 1px 0 var(--color-text);
+  }
   .bento-nav__item--active {
-    color: var(--color-text);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--color-text);
+    background: var(--color-text);
+    color: var(--color-cream);
+    box-shadow: 2px 2px 0 var(--color-text);
+  }
+  .bento-nav__item--active:hover {
+    background: var(--color-text);
+    color: var(--color-cream);
   }
 
   .bento {
@@ -383,7 +426,7 @@ const jsonLd = {
 
   .bento__name {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 700;
     letter-spacing: -0.025em;
     color: #fff;

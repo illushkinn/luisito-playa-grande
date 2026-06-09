@@ -94,11 +94,11 @@ import { Icon } from "astro-icon/components";
         </div>
         <div class="cart-item__actions">
           <div class="cart-item__qty">
-            <button class="qty-btn" data-dec="${item.id}">−</button>
+            <button class="qty-btn btn-icon" data-dec="${item.id}">−</button>
             <span class="qty-value">${item.qty}</span>
-            <button class="qty-btn" data-inc="${item.id}">+</button>
+            <button class="qty-btn btn-icon" data-inc="${item.id}">+</button>
           </div>
-          <button class="cart-item__remove" data-remove="${item.id}" aria-label="Eliminar">✕</button>
+          <button class="cart-item__remove btn-icon" data-remove="${item.id}" aria-label="Eliminar">✕</button>
         </div>
       </div>
     `).join("");
@@ -269,7 +269,7 @@ import { Icon } from "astro-icon/components";
   }
 
   .cart-modal__close:hover {
-    background: #fff;
+    background: oklch(1 0 0);
     transform: translate(-1px, -1px);
     box-shadow: 3px 3px 0 var(--color-text);
   }
@@ -292,7 +292,7 @@ import { Icon } from "astro-icon/components";
     display: inline-block;
     padding: var(--space-sm) var(--space-lg);
     background: var(--color-primary);
-    color: #fff;
+    color: oklch(1 0 0);
     font-weight: 700;
     text-decoration: none;
     border: 2px solid var(--color-text);
@@ -350,75 +350,83 @@ import { Icon } from "astro-icon/components";
   .cart-item__qty {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 0;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow-hard-sm);
   }
 
-  .qty-btn {
-    width: 36px;
-    height: 36px;
+  .btn-icon {
+    width: 40px;
+    height: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
-    font-size: 1.25rem;
-    cursor: pointer;
-    background: var(--color-accent);
-    color: var(--color-text);
     border: 2px solid var(--color-text);
-    border-radius: var(--radius-sm);
-    box-shadow: 4px 4px 0 var(--color-text);
-    transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+    font-weight: 700;
+    cursor: pointer;
     line-height: 1;
     padding: 0;
+    transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
   }
-  .qty-btn:hover {
-    background: #e8a040;
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 var(--color-text);
+  .btn-icon:active {
+    transform: scale(0.96);
+  }
+
+  .qty-btn {
+    font-weight: 800;
+    font-size: 1.25rem;
+    background: var(--color-accent);
+    color: var(--color-text);
+    position: relative;
+  }
+  .qty-btn[data-dec] {
+    background: var(--color-cream);
+    border-right: none;
+  }
+  .qty-btn[data-dec]:hover {
+    background: oklch(0.92 0.025 70);
+    filter: brightness(0.96);
+  }
+  .qty-btn[data-inc] {
+    background: var(--color-accent);
+    border-left: none;
+  }
+  .qty-btn[data-inc]:hover {
+    background: var(--color-accent-hover);
+    filter: brightness(0.96);
   }
   .qty-btn:active {
-    transform: translate(1px, 1px) scale(0.96);
-    box-shadow: 2px 2px 0 var(--color-text);
+    filter: brightness(0.9);
   }
 
   .qty-value {
     font-weight: 800;
     font-size: 1.05rem;
-    min-width: 32px;
+    min-width: 40px;
     text-align: center;
-    padding: 4px 10px;
+    padding: 4px 6px;
     background: var(--color-cream);
-    border: 2px solid var(--color-text);
-    border-radius: var(--radius-sm);
-    box-shadow: inset 2px 2px 0 rgba(0,0,0,0.08), 2px 2px 0 var(--color-text);
+    border-top: 2px solid var(--color-text);
+    border-bottom: 2px solid var(--color-text);
+    line-height: 1;
   }
 
   .cart-item__remove {
-    width: 36px;
-    height: 36px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     background: var(--color-primary);
-    border: 2px solid var(--color-text);
-    border-radius: var(--radius-sm);
+    color: oklch(1 0 0);
     font-size: 1.2rem;
-    font-weight: 700;
-    cursor: pointer;
-    color: #fff;
-    box-shadow: 4px 4px 0 var(--color-text);
-    transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
-    line-height: 1;
-    padding: 0;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-hard);
   }
   .cart-item__remove:hover {
     background: var(--color-primary-hover);
     transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 var(--color-text);
+    box-shadow: var(--shadow-hard-lg);
   }
   .cart-item__remove:active {
     transform: translate(1px, 1px) scale(0.96);
-    box-shadow: 2px 2px 0 var(--color-text);
+    box-shadow: var(--shadow-hard-sm);
   }
 
   @media (max-width: 480px) {
@@ -429,17 +437,17 @@ import { Icon } from "astro-icon/components";
       padding: var(--space-md);
     }
     .qty-btn {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       font-size: 1.3rem;
     }
     .qty-value {
-      min-width: 34px;
+      min-width: 44px;
       font-size: 1.1rem;
     }
     .cart-item__remove {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       font-size: 1.3rem;
     }
   }
@@ -582,8 +590,8 @@ import { Icon } from "astro-icon/components";
     gap: 8px;
     padding: var(--space-md);
     margin-top: var(--space-md);
-    background: #25d366;
-    color: #fff;
+    background: var(--color-whatsapp);
+    color: oklch(1 0 0);
     font-family: var(--font-body);
     font-weight: 700;
     font-size: 1.125rem;
@@ -595,7 +603,7 @@ import { Icon } from "astro-icon/components";
     transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
   }
   .cart-send:hover {
-    background: #22c35e;
+    background: var(--color-whatsapp-hover);
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 var(--color-text);
   }
