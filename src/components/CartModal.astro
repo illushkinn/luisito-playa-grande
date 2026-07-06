@@ -5,13 +5,13 @@ import { Icon } from "astro-icon/components";
   <div class="cart-modal__overlay" data-cart-close></div>
   <div class="cart-modal__content">
     <div class="cart-modal__header">
-      <h2 class="cart-modal__title" data-i18n="order.title">Mi Pedido</h2>
+      <h2 class="cart-modal__title">Mi Pedido</h2>
       <button class="cart-modal__close" data-cart-close aria-label="Cerrar">✕</button>
     </div>
 
     <div id="cart-empty-state" class="cart-empty">
-      <p class="cart-empty__text" data-i18n="order.empty">Todavia no agregaste nada al pedido</p>
-      <a href="/menu" class="cart-empty__cta" data-cart-close data-i18n="order.emptyCta">Ver la carta</a>
+      <p class="cart-empty__text">Todavia no agregaste nada al pedido</p>
+      <a href="/menu" class="cart-empty__cta" data-cart-close>Ver la carta</a>
     </div>
 
     <div id="cart-content" class="cart-content" style="display:none">
@@ -19,39 +19,39 @@ import { Icon } from "astro-icon/components";
 
       <div class="cart-summary">
         <div class="cart-summary__row">
-          <span data-i18n="order.subtotal">Subtotal</span>
+          <span>Subtotal</span>
           <span id="cart-subtotal">$0</span>
         </div>
         <div class="cart-summary__row cart-summary__row--total">
-          <span data-i18n="order.total">Total</span>
+          <span>Total</span>
           <span id="cart-total">$0</span>
         </div>
       </div>
 
       <div class="cart-service">
-        <h3 class="cart-service__title" data-i18n="order.serviceType">Tipo de servicio</h3>
+        <h3 class="cart-service__title">Tipo de servicio</h3>
         <div class="cart-service__options">
           <label class="cart-service__option">
             <input type="radio" name="service" value="delivery" checked />
             <Icon name="lucide:truck" size={16} />
-            <span data-i18n="order.delivery">Delivery a domicilio</span>
+            <span>Delivery a domicilio</span>
           </label>
           <label class="cart-service__option">
             <input type="radio" name="service" value="takeaway" />
             <Icon name="lucide:store" size={16} />
-            <span data-i18n="order.takeaway">Pasar a buscar</span>
+            <span>Pasar a buscar</span>
           </label>
         </div>
       </div>
 
       <div id="address-field" class="cart-field">
-        <label for="address-input" data-i18n="order.address">Direccion de entrega</label>
-        <input type="text" id="address-input" placeholder="Calle y altura" data-i18n-attr="order.addressPlaceholder" data-i18n-attr-name="placeholder" />
+        <label for="address-input">Direccion de entrega</label>
+        <input type="text" id="address-input" placeholder="Calle y altura" />
       </div>
 
       <div class="cart-field">
-        <label for="notes-input" data-i18n="order.notes">Notas (opcional)</label>
-        <textarea id="notes-input" placeholder="Ej: sin cebolla, bien cocido..." rows="2" data-i18n-attr="order.notesPlaceholder" data-i18n-attr-name="placeholder"></textarea>
+        <label for="notes-input">Notas (opcional)</label>
+        <textarea id="notes-input" placeholder="Ej: sin cebolla, bien cocido..." rows="2"></textarea>
       </div>
 
       <button id="clear-cart" class="cart-clear">
@@ -60,7 +60,7 @@ import { Icon } from "astro-icon/components";
       </button>
       <button id="send-wpp" class="cart-send">
         <Icon name="lucide:send" size={18} />
-        <span data-i18n="order.send">Enviar pedido por WhatsApp</span>
+        <span>Enviar pedido por WhatsApp</span>
       </button>
     </div>
   </div>

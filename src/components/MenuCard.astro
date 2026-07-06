@@ -26,7 +26,7 @@ const { id, name, price, category, image } = Astro.props;
     <p class="menu-card__price">${price.toLocaleString("es-AR")}</p>
     <div class="menu-card__actions">
       <button class="menu-card__btn" data-add={id}>
-        <span data-i18n="menu.add">{t("menu.add")}</span>
+        <span>{t("menu.add")}</span>
       </button>
     </div>
   </div>

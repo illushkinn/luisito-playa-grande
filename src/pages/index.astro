@@ -74,7 +74,7 @@ const jsonLd = {
     <nav class="bento-nav" id="bento-nav" aria-label="Categorías">
       <button class="bento-nav__item bento-nav__item--active" data-filter="all">Todo</button>
       {allCategories.map((cat) => (
-        <button class="bento-nav__item" data-filter={cat.key} data-i18n={cat.key === "pollo-rostizado" ? null : "menu.categories." + cat.key}>
+        <button class="bento-nav__item" data-filter={cat.key}>
           {cat.label}
         </button>
       ))}
@@ -94,7 +94,7 @@ const jsonLd = {
             style={`background: ${categoryGradients[item.category] || "#ece3d8"}`}
           >
             <div class="bento__overlay">
-              <span class="bento__cat" data-i18n={`menu.categories.${item.category}`}>
+              <span class="bento__cat">
                 {t(`menu.categories.${item.category}`)}
               </span>
               <h3 class="bento__name">{item.name}</h3>
@@ -105,7 +105,7 @@ const jsonLd = {
                 data-name={item.name}
                 data-price={item.price}
               >
-                <span data-i18n="menu.add">{t("menu.add")}</span>
+                <span>{t("menu.add")}</span>
               </button>
             </div>
           </div>

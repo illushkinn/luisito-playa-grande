@@ -8,9 +8,5 @@ export default defineConfig({
   output: "static",
   adapter: vercel(),
   integrations: [sitemap(), astroIcon()],
-  i18n: {
-    defaultLocale: "es",
-    locales: ["es", "en"],
-    routing: { prefixDefaultLocale: false },
-  },
+
 });

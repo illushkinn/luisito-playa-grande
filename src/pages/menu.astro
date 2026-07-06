@@ -27,15 +27,15 @@ const jsonLd = {
 
 <BaseLayout title={`${t("menu.title")} | ${t("site.title")}`} description={t("site.descriptionMenu")} jsonLd={jsonLd}>
   <section>
-    <h1 class="section-title" data-i18n="menu.title">{t("menu.title")}</h1>
-    <p class="menu__subtitle" data-i18n="menu.subtitle">{t("menu.subtitle")}</p>
+    <h1 class="section-title">{t("menu.title")}</h1>
+    <p class="menu__subtitle">{t("menu.subtitle")}</p>
 
     {categories.map((cat) => {
       const items = MENU_ITEMS.filter((i) => i.category === cat);
       if (items.length === 0) return null;
       return (
         <div class="menu-section" id={cat}>
-          <h2 class="menu-section__title" data-i18n={`menu.categories.${cat}`}>{t(`menu.categories.${cat}`)}</h2>
+          <h2 class="menu-section__title">{t(`menu.categories.${cat}`)}</h2>
           <div class="menu-section__grid">
             {items.map((item) => (
               <MenuCard
@@ -52,7 +52,7 @@ const jsonLd = {
 
     <div class="menu__footer">
       <button class="hero__cta hero__cta--primary" onclick="openCartModal()">
-        <span data-i18n="nav.order">{t("nav.order")}</span>
+        <span>{t("nav.order")}</span>
       </button>
     </div>
   </section>

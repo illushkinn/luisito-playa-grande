@@ -8,7 +8,6 @@ import SpeedInsights from "@vercel/speed-insights/astro";
 import { Icon } from "astro-icon/components";
 import { t } from "../utils/i18n";
 import type { SeoProps } from "../components/Seo.astro";
-import es from "../content/i18n/es.json";
 
 export interface Props extends SeoProps {}
 
@@ -705,13 +704,13 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
       <div class="mobile-nav__overlay" id="mobile-nav-overlay"></div>
       <div class="mobile-nav__panel">
         <div class="mobile-nav__header">
-          <span class="mobile-nav__title" data-i18n="nav.menu">Menú</span>
+          <span class="mobile-nav__title">Menú</span>
           <button class="mobile-nav__close" id="mobile-nav-close" aria-label="Cerrar">✕</button>
         </div>
         <ul class="mobile-nav__list">
-          <li><a href="/" class="mobile-nav__link" data-i18n="nav.home">{t("nav.home")}</a></li>
-          <li><a href="/menu" class="mobile-nav__link" data-i18n="nav.menu">{t("nav.menu")}</a></li>
-          <li><a href="/contact" class="mobile-nav__link" data-i18n="nav.contact">{t("nav.contact")}</a></li>
+          <li><a href="/" class="mobile-nav__link">{t("nav.home")}</a></li>
+          <li><a href="/menu" class="mobile-nav__link">{t("nav.menu")}</a></li>
+          <li><a href="/contact" class="mobile-nav__link">{t("nav.contact")}</a></li>
         </ul>
         <div class="mobile-nav__actions">
           <button class="mobile-nav__cart" id="mobile-nav-cart"><Icon name="lucide:shopping-bag" size={16} /> {t("nav.order")}<span id="mobile-cart-badge" class="mobile-nav__cart-badge"></span></button>
@@ -759,7 +758,7 @@ const instagramUrl = "https://www.instagram.com/luisito.playagrande/";
         <div class="footer__top-wrap">
           <button class="footer__top-btn" id="footer-top-btn" aria-label="Volver arriba">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-            <span data-i18n="footer.backToTop">Volver arriba</span>
+            <span>Volver arriba</span>
           </button>
         </div>
       </div>
