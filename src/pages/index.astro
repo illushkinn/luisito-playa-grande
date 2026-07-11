@@ -65,11 +65,7 @@ const jsonLd = {
 <BaseLayout title={t("site.title")} description={t("site.description")} jsonLd={jsonLd}>
   <SplitHero />
 
-  <section class="desde-1955">
-    <span class="desde-1955__year">Desde 1955</span>
-  </section>
-
-    <div class="bento-nav-wrapper">
+  <div class="bento-nav-wrapper">
     <button class="bento-nav__arrow bento-nav__arrow--left" aria-label="Anterior">‹</button>
     <nav class="bento-nav" id="bento-nav" aria-label="Categorías">
       <button class="bento-nav__item bento-nav__item--active" data-filter="all">Todo</button>
@@ -210,29 +206,7 @@ const jsonLd = {
 
 <style>
 
-  .desde-1955 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: var(--space-xl) 0 var(--space-lg);
-    text-align: center;
-  }
-  .desde-1955__year {
-    font-family: var(--font-heading);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 700;
-    color: var(--color-text);
-    letter-spacing: -0.02em;
-    line-height: 1;
-    text-transform: uppercase;
-    text-shadow: 3px 3px 0 rgba(0,0,0,0.06);
-  }
 
-
-  @media (max-width: 768px) {
-    .desde-1955 { padding: var(--space-lg) 0 var(--space-md); }
-    .desde-1955__year { font-size: clamp(1.5rem, 6vw, 2.5rem); }
-  }
 
   .bento-nav-wrapper {
     display: flex;
